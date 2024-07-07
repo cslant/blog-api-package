@@ -25,7 +25,7 @@ npm-debug.log
 /storage/installing
 /storage/installed
 /log
-
+build
 package-lock.json
 yarn.lock
 /.sass-cache
