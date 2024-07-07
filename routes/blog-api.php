@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 $routePrefix = config('blog-api.defaults.route_prefix');
 
 Route::prefix($routePrefix)->name("$routePrefix.")->group(function () {
-    Route::get('/posts', function () {
+    Route::get('/hello', function () {
         return response()->json([
             'message' => 'Hello from the blog API!',
         ]);
