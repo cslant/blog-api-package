@@ -29,3 +29,5 @@ build
 package-lock.json
 yarn.lock
 /.sass-cache
+
+__MACOSX
