@@ -1,6 +1,6 @@
 {
     "name": "cslant/blog-api-package",
-    "description": "Send notification from Gitlab and Github events to Telegram",
+    "description": "A Laravel package for CSlant blog API",
     "keywords": [
         "cslant",
         "laravel",
