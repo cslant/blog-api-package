@@ -18,6 +18,20 @@
             "name": "Tan Nguyen",
             "email": "tannp27@gmail.com",
             "homepage": "https://tanhongit.com",
+            "role": "Maintainer"
+        },
+        {
+            "name": "My Truong",
+            "homepage": "https://medium.com/@ngoc-my-truong",
+            "role": "Maintainer"
+        },
+        {
+            "name": "Thinh Pham",
+            "role": "Developer"
+        },
+        {
+            "name": "Tri Ho",
+            "email": "hokhacminhtri@gmail.com",
             "role": "Developer"
         }
     ],
