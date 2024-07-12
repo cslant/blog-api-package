@@ -26,8 +26,4 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('filters', [PostController::class, 'getFilters']);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
     });
-    Route::get('posts', [PostController::class, 'index']);
-
-    Route::get('posts/filters', [PostController::class, 'getFilters']);
-    Route::get('posts/{slug}', [PostController::class, 'findBySlug']);
 });
