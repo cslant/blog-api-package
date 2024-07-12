@@ -1,5 +1,6 @@
 <?php
 
+use Botble\Blog\Http\Controllers\API\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,4 +18,16 @@ $routePrefix = config('blog-api.defaults.route_prefix');
 
 Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(function () {
     Route::get('/', fn() => response()->json(['message' => 'Welcome to Blog API']));
+
+    Route::get('search', [PostController::class, 'getSearch']);
+
+    Route::group(['prefix' => 'posts'], function () {
+        Route::get('/', [PostController::class, 'index']);
+        Route::get('filters', [PostController::class, 'getFilters']);
+        Route::get('{slug}', [PostController::class, 'findBySlug']);
+    });
+    Route::get('posts', [PostController::class, 'index']);
+
+    Route::get('posts/filters', [PostController::class, 'getFilters']);
+    Route::get('posts/{slug}', [PostController::class, 'findBySlug']);
 });
