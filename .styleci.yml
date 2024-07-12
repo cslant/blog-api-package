@@ -2,3 +2,4 @@ preset: laravel
 
 disabled:
   - not_operator_with_successor_space
+  - binary_operator_spaces
