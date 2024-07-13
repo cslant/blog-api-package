@@ -1,6 +1,6 @@
 <?php
 
-use Botble\Blog\Http\Controllers\API\PostController;
+use CSlant\BlogApi\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
