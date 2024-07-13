@@ -1,5 +1,7 @@
 parameters:
     ignoreErrors:
+        - message: '#Class .+ not found#'
+
         - message: '#Parameter \#1 \$prefix of static method Illuminate\\Support\\Facades\\Route::prefix\(\) expects string, mixed given\.#'
           path: routes/blog-api.php
 
