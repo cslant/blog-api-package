@@ -40,3 +40,6 @@ tools:
   php_cpd:
     enabled: true
     excluded_dirs: [ vendor ]
+  php_mess_detector:
+    filter:
+      excluded_paths: [ src/Http/Controllers/Base ]
