@@ -29,7 +29,8 @@ checks:
 tools:
   php_analyzer:
     enabled: true
-    excluded_dirs: [ 'src/Http/Controllers/Base/*' ]
+    filter:
+      excluded_paths: [ 'src/Http/Controllers/Base/*' ]
   php_code_coverage: true
   php_code_sniffer:
     config:
