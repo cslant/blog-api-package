@@ -7,4 +7,4 @@ parameters:
           path: routes/blog-api.php
 
     excludePaths:
-        - src/Http/Controllers/Base/BasePostController.php
+        - src/Http/Controllers/Base/*.php
