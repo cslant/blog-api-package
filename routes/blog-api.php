@@ -1,5 +1,6 @@
 <?php
 
+use CSlant\BlogApi\Http\Controllers\CategoryController;
 use CSlant\BlogApi\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,5 +26,11 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('/', [PostController::class, 'index']);
         Route::get('filters', [PostController::class, 'getFilters']);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
+    });
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('/', [CategoryController::class, 'index']);
+        Route::get('filters', [CategoryController::class, 'getFilters']);
+        Route::get('{slug}', [CategoryController::class, 'findBySlug']);
     });
 });
