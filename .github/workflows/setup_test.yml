@@ -1,0 +1,39 @@
+name: Setup & test
+
+on: [ push, pull_request ]
+
+jobs:
+  tests:
+    name: Composer P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+        php: [ '8.1', '8.2', '8.3' ]
+        laravel: [ 11.*, 10.*, 9.* ]
+        include:
+          - laravel: 11.*
+            testbench: 9.*
+          - laravel: 10.*
+            testbench: 8.*
+          - laravel: 9.*
+            testbench: 8.*
+        exclude:
+          - laravel: 11.*
+            php: 8.1
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction --no-progress --no-suggest
+
+      - name: Run tests
+        run: |
+          composer validate --strict
