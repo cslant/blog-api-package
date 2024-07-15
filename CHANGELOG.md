@@ -2,7 +2,7 @@
 
 Here is the complete list of changes for each Blog API package release.
 
-## v0.1.0 - 2024-05-23
+## v0.1.0 - 2024-07-12
 
 ### What's Changed
 
