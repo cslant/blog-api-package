@@ -7,6 +7,14 @@
 <a href="https://codeclimate.com/github/cslant/blog-api-package/maintainability"><img src="https://api.codeclimate.com/v1/badges/429b59aad9584bad7ff6/maintainability"  alt="Maintainability"/></a>
 </p>
 
+```text
+      ____ ____  _        _    _   _ _____   ____  _     ___   ____
+     / ___/ ___|| |      / \  | \ | |_   _| | __ )| |   / _ \ / ___|
+    | |   \___ \| |     / _ \ |  \| | | |   |  _ \| |  | | | | |  _
+    | |___ ___) | |___ / ___ \| |\  | | |   | |_) | |__| |_| | |_| |
+     \____|____/|_____/_/   \_\_| \_| |_|   |____/|_____\___/ \____|
+ ```
+
 This is a package for Cslant's blog API.
 
 ## Installation

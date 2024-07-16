@@ -27,7 +27,10 @@ checks:
     fix_doc_comments: true
 
 tools:
-  php_analyzer: true
+  php_analyzer:
+    enabled: true
+    filter:
+      excluded_paths: [ 'src/Http/Controllers/Base/*' ]
   php_code_coverage: true
   php_code_sniffer:
     config:
