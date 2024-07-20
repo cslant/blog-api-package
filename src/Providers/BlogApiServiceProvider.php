@@ -1,10 +1,10 @@
 <?php
 
-namespace CSlant\BlogApi\Providers;
+namespace CSlant\Blog\Api\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class BlogApiServiceProvider extends ServiceProvider
+class Blog\ApiServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.

@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\BlogApi\Models\Traits;
+namespace CSlant\Blog\Api\Models\Traits;
 
 trait IsIncrementing
 {

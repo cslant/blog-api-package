@@ -1,8 +1,8 @@
 <?php
 
-namespace CSlant\BlogApi\Http\Controllers;
+namespace CSlant\Blog\Api\Http\Controllers;
 
-use CSlant\BlogApi\Http\Controllers\Base\BaseTagController;
+use CSlant\Blog\Api\Http\Controllers\Base\BaseTagController;
 
 class TagController extends BaseTagController
 {

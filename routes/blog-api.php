@@ -1,8 +1,8 @@
 <?php
 
-use CSlant\BlogApi\Http\Controllers\CategoryController;
-use CSlant\BlogApi\Http\Controllers\PostController;
-use CSlant\BlogApi\Http\Controllers\TagController;
+use CSlant\Blog\Api\Http\Controllers\CategoryController;
+use CSlant\Blog\Api\Http\Controllers\PostController;
+use CSlant\Blog\Api\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*

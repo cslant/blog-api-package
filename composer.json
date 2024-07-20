@@ -38,12 +38,12 @@
     ],
     "autoload": {
         "psr-4": {
-            "CSlant\\BlogApi\\": "src/"
+            "CSlant\\Blog\\Api\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "CSlant\\BlogApi\\Tests\\": "tests/"
+            "CSlant\\Blog\\Api\\Tests\\": "tests/"
         }
     },
     "require": {
@@ -69,7 +69,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "CSlant\\BlogApi\\Providers\\BlogApiServiceProvider"
+                "CSlant\\Blog\\Api\\Providers\\Blog\\ApiServiceProvider"
             ]
         }
     },

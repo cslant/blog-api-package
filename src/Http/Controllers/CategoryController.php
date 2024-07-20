@@ -1,8 +1,8 @@
 <?php
 
-namespace CSlant\BlogApi\Http\Controllers;
+namespace CSlant\Blog\Api\Http\Controllers;
 
-use CSlant\BlogApi\Http\Controllers\Base\BaseCategoryController;
+use CSlant\Blog\Api\Http\Controllers\Base\BaseCategoryController;
 
 class CategoryController extends BaseCategoryController
 {
