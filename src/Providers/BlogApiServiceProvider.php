@@ -4,7 +4,7 @@ namespace CSlant\Blog\Api\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class Blog\ApiServiceProvider extends ServiceProvider
+class BlogApiServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
