@@ -2,6 +2,14 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v0.1.2 - 2024-07-20
+
+### What's Changed
+
+* Feature/get exist apis by @tanhongit in https://github.com/cslant/blog-api-package/pull/18
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.1.1...v0.1.2
+
 ## v0.1.1 - 2024-07-15
 
 ### What's Changed
