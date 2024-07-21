@@ -22,4 +22,4 @@
 * [ ] Code follows our Coding Standards.
 * [ ] Code matches the confirmed solution in the ticket.
 * [ ] Unit/Integration tests have been added or updated.
-* [ ] Env/Config/DB changes were confirmed by @tanhongit.
+* [ ] Env/Config/DB changes were confirmed by @cslant/admin.
