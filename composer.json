@@ -1,85 +1,85 @@
 {
-    "name": "cslant/blog-api-package",
-    "description": "A Laravel package for CSlant blog API",
-    "keywords": [
-        "cslant",
-        "laravel",
-        "cslant-blog-api-package",
-        "cslant-blog-api",
-        "cslant-blog",
-        "cslant-api",
-        "cslant-package",
-        "blog-api-package"
-    ],
-    "homepage": "https://github.com/cslant/blog-api-package",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Tan Nguyen",
-            "email": "tannp27@gmail.com",
-            "homepage": "https://tanhongit.com",
-            "role": "Maintainer"
-        },
-        {
-            "name": "My Truong",
-            "homepage": "https://medium.com/@ngoc-my-truong",
-            "role": "Maintainer"
-        },
-        {
-            "name": "Thinh Pham",
-            "email": "pxthinh.vn@gmail.com",
-            "role": "Developer"
-        },
-        {
-            "name": "Tri Ho",
-            "email": "hokhacminhtri@gmail.com",
-            "role": "Developer"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "CSlant\\Blog\\Api\\": "src/"
-        }
+  "name": "cslant/blog-api-package",
+  "description": "A Laravel package for CSlant blog API",
+  "keywords": [
+    "cslant",
+    "laravel",
+    "cslant-blog-api-package",
+    "cslant-blog-api",
+    "cslant-blog",
+    "cslant-api",
+    "cslant-package",
+    "blog-api-package"
+  ],
+  "homepage": "https://github.com/cslant/blog-api-package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tan Nguyen",
+      "email": "tannp27@gmail.com",
+      "homepage": "https://tanhongit.com",
+      "role": "Maintainer"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "CSlant\\Blog\\Api\\Tests\\": "tests/"
-        }
+    {
+      "name": "My Truong",
+      "homepage": "https://medium.com/@ngoc-my-truong",
+      "role": "Maintainer"
     },
-    "require": {
-        "php": "^8.1"
+    {
+      "name": "Thinh Pham",
+      "email": "pxthinh.vn@gmail.com",
+      "role": "Developer"
     },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^v3.0",
-        "nunomaduro/collision": "^7.10",
-        "nunomaduro/larastan": "^2.9",
-        "orchestra/testbench": "^8.0",
-        "pestphp/pest": "^2.0",
-        "phpstan/extension-installer": "^1.3",
-        "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpstan/phpstan-phpunit": "^1.3"
-    },
-    "scripts": {
-        "analyse": "vendor/bin/phpstan analyse",
-        "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
-    },
-    "support": {
-        "issues": "https://github.com/cslant/blog-api-package/issues"
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "CSlant\\Blog\\Api\\Providers\\BlogApiServiceProvider"
-            ]
-        }
-    },
-    "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    {
+      "name": "Tri Ho",
+      "email": "hokhacminhtri@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CSlant\\Blog\\Api\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CSlant\\Blog\\Api\\Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^8.1"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^v3.0",
+    "nunomaduro/collision": "^7.10",
+    "nunomaduro/larastan": "^2.9",
+    "orchestra/testbench": "^8.0",
+    "pestphp/pest": "^2.0",
+    "phpstan/extension-installer": "^1.3",
+    "phpstan/phpstan-deprecation-rules": "^1.1",
+    "phpstan/phpstan-phpunit": "^1.3"
+  },
+  "scripts": {
+    "analyse": "vendor/bin/phpstan analyse",
+    "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+  },
+  "support": {
+    "issues": "https://github.com/cslant/blog-api-package/issues"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "CSlant\\Blog\\Api\\Providers\\BlogApiServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true,
+    "allow-plugins": {
+      "pestphp/pest-plugin": true,
+      "phpstan/extension-installer": true
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
