@@ -5,6 +5,3 @@ parameters:
 
         - message: '#Part \$routePrefix \(mixed\) of encapsed string cannot be cast to string\.#'
           path: routes/blog-api.php
-
-    excludePaths:
-        - src/Http/Controllers/Base/*.php
