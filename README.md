@@ -3,6 +3,7 @@
 <p align="center">
 <a href="#"><img src="https://img.shields.io/github/license/cslant/blog-api-package.svg?style=flat-square" alt="License"></a>
 <a href="https://packagist.org/packages/cslant/blog-api-package"><img src="https://img.shields.io/github/release/cslant/blog-api-package.svg?style=flat-square" alt="Latest Version"></a>
+    <a href="https://github.com/cslant/blog-api-package/actions/workflows/setup_test.yml"><img src="https://img.shields.io/github/actions/workflow/status/cslant/blog-api-package/setup_test.yml?label=tests&branch=main" alt="Test Status"></a>
 <a href="https://scrutinizer-ci.com/g/cslant/blog-api-package"><img src="https://img.shields.io/scrutinizer/g/cslant/blog-api-package.svg?style=flat-square" alt="Quality Score"></a>
 <a href="https://codeclimate.com/github/cslant/blog-api-package/maintainability"><img src="https://api.codeclimate.com/v1/badges/429b59aad9584bad7ff6/maintainability"  alt="Maintainability"/></a>
 </p>
