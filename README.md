@@ -1,4 +1,4 @@
-# Blog API Package for Cslant Blog 👋
+# Blog API Package for CSlant Blog 👋
 
 <p align="center">
 <a href="#"><img src="https://img.shields.io/github/license/cslant/blog-api-package.svg?style=flat-square" alt="License"></a>
@@ -15,16 +15,29 @@
      \____|____/|_____/_/   \_\_| \_| |_|   |____/|_____\___/ \____|
  ```
 
-This is a package for Cslant's blog API.
+This is a package for CSlant's blog API.
 
-## Installation
+## 📋 Requirements
+
+- PHP ^8.1
+- [Composer](https://getcomposer.org/)
+- Core: [Blog Core](https://github.com/cslant/blog-core.git)
+
+
+## 🔧 Installation
 
 ```bash
 composer require cslant/blog-api-package
 ```
 
-## Commit template
+##  Commit template
+
+If you want to use a commit template, you can use the following command in the root directory of this project:
 
 ```bash
 git config --local commit.template .github/commit_message.txt
 ```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
