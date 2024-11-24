@@ -2,6 +2,16 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v0.2.0 - 2024-11-24
+
+### What's Changed
+
+* Fix/move base code to core by @tanhongit in https://github.com/cslant/blog-api-package/pull/23
+* feat-Create-dependabot.yml by @hokhacminhtri in https://github.com/cslant/blog-api-package/pull/27
+* feat/workflow-auto-update-dependencies by @hokhacminhtri in https://github.com/cslant/blog-api-package/pull/26
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.1.2...v0.2.0
+
 ## v0.1.2 - 2024-07-20
 
 ### What's Changed
