@@ -39,7 +39,7 @@ class BlogApiServiceProvider extends ServiceProvider
     /**
      * Get the services provided by the provider.
      *
-     * @return array<string>|null
+     * @return null|array<string>
      */
     public function provides(): ?array
     {
