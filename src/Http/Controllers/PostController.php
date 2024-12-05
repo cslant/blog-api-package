@@ -16,7 +16,7 @@ class PostController extends BasePostController
      *
      * @param  Request  $request
      *
-     * @return \Botble\Base\Http\Responses\BaseHttpResponse|\Illuminate\Http\JsonResponse|RedirectResponse|JsonResource
+     * @return \Botble\Base\Http\Responses\BaseHttpResponse|\Illuminate\Http\JsonResponse|JsonResource|RedirectResponse
      */
     public function index(Request $request)
     {

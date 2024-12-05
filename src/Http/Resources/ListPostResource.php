@@ -2,10 +2,10 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
+use Botble\Blog\Http\Resources\ListPostResource as BaseListPostResource;
 use Botble\Blog\Http\Resources\TagResource;
 use Botble\Blog\Models\Post;
 use Botble\Media\Facades\RvMedia;
-use Botble\Blog\Http\Resources\ListPostResource as BaseListPostResource;
 
 /**
  * @mixin Post
