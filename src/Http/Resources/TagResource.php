@@ -2,13 +2,13 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
-use CSlant\Blog\Core\Models\Category;
+use CSlant\Blog\Core\Models\Tag;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin Category
+ * @mixin Tag
  */
-class CategoryResource extends JsonResource
+class TagResource extends JsonResource
 {
     /**
      * @param $request
@@ -17,11 +17,11 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request): array
     {
+        /** @var Tag $this */
         return [
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'url' => $this->url,
             'description' => $this->description,
         ];
     }

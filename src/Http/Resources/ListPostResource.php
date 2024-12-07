@@ -4,7 +4,7 @@ namespace CSlant\Blog\Api\Http\Resources;
 
 use Botble\Blog\Http\Resources\ListPostResource as BaseListPostResource;
 use Botble\Blog\Http\Resources\TagResource;
-use Botble\Blog\Models\Post;
+use CSlant\Blog\Core\Models\Post;
 use Botble\Media\Facades\RvMedia;
 
 /**
@@ -12,6 +12,11 @@ use Botble\Media\Facades\RvMedia;
  */
 class ListPostResource extends BaseListPostResource
 {
+    /**
+     * @param $request
+     *
+     * @return array<string, mixed>
+     */
     public function toArray($request): array
     {
         /** @var Post $this */
