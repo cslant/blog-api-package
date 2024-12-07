@@ -11,7 +11,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class AuthorResource extends JsonResource
 {
-    /**  */
+    /**
+     * @param $request
+     *
+     * @return array
+     */
     public function toArray($request): array
     {
         /** @var User $this */

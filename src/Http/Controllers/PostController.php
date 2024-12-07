@@ -15,7 +15,6 @@ class PostController extends BasePostController
      * @group Blog API
      *
      * @param  Request  $request
-     *
      * @return \Botble\Base\Http\Responses\BaseHttpResponse|\Illuminate\Http\JsonResponse|JsonResource|RedirectResponse
      */
     public function index(Request $request)
