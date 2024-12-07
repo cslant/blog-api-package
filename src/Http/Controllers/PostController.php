@@ -21,7 +21,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @authenticated
  *
  * @method BaseHttpResponse httpResponse()
- * @method BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse toApiResponse()
+ * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
 class PostController extends BasePostController
 {
@@ -30,7 +30,7 @@ class PostController extends BasePostController
      *
      * @param  Request  $request
      *
-     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {

@@ -24,7 +24,7 @@ class AuthorResource extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'image' => $this->avatar_url,
-            'role' => $this->roles?->first()?->name ?? null,
+            'role' => $this->roles->first()->name ?? null,
         ];
     }
 }
