@@ -34,7 +34,8 @@ class PostController extends BasePostController
      */
     public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $data = $this->postRepository
+        $data = $this
+            ->postRepository
             ->advancedGet([
                 'with' => ['tags', 'categories', 'author', 'slugable'],
                 'condition' => ['status' => StatusEnum::PUBLISHED],

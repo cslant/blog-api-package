@@ -20,6 +20,7 @@ class ListPostResource extends BaseListPostResource
     public function toArray($request): array
     {
         /** @var Post $this */
+
         return [
             'id' => $this->id,
             'name' => $this->name,
