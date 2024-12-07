@@ -16,14 +16,12 @@ class AuthorResource extends JsonResource
     {
         /** @var User $this */
 
-        $role = $this->roles->first()->name ?? null;
-
         return [
             'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'image' => $this->avatar_url,
-            'role' => $role,
+            'role' => $this->roles?->first()?->name ?? null,
         ];
     }
 }
