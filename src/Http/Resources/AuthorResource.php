@@ -2,13 +2,9 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
-use Botble\Blog\Models\Category;
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-/**
- * @mixin Category
- */
 class AuthorResource extends JsonResource
 {
     /**
