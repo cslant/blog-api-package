@@ -2,18 +2,11 @@
 
 namespace CSlant\Blog\Api\Enums;
 
-use Botble\Base\Supports\Enum;
-
-/**
- * @method static StatusEnum DRAFT()
- * @method static StatusEnum PUBLISHED()
- * @method static StatusEnum PENDING()
- */
-class StatusEnum extends Enum
+enum StatusEnum: string
 {
-    public const PUBLISHED = 'published';
+    case PUBLISHED = 'published';
 
-    public const DRAFT = 'draft';
+    case DRAFT = 'draft';
 
-    public const PENDING = 'pending';
+    case PENDING = 'pending';
 }

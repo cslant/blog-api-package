@@ -2,10 +2,10 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListPostResource;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -38,7 +38,7 @@ class PostController extends BasePostController
             ->postRepository
             ->advancedGet([
                 'with' => ['tags', 'categories', 'author', 'slugable'],
-                'condition' => ['status' => StatusEnum::PUBLISHED],
+                'condition' => ['status' => StatusEnum::PUBLISHED->value],
                 'paginate' => [
                     'per_page' => $request->integer('per_page', 10),
                     'current_paged' => $request->integer('page', 1),
