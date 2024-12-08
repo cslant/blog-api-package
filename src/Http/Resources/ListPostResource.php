@@ -2,18 +2,20 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
-use Botble\Blog\Http\Resources\ListPostResource as BaseListPostResource;
-use Botble\Blog\Http\Resources\TagResource;
 use Botble\Media\Facades\RvMedia;
+use CSlant\Blog\Core\Http\Resources\Base\BaseListPostResource;
 use CSlant\Blog\Core\Models\Post;
+use Illuminate\Http\Request;
 
 /**
  * @mixin Post
+ *
+ * @method static collection($resource)
  */
 class ListPostResource extends BaseListPostResource
 {
     /**
-     * @param $request
+     * @param  Request  $request
      *
      * @return array<string, mixed>
      */
