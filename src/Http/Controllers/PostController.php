@@ -22,7 +22,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  *
  * @method BaseHttpResponse httpResponse()
  * @method BaseHttpResponse setData(mixed $data)
- * @method BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse toApiResponse()
+ * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
 class PostController extends BasePostController
 {
