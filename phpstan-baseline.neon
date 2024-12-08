@@ -5,3 +5,6 @@ parameters:
 
         - message: '#Part \$routePrefix \(mixed\) of encapsed string cannot be cast to string\.#'
           path: routes/blog-api.php
+
+        - message: '#Access to an undefined property CSlant\\Blog\\Api\\Http\\Controllers\\PostController::\$postRepository\.#'
+          path: src/Http/Controllers/PostController.php
