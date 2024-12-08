@@ -6,8 +6,6 @@ use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Http\Resources\Base\BaseListPostResource;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @mixin Post
@@ -35,15 +33,5 @@ class ListPostResource extends BaseListPostResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
-    }
-
-    /**
-     * @param  mixed  $resource
-     *
-     * @return AnonymousResourceCollection
-     */
-    public static function collection(mixed $resource): AnonymousResourceCollection
-    {
-        return JsonResource::collection($resource);
     }
 }

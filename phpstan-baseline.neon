@@ -8,3 +8,6 @@ parameters:
 
         - message: '#Access to an undefined property CSlant\\Blog\\Api\\Http\\Controllers\\PostController::\$postRepository\.#'
           path: src/Http/Controllers/PostController.php
+
+        - message: '#Call to an undefined static method CSlant\\Blog\\Api\\Http\\Resources\\ListPostResource::collection\(\).#'
+          path: src/Http/Controllers/PostController.php
