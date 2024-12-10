@@ -22,7 +22,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting(): void
     {
         RateLimiter::for((string) config('blog-api.defaults.route_prefix'), function (Request $request) {
-            /** @var User|null $user */
+            /** @var null|User $user */
             $user = $request->user();
             $identifier = $user ? $user->id : $request->ip();
 
