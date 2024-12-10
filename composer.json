@@ -70,7 +70,8 @@
   "extra": {
     "laravel": {
       "providers": [
-        "CSlant\\Blog\\Api\\Providers\\BlogApiServiceProvider"
+        "CSlant\\Blog\\Api\\Providers\\BlogApiServiceProvider",
+        "CSlant\\Blog\\Api\\Providers\\RouteServiceProvider"
       ]
     }
   },

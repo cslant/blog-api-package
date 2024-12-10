@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\ApiPackage\Providers;
 
-use Botble\Theme\Facades\Theme;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
