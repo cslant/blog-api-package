@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\ApiPackage\Providers;
 
+use CSlant\Blog\Core\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -21,7 +22,11 @@ class RouteServiceProvider extends ServiceProvider
     protected function configureRateLimiting(): void
     {
         RateLimiter::for((string) config('blog-api.defaults.route_prefix'), function (Request $request) {
-            return Limit::perMinute(40)->by(optional($request->user())->id ?: $request->ip());
+            /** @var User|null $user */
+            $user = $request->user();
+            $identifier = $user ? $user->id : $request->ip();
+
+            return Limit::perMinute(40)->by($identifier);
         });
     }
 }
