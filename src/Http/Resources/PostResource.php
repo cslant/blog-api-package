@@ -27,6 +27,7 @@ class PostResource extends JsonResource
             'image' => $this->image ? RvMedia::url($this->image) : null,
             'categories' => CategoryResource::collection($this->categories),
             'tags' => TagResource::collection($this->tags),
+            'author' => AuthorResource::make($this->author),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
