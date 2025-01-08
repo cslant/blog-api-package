@@ -61,7 +61,7 @@ class PostController extends BasePostController
      *
      * @group Blog
      * @queryParam slug Find by slug of post.
-     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function findBySlug(string $slug): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
