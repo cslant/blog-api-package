@@ -9,6 +9,7 @@ use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
+use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -56,13 +57,15 @@ class PostController extends BasePostController
     }
 
     /**
-     * Get post by slug
+     * @param  string  $slug
      *
      * @group Blog
      * @queryParam slug Find by slug of post.
+     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
      */
-    public function findBySlug(string $slug)
+    public function findBySlug(string $slug): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
+        /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::class));
 
         if (!$slug) {

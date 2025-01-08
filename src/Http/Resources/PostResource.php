@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
-use Botble\Media\Facades\RvMedia;
+use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;
 
