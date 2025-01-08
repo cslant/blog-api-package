@@ -2,7 +2,8 @@
 
 namespace CSlant\Blog\Api\Helpers;
 
-use Botble\Slug\SlugHelper as BaseSlugHelper;
+
+use CSlant\Blog\Core\Helpers\Base\BaseSlugHelper;
 
 class SlugHelper extends BaseSlugHelper
 {
