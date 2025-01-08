@@ -2,10 +2,13 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
+use CSlant\Blog\Api\Helpers\SlugHelper;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListPostResource;
+use CSlant\Blog\Api\Http\Resources\PostResource;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
+use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -49,6 +52,45 @@ class PostController extends BasePostController
         return $this
             ->httpResponse()
             ->setData(ListPostResource::collection($data))
+            ->toApiResponse();
+    }
+
+    /**
+     * Get post by slug
+     *
+     * @group Blog
+     * @queryParam slug Find by slug of post.
+     */
+    public function findBySlug(string $slug)
+    {
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::class));
+
+        if (!$slug) {
+            return $this
+                ->httpResponse()
+                ->setError()
+                ->setCode(404)
+                ->setMessage('Not found');
+        }
+
+        $post = Post::query()
+            ->where([
+                'id' => $slug->reference_id,
+                'status' => StatusEnum::PUBLISHED,
+            ])
+            ->first();
+
+        if (!$post) {
+            return $this
+                ->httpResponse()
+                ->setError()
+                ->setCode(404)
+                ->setMessage('Not found');
+        }
+
+        return $this
+            ->httpResponse()
+            ->setData(new PostResource($post))
             ->toApiResponse();
     }
 }
