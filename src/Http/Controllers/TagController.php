@@ -2,11 +2,11 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
+use Botble\Blog\Models\Tag;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\TagResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
-use CSlant\Blog\Core\Models\Tag;
 
 class TagController extends BaseTagController
 {
