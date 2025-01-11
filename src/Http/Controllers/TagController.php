@@ -35,7 +35,7 @@ class TagController extends BaseTagController
      *
      * @param  string  $slug
      *
-     * @return JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
