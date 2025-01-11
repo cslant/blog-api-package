@@ -34,7 +34,7 @@ class TagController extends BaseTagController
                 'status' => StatusEnum::PUBLISHED,
             ])
             ->first();
-        
+
         if (!$tag) {
             return $this
                 ->httpResponse()
@@ -48,5 +48,4 @@ class TagController extends BaseTagController
             ->setData(new TagResource($tag))
             ->toApiResponse();
     }
-
 }
