@@ -37,5 +37,6 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
 
     Route::group(['prefix' => 'tags'], function () {
         Route::get('/', [TagController::class, 'index']);
+        Route::get('{slug}', [TagController::class, 'findBySlug']);
     });
 });
