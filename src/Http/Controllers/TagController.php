@@ -2,13 +2,13 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use Botble\Blog\Models\Tag;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\TagResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Slug;
+use CSlant\Blog\Core\Models\Tag;
 
 /**
  * Class TagController
@@ -33,7 +33,7 @@ class TagController extends BaseTagController
     public function findBySlug(string $slug)
     {
         /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::class));
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::getBaseModel()));
         if (!$slug) {
             return $this
                 ->httpResponse()
