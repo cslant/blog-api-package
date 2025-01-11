@@ -7,7 +7,21 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\TagResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
+use CSlant\Blog\Core\Models\Slug;
 
+/**
+ * Class TagController
+ *
+ * @package CSlant\Blog\Api\Http\Controllers
+ *
+ * @group Blog
+ *
+ * @authenticated
+ *
+ * @method BaseHttpResponse httpResponse()
+ * @method BaseHttpResponse setData(mixed $data)
+ */
 class TagController extends BaseTagController
 {
     /**
@@ -18,6 +32,7 @@ class TagController extends BaseTagController
      */
     public function findBySlug(string $slug)
     {
+        /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::class));
         if (!$slug) {
             return $this
