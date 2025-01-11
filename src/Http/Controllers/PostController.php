@@ -99,7 +99,12 @@ class PostController extends BasePostController
             ->toApiResponse();
     }
 
-    public function getFilters(Request $request)
+    /**
+     * @param  Request  $request
+     *
+     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+     */
+    public function getFilters(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         $filters = FilterPost::setFilters($request->input());
 
