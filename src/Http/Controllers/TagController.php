@@ -9,6 +9,9 @@ use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Models\Tag;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class TagController
@@ -29,11 +32,16 @@ class TagController extends BaseTagController
      *
      * @group Blog
      * @queryParam slug Find by slug of tag.
+     *
+     * @param  string  $slug
+     *
+     * @return JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
      */
-    public function findBySlug(string $slug)
+    public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::getBaseModel()));
+
         if (!$slug) {
             return $this
                 ->httpResponse()
