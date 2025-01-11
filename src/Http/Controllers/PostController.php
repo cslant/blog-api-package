@@ -102,7 +102,7 @@ class PostController extends BasePostController
     /**
      * @param  Request  $request
      *
-     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function getFilters(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
