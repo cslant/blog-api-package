@@ -108,7 +108,7 @@ class PostController extends BasePostController
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postRepository->getFilters($filters);
+        $data = $this->postRepository->getFilters((array) $filters);
 
         return $this
             ->httpResponse()
