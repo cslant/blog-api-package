@@ -31,22 +31,22 @@ class MetaBoxService
         return $this->getSEOMetaBoxByModel($model, $lang);
     }
 
-    public function getPostMetaBox(int $modelId, mixed $lang): ?Model
+    public function getPostMetaBox(int $modelId, string $lang): ?Model
     {
         return $this->getModelMetaBox(Post::getBaseModel(), $modelId, $lang);
     }
 
-    public function getPageMetaBox(int $modelId, mixed $lang): ?Model
+    public function getPageMetaBox(int $modelId, string $lang): ?Model
     {
         return $this->getModelMetaBox(Page::getBaseModel(), $modelId, $lang);
     }
 
-    public function getCategoryMetaBox(int $modelId, mixed $lang): ?Model
+    public function getCategoryMetaBox(int $modelId, string $lang): ?Model
     {
         return $this->getModelMetaBox(Category::getBaseModel(), $modelId, $lang);
     }
 
-    public function getTagMetaBox(int $modelId, mixed $lang): ?Model
+    public function getTagMetaBox(int $modelId, string $lang): ?Model
     {
         return $this->getModelMetaBox(Tag::getBaseModel(), $modelId, $lang);
     }
