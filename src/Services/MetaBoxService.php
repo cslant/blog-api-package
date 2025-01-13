@@ -56,7 +56,7 @@ class MetaBoxService
      * @param  int  $modelId
      * @param  string  $lang
      *
-     * @return Model|null
+     * @return null|Model
      */
     public function getMetaBoxByModel(string $model, int $modelId, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
     {
