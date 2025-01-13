@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class MetaBoxController
 {
     protected MetaBoxService $metaBoxService;
+
     protected SlugService $slugService;
 
     public function __construct(MetaBoxService $metaBoxService, SlugService $slugService)

@@ -15,6 +15,7 @@ class MetaBoxService
     protected function getSEOMetaBoxByModel(Model $model, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
     {
         $metaKey = $lang === 'vi' ? 'seo_meta_vi' : 'seo_meta';
+
         return MetaBox::getMeta($model, $metaKey);
     }
 
