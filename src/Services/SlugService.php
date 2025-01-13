@@ -15,16 +15,11 @@ use CSlant\Blog\Core\Models\Slug;
  */
 class SlugService
 {
-    /**
-     * @param  string  $slug
-     * @param  string  $model
-     *
-     * @return Slug|null
-     */
-    public function getSlugModel(string $slug, string $model): ?Slug
+    public function getSlugModel(string $slug, string $model)
     {
         /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix($model));
-        return $slug instanceof Slug ? $slug : null;
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(get_class_name_by_slug($model)));
+
+        return $slug ?? null;
     }
 }

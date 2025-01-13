@@ -1,6 +1,7 @@
 <?php
 
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
+use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
 use CSlant\Blog\Api\Http\Controllers\PostController;
 use CSlant\Blog\Api\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,9 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::group(['prefix' => 'tags'], function () {
         Route::get('/', [TagController::class, 'index']);
         Route::get('{slug}', [TagController::class, 'findBySlug']);
+    });
+
+    Route::group(['prefix' => 'meta-box'], function () {
+        Route::get('{model}/{modelSlug}', [MetaBoxController::class, 'getMetaBoxBySlugModel']);
     });
 });
