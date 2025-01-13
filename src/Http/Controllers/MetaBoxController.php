@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class MetaBoxController
 {
     protected MetaBoxService $metaBoxService;
+
     protected SlugService $slugService;
 
     public function __construct(MetaBoxService $metaBoxService, SlugService $slugService)
@@ -27,12 +28,13 @@ class MetaBoxController
 
         return null;
     }
+
     /**
      * @param  string  $model
      * @param  int  $modelId
      * @param  string  $lang
      *
-     * @return Model|null
+     * @return null|Model
      */
     public function getMetaBoxByModel(string $model, int $modelId, string $lang = 'en'): ?Model
     {
