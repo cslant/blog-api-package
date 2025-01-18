@@ -41,7 +41,7 @@ class CategoryController extends BaseCategoryController
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::getBaseModel()));
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::class));
 
         if (!$slug) {
             return $this
@@ -52,7 +52,7 @@ class CategoryController extends BaseCategoryController
         }
 
         $category = Category::query()
-            ->with('slugable')
+            ->with(['slug'])
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,
