@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Resources;
 
 use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
+use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -21,7 +22,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug->key,
+            'slug' => $this->slug instanceof Slug ? $this->slug->key : $this->slug,
             'description' => $this->description,
             'content' => $this->content,
             'image' => $this->image ? RvMedia::url($this->image) : null,

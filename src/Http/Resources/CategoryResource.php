@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Resources;
 
 use CSlant\Blog\Core\Models\Category;
+use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -20,7 +21,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug,
+            'slug' => $this->slug instanceof Slug ? $this->slug->key : $this->slug,
             'url' => $this->url,
             'icon' => $this->icon,
             'description' => $this->description,

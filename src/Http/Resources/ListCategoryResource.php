@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Http\Resources;
 use CSlant\Blog\Core\Facades\Base\BaseHelper;
 use CSlant\Blog\Core\Http\Resources\Base\BaseListCategoryResource;
 use CSlant\Blog\Core\Models\Category;
+use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
 
 /**
@@ -22,7 +23,7 @@ class ListCategoryResource extends BaseListCategoryResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug->key,
+            'slug' => $this->slug instanceof Slug ? $this->slug->key : $this->slug,
             'icon' => $this->icon ? BaseHelper::renderIcon($this->icon) : null,
             'description' => $this->description,
             'children' => CategoryResource::collection($this->children),
