@@ -67,7 +67,7 @@ class PostController extends BasePostController
     public function findBySlug(string $slug): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::class));
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
         if (!$slug) {
             return $this
