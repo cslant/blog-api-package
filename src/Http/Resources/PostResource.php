@@ -21,7 +21,7 @@ class PostResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug->key,
+            'slug' => $this->slug,
             'description' => $this->description,
             'content' => $this->content,
             'image' => $this->image ? RvMedia::url($this->image) : null,

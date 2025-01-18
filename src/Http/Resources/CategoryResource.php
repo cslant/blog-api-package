@@ -20,7 +20,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug->key,
+            'slug' => $this->slug,
             'url' => $this->url,
             'icon' => $this->icon,
             'description' => $this->description,

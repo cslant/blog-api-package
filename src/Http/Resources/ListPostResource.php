@@ -22,7 +22,7 @@ class ListPostResource extends BaseListPostResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'slug' => $this->slug->key,
+            'slug' => $this->slug,
             'description' => $this->description,
             'image' => $this->image ? RvMedia::url($this->image) : null,
             'categories' => CategoryResource::collection($this->categories),
