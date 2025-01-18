@@ -69,7 +69,7 @@ class CategoryController extends BaseCategoryController
 
         return $this
             ->httpResponse()
-            ->setData(new ListCategoryResource($category))
+            ->setData(ListCategoryResource::make($category))
             ->toApiResponse();
     }
 }
