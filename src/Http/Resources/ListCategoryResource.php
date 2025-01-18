@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Resources;
 
+use CSlant\Blog\Core\Facades\Base\BaseHelper;
 use CSlant\Blog\Core\Http\Resources\Base\BaseListCategoryResource;
 use CSlant\Blog\Core\Models\Category;
 use Illuminate\Http\Request;
@@ -22,7 +23,7 @@ class ListCategoryResource extends BaseListCategoryResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'icon' => $this->icon,
+            'icon' => BaseHelper::renderIcon($this->icon),
             'description' => $this->description,
             'children' => CategoryResource::collection($this->children),
             'parent' => new CategoryResource($this->parent),
