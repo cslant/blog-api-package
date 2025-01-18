@@ -36,7 +36,7 @@ class CategoryController extends BaseCategoryController
      *
      * @param  string  $slug
      *
-     * @return BaseHttpResponse|JsonResponse|RedirectResponse|JsonResource
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
