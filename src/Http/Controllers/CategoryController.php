@@ -20,7 +20,7 @@ class CategoryController extends BaseCategoryController
     {
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::getBaseModel()));
 
-        if (! $slug) {
+        if (!$slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -36,7 +36,7 @@ class CategoryController extends BaseCategoryController
             ])
             ->first();
 
-        if (! $category) {
+        if (!$category) {
             return $this
                 ->httpResponse()
                 ->setError()
