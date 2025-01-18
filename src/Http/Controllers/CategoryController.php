@@ -52,7 +52,6 @@ class CategoryController extends BaseCategoryController
         }
 
         $category = Category::query()
-            ->with(['slug'])
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,
