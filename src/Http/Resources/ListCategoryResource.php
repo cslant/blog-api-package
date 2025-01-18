@@ -23,7 +23,7 @@ class ListCategoryResource extends BaseListCategoryResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'icon' => BaseHelper::renderIcon($this->icon),
+            'icon' => $this->icon ? BaseHelper::renderIcon($this->icon) : null,
             'description' => $this->description,
             'children' => CategoryResource::collection($this->children),
             'parent' => new CategoryResource($this->parent),
