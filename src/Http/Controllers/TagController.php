@@ -51,6 +51,7 @@ class TagController extends BaseTagController
         }
 
         $tag = Tag::query()
+            ->with('slugable')
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,

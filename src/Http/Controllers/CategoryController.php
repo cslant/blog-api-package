@@ -36,12 +36,12 @@ class CategoryController extends BaseCategoryController
      *
      * @param  string  $slug
      *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
+     * @return BaseHttpResponse|JsonResponse|RedirectResponse|JsonResource
      */
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::class));
+        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::getBaseModel()));
 
         if (!$slug) {
             return $this
@@ -52,6 +52,7 @@ class CategoryController extends BaseCategoryController
         }
 
         $category = Category::query()
+            ->with(['slugable'])
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,
@@ -68,7 +69,7 @@ class CategoryController extends BaseCategoryController
 
         return $this
             ->httpResponse()
-            ->setData(ListCategoryResource::make($category))
+            ->setData(new ListCategoryResource($category))
             ->toApiResponse();
     }
 }
