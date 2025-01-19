@@ -9,6 +9,8 @@ use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
 
 /**
+ * @method static mixed make(...$params)
+ *
  * @mixin Category
  */
 class ListCategoryResource extends BaseListCategoryResource
