@@ -2,6 +2,21 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v0.3.0 - 2025-01-19
+
+### What's Changed
+
+* Feat/create ratelimit for api #28 by @tanhongit in https://github.com/cslant/blog-api-package/pull/29
+* Feat/add author info in the blog detail api #30 by @tanhongit in https://github.com/cslant/blog-api-package/pull/31
+* Feat/api get tag by slug by @thuankg1752 in https://github.com/cslant/blog-api-package/pull/32
+* Feat/#33 handle meta seo by @tanhongit in https://github.com/cslant/blog-api-package/pull/34
+
+### New Contributors
+
+* @thuankg1752 made their first contribution in https://github.com/cslant/blog-api-package/pull/32
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.2.0...v0.3.0
+
 ## v0.2.0 - 2024-11-24
 
 ### What's Changed
