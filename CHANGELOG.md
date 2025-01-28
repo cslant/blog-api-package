@@ -2,6 +2,18 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v0.5.0 - 2025-01-28
+
+### What's Changed
+
+* chore(deps): bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/cslant/blog-api-package/pull/35
+
+### New Contributors
+
+* @dependabot made their first contribution in https://github.com/cslant/blog-api-package/pull/35
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.3.0...v0.5.0
+
 ## v0.3.0 - 2025-01-19
 
 ### What's Changed
