@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\ApiPackage\Providers;
+namespace CSlant\Blog\Api\Providers;
 
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -16,7 +16,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // add rate limit for api
-        $this->configureRateLimiting();
+        // $this->configureRateLimiting();
     }
 
     protected function configureRateLimiting(): void
@@ -26,7 +26,7 @@ class RouteServiceProvider extends ServiceProvider
             $user = $request->user();
             $identifier = $user ? $user->id : $request->ip();
 
-            return Limit::perMinute(40)->by($identifier);
+            return Limit::perMinute(50)->by($identifier);
         });
     }
 }
