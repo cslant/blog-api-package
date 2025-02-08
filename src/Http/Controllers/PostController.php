@@ -2,12 +2,12 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
+use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\PostResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
-use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
