@@ -6,7 +6,7 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\TagResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
+use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Models\Tag;
 use Illuminate\Http\JsonResponse;

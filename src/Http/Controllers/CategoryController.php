@@ -6,7 +6,7 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListCategoryResource;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
+use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
