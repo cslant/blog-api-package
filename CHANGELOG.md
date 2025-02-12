@@ -2,6 +2,10 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v1.0.0 - 2025-02-12
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.5.1...v1.0.0
+
 ## v0.5.1 - 2025-01-28
 
 **Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.5.0...v0.5.1
