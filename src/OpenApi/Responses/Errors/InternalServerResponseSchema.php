@@ -22,6 +22,6 @@ use OpenApi\Attributes\Response;
         )
     )
 ]
-class ErrorResponseSchema
+class InternalServerResponseSchema
 {
 }
