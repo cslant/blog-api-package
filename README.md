@@ -21,10 +21,14 @@ This is a package for CSlant's blog API.
 
 ## 📋 Requirements
 
-- PHP ^8.1
+- PHP
 - [Composer](https://getcomposer.org/)
 - Core: [Blog Core](https://github.com/cslant/blog-core.git)
 
+| Is Maintain | PHP  | Laravel            | Blog API Package |
+|-------------|------|--------------------|------------------|
+| [x]         | ^8.2 | ^11.0, ^12.0       | v2.0             |
+| [ ]         | ^8.1 | ^9.0, ^10.0, ^11.0 | v1.0             |
 
 ## 🔧 Installation
 

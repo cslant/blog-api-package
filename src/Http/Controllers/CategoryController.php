@@ -12,6 +12,10 @@ use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Schema;
 
 /**
  * Class CategoryController
@@ -38,6 +42,45 @@ class CategoryController extends BaseCategoryController
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
+    #[
+        Get(
+            path: "/categories",
+            operationId: "categoryGetAll",
+            description: "Get all categories with pagination (10 items per page by default, page 1 by default)
+            
+    This API will get records in all types(News, Event, Prayer) of categories.
+            ",
+            summary: "Get all categories with pagination",
+            security: [['sanctum' => []]],
+            tags: ["Category"],
+            parameters: [
+                new Parameter(
+                    name: 'per_page',
+                    description: 'Number of items per page',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 10)
+                ),
+                new Parameter(
+                    name: 'page',
+                    description: 'Page number',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 1)
+                ),
+            ],
+            responses: [
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    response: 404,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    response: 500,
+                ),
+            ]
+        )
+    ]
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
