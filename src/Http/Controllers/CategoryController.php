@@ -11,6 +11,7 @@ use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\Parameter;
@@ -32,23 +33,14 @@ use OpenApi\Attributes\Schema;
  */
 class CategoryController extends BaseCategoryController
 {
-    /**
-     *  Get category by slug
-     *
-     * @group Blog
-     * @queryParam slug Find by slug of category.
-     *
-     * @param  string  $slug
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
-     */
     #[
         Get(
             path: "/categories",
-            operationId: "categoryGetAll",
+            operationId: "categoryGetAllWithFilter",
             description: "Get all categories with pagination (10 items per page by default, page 1 by default)
             
-    This API will get records in all types(News, Event, Prayer) of categories.
+    This API will get records from the database and return them as a paginated list. 
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
             summary: "Get all categories with pagination",
             security: [['sanctum' => []]],
@@ -71,6 +63,10 @@ class CategoryController extends BaseCategoryController
             ],
             responses: [
                 new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    response: 400,
+                ),
+                new Response(
                     ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
                     response: 404,
                 ),
@@ -81,6 +77,21 @@ class CategoryController extends BaseCategoryController
             ]
         )
     ]
+    public function index(Request $request)
+    {
+        parent::index($request);
+    }
+
+    /**
+     *  Get category by slug
+     *
+     * @group Blog
+     * @queryParam slug Find by slug of category.
+     *
+     * @param  string  $slug
+     *
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
+     */
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
