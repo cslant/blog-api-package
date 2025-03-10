@@ -17,9 +17,14 @@ use OpenApi\Attributes\Schema;
         new Property(property: "description", type: "string", nullable: true),
         new Property(property: "icon", description: "Category icon", type: "string", nullable: true),
         new Property(
-            property: "parent",
+            property: "children",
             type: "array",
             items: new Items(ref: CategorySchema::class)
+        ),
+        new Property(
+            property: "parent",
+            ref: CategorySchema::class,
+            type: "object",
         ),
     ],
     type: "object"
