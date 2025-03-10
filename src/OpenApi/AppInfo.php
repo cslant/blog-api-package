@@ -35,6 +35,11 @@ namespace CSlant\Blog\Api\OpenApi;
  *     description="The API Base Path"
  * )
  *
+ * @OA\Server(
+ *     url="https://blog-api.cslant.com/cs-api",
+ *     description="The CSlant Blog API Base Path"
+ * )
+ *
  * @OA\SecurityScheme(
  *     type="http",
  *     description="Authentication by bearer token",
