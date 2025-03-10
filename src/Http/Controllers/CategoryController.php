@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -65,6 +66,33 @@ class CategoryController extends BaseCategoryController
                 ),
             ],
             responses: [
+                new Response(
+                    response: 200,
+                    description: "Get categories successfully",
+                    content: new JsonContent(
+                        properties: [
+                            new Property(
+                                property: 'error',
+                                description: 'Error status',
+                                type: 'boolean',
+                                default: false
+                            ),
+                            new Property(
+                                property: 'data',
+                                description: 'Data',
+                                properties: [
+                                    new Property(
+                                        property: 'category',
+                                        ref: CategoryModelResourceSchema::class,
+                                        description: 'Category',
+                                        type: 'object'
+                                    ),
+                                ],
+                                type: 'object'
+                            ),
+                        ]
+                    )
+                ),
                 new Response(
                     ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
                     response: 400,
@@ -132,10 +160,12 @@ class CategoryController extends BaseCategoryController
                                 description: 'Data',
                                 properties: [
                                     new Property(
-                                        property: 'category',
-                                        ref: CategoryModelResourceSchema::class,
-                                        description: 'Category',
-                                        type: 'object'
+                                        property: 'categories',
+                                        description: 'Categories',
+                                        type: 'array',
+                                        items: new Items(
+                                            ref: CategoryModelResourceSchema::class
+                                        ),
                                     ),
                                 ],
                                 type: 'object'
