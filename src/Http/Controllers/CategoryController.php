@@ -82,7 +82,7 @@ class CategoryController extends BaseCategoryController
     ]
     public function index(Request $request)
     {
-        parent::index($request);
+        return parent::index($request);
     }
 
     /**
