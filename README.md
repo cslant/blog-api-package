@@ -27,7 +27,7 @@ This is a package for CSlant's blog API.
 
 | Is Maintain        | PHP  | Laravel            | Blog API Package |
 |--------------------|------|--------------------|------------------|
-| :heavy_check_mark: | ^8.2 | ^11.0, ^12.0       | v2.0             |
+| :white_check_mark: | ^8.2 | ^11.0, ^12.0       | v2.0             |
 | :x:                | ^8.1 | ^9.0, ^10.0, ^11.0 | v1.0             |
 
 ## 🔧 Installation
