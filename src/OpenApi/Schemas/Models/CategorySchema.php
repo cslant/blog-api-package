@@ -1,29 +1,23 @@
 <?php
 
-namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Category;
+namespace CSlant\Blog\Api\OpenApi\Schemas\Models;
 
-use CSlant\Blog\Api\OpenApi\Schemas\Models\CategorySchema;
-use OpenApi\Attributes\Items;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
 
 #[Schema(
-    schema: "CategoryModelResource",
+    schema: "Category",
     required: ["id", "name", "slug", "description"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
         new Property(property: "name", description: "Category name", type: "string", maxLength: 255),
         new Property(property: "slug", description: "Category slug", type: "string", maxLength: 255, uniqueItems: true),
-        new Property(property: "description", type: "string", nullable: true),
+        new Property(property: "url", description: "Category url", type: "string", maxLength: 255, nullable: true),
         new Property(property: "icon", description: "Category icon", type: "string", nullable: true),
-        new Property(
-            property: "parent",
-            type: "array",
-            items: new Items(ref: CategorySchema::class)
-        ),
+        new Property(property: "description", type: "string", nullable: true),
     ],
     type: "object"
 )]
-class CategoryModelResourceSchema
+class CategorySchema
 {
 }
