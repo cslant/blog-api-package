@@ -140,7 +140,7 @@ class CategoryController extends BaseCategoryController
                     description: 'Category slug',
                     in: 'path',
                     required: true,
-                    schema: new Schema(type: 'string', default: 'php')
+                    schema: new Schema(type: 'string', example: 'php')
                 ),
             ],
             responses: [
@@ -156,19 +156,10 @@ class CategoryController extends BaseCategoryController
                                 default: false
                             ),
                             new Property(
-                                property: 'data',
-                                description: 'Data',
-                                properties: [
-                                    new Property(
-                                        property: 'categories',
-                                        description: 'Categories',
-                                        type: 'array',
-                                        items: new Items(
-                                            ref: CategoryModelResourceSchema::class
-                                        ),
-                                    ),
-                                ],
-                                type: 'object'
+                                property: "data",
+                                ref: CategoryModelResourceSchema::class,
+                                description: "Data of model",
+                                type: "object",
                             ),
                         ]
                     )
