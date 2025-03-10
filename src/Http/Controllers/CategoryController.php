@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Http\Controllers;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListCategoryResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
 use CSlant\Blog\Core\Models\Category;
@@ -14,7 +15,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
@@ -92,6 +95,69 @@ class CategoryController extends BaseCategoryController
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
+    #[
+        Get(
+            path: "/categories/{slug}",
+            operationId: "categoryFilterBySlug",
+            description: "Get the category by slug
+            
+    This API will get records from the database and return the category by slug.
+            ",
+            summary: "Get category by slug",
+            security: [['sanctum' => []]],
+            tags: ["Category"],
+            parameters: [
+                new Parameter(
+                    name: 'slug',
+                    description: 'Category slug',
+                    in: 'path',
+                    required: true,
+                    schema: new Schema(type: 'string', default: 'php')
+                ),
+            ],
+            responses: [
+                new Response(
+                    response: 200,
+                    description: "Get category successfully",
+                    content: new JsonContent(
+                        properties: [
+                            new Property(
+                                property: 'error',
+                                description: 'Error status',
+                                type: 'boolean',
+                                default: false
+                            ),
+                            new Property(
+                                property: 'data',
+                                description: 'Data',
+                                properties: [
+                                    new Property(
+                                        property: 'category',
+                                        ref: CategoryModelResourceSchema::class,
+                                        description: 'Category',
+                                        type: 'object'
+                                    ),
+                                ],
+                                type: 'object'
+                            ),
+                        ]
+                    )
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    response: 400,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    response: 404,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    response: 500,
+                ),
+            ]
+        )
+    ]
     public function findBySlug(string $slug): JsonResponse|RedirectResponse|JsonResource|BaseHttpResponse
     {
         /** @var Slug $slug */
