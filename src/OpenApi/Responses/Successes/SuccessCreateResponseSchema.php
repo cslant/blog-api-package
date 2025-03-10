@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\OpenApi\Responses\Errors;
+namespace CSlant\Blog\Api\OpenApi\Responses\Successes;
 
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Property;
