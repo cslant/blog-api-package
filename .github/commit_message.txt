@@ -1,7 +1,14 @@
 # ==== Commit Messages ====
 
+EX: #issue_id feat: xxx
+EX: #issue_id fix: xxx
+
 # ==== Commit Messages(Template) ====
-# <type>: <subject>
+# #<issue_id> <type>: <subject>
+# #1 feat: Add new feature
+# #2 fix: Fix a bug
+#
+# ==== Global Commit Types ====
 # fix: Fixed a bug in the code
 # hotfix: Fixed a critical bug in the code
 # feat: Added new feature
