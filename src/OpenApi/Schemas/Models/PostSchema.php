@@ -18,7 +18,7 @@ use OpenApi\Attributes\Schema;
         new Property(
             property: "categories",
             type: "array",
-            items: new Items(ref: CategorySchema::class)
+            items: new Items(ref: AuthorSchema::class)
         ),
         new Property(
             property: "tags",
