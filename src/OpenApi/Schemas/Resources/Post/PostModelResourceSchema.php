@@ -39,4 +39,3 @@ use OpenApi\Attributes\Schema;
 class PostModelResourceSchema
 {
 }
-
