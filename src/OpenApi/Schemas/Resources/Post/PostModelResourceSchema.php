@@ -3,7 +3,8 @@
 namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Post;
 
 use CSlant\Blog\Api\OpenApi\Schemas\Models\CategorySchema;
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\AuthorModelResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use OpenApi\Attributes\Items;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
@@ -25,7 +26,7 @@ use OpenApi\Attributes\Schema;
         new Property(
             property: "tags",
             type: "array",
-            items: new Items(ref: CategorySchema::class)
+            items: new Items(ref: TagModelResourceSchema::class)
         ),
         new Property(
             property: "author",
