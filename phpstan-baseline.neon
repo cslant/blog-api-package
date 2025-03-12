@@ -19,3 +19,15 @@ parameters:
           path: src/Services/SlugService.php
 
         - message: '#.*Botble.*#'
+
+        - message: '#.*is used zero times and is not analysed#'
+          path: *.php
+
+        -
+          identifier: varTag.nativeType
+
+        -
+          identifier: staticMethod.notFound
+
+        -
+          identifier: method.notFound

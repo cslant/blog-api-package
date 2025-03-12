@@ -61,6 +61,7 @@
     "phpstan/phpstan-phpunit": "^2.0.4"
   },
   "scripts": {
+    "a": "vendor/bin/phpstan analyse",
     "analyse": "vendor/bin/phpstan analyse",
     "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes"
   },
