@@ -11,7 +11,7 @@ use OpenApi\Attributes\Schema;
 
 #[Schema(
     schema: "PostModelResource",
-    required: ["id", "name", "slug", "description", "categories", "tags", "author", "created_at", "updated_at"],
+    required: ["id", "name", "slug", "description", "categories", "tags", "author"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
         new Property(property: "name", description: "Post name", type: "string", maxLength: 255),

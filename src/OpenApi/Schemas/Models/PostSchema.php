@@ -11,7 +11,7 @@ use OpenApi\Attributes\Schema;
 
 #[Schema(
     schema: "Post",
-    required: ["id", "name", "slug", "description", "content", "created_at", "updated_at"],
+    required: ["id", "name", "slug", "description", "content"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
         new Property(property: "name", description: "Post name", type: "string", maxLength: 255),
