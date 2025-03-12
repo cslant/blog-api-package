@@ -14,11 +14,6 @@ use OpenApi\Attributes\Schema;
         new Property(property: "name", description: "Tag name", type: "string", maxLength: 120),
         new Property(property: "slug", description: "Tag Slug", type: "string", maxLength: 255, uniqueItems: true),
         new Property(property: "description", description: "Tag description", type: "string", maxLength: 400, nullable: true),
-        new Property(
-            property: "author",
-            ref: AuthorModelResourceSchema::class,
-            type: "object"
-        ),
     ],
     type: "object"
 )]
