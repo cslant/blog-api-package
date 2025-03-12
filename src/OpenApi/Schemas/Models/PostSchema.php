@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\OpenApi\Schemas\Models;
 
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\AuthorModelResourceSchema;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
 
@@ -18,7 +19,7 @@ use OpenApi\Attributes\Schema;
         new Property(
             property: "categories",
             type: "array",
-            items: new Items(ref: AuthorSchema::class)
+            items: new Items(ref: CategorySchema::class)
         ),
         new Property(
             property: "tags",
@@ -27,7 +28,7 @@ use OpenApi\Attributes\Schema;
         ),
         new Property(
             property: "author",
-            ref: CategorySchema::class,
+            ref: AuthorModelResourceSchema::class,
             type: "object",
         ),
         new Property(property: "created_at", type: "datetime", nullable: true),

@@ -2,8 +2,8 @@
 
 namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Post;
 
-use CSlant\Blog\Api\OpenApi\Schemas\Models\AuthorSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Models\CategorySchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\AuthorModelResourceSchema;
 use OpenApi\Attributes\Items;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
@@ -29,7 +29,7 @@ use OpenApi\Attributes\Schema;
         ),
         new Property(
             property: "author",
-            ref: AuthorSchema::class,
+            ref: AuthorModelResourceSchema::class,
             type: "object",
         ),
         new Property(property: "created_at", description: "Post created at", type: "datetime", nullable: true),
