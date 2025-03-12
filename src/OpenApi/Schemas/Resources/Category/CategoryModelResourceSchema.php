@@ -6,7 +6,7 @@ use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
 
 #[Schema(
-    schema: "CategoryListResource",
+    schema: "CategoryModelResource",
     required: ["id", "slug"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
