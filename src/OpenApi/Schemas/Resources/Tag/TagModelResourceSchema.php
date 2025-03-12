@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag;
 
+
 use CSlant\Blog\Api\OpenApi\Schemas\Models\TagSchema;
 
 #[Schema(
@@ -28,6 +29,4 @@ use CSlant\Blog\Api\OpenApi\Schemas\Models\TagSchema;
     ],
     type: "object"
 )]
-class TagModelResourceSchema
-{
-}
+class TagModelResourceSchema {}
