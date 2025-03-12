@@ -5,7 +5,7 @@ namespace CSlant\Blog\Api\Http\Controllers;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListCategoryResource;
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryModelResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
 use CSlant\Blog\Core\Models\Category;
@@ -82,7 +82,7 @@ class CategoryController extends BaseCategoryController
                                 properties: [
                                     new Property(
                                         property: 'category',
-                                        ref: CategoryModelResourceSchema::class,
+                                        ref: CategoryListResourceSchema::class,
                                         description: 'Category',
                                         type: 'object'
                                     ),
@@ -156,7 +156,7 @@ class CategoryController extends BaseCategoryController
                             ),
                             new Property(
                                 property: "data",
-                                ref: CategoryModelResourceSchema::class,
+                                ref: CategoryListResourceSchema::class,
                                 description: "Data of model",
                                 type: "object",
                             ),
