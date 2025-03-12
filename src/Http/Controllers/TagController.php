@@ -86,10 +86,10 @@ class TagController extends BaseTagController
                                         ref: TagModelResourceSchema::class,
                                         description: 'Tag',
                                         type: 'object'
-                                    )
+                                    ),
                                 ],
                                 type: 'object'
-                            )
+                            ),
                         ]
                     )
                 ),
@@ -104,11 +104,10 @@ class TagController extends BaseTagController
                 new Response(
                     ref: InternalServerResponseSchema::class,
                     response: 500,
-                )
+                ),
             ]
         )
     ]
-
     public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         return parent::index($request);
