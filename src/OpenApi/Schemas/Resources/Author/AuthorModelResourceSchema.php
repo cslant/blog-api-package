@@ -7,7 +7,7 @@ use OpenApi\Attributes\Schema;
 
 #[Schema(
     schema: "AuthorModelResource",
-    required: ["id", "first_name", "last_name", "image"],
+    required: ["id"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
         new Property(property: "first_name", description: "Author first_name", type: "string", maxLength: 120, nullable: true),
