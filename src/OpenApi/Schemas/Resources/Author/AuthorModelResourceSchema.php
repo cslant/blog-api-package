@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Category;
+namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Author;
 
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
