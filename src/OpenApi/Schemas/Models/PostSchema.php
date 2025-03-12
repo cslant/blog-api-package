@@ -5,7 +5,6 @@ namespace CSlant\Blog\Api\OpenApi\Schemas\Models;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use OpenApi\Attributes\Items;
-use CSlant\Blog\Api\OpenApi\Schemas\Models\CategorySchema;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
 
