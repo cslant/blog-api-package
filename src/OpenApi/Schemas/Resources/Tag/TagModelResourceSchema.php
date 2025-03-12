@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag;
 
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Schema;
 
