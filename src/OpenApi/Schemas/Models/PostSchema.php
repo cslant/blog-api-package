@@ -16,8 +16,8 @@ use OpenApi\Attributes\Schema;
         new Property(property: "id", type: "integer", uniqueItems: true),
         new Property(property: "name", description: "Post name", type: "string", maxLength: 255),
         new Property(property: "slug", description: "Post slug", type: "string", maxLength: 255, uniqueItems: true),
-        new Property(property: "description", type: "string", nullable: true),
-        new Property(property: "content", type: "string", nullable: true),
+        new Property(property: "description", type: "string"),
+        new Property(property: "content", type: "string"),
         new Property(property: "image", type: "string", nullable: true),
         new Property(
             property: "categories",
