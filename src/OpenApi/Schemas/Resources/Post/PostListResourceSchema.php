@@ -17,7 +17,6 @@ use OpenApi\Attributes\Schema;
         new Property(property: "name", description: "Post name", type: "string", maxLength: 255),
         new Property(property: "slug", description: "Post slug", type: "string", maxLength: 255, uniqueItems: true),
         new Property(property: "description", description: "Post description", type: "string"),
-        new Property(property: "content", description: "Post content", type: "string", nullable: true),
         new Property(property: "image", description: "Post image", type: "string", nullable: true),
         new Property(
             property: "categories",
@@ -39,6 +38,6 @@ use OpenApi\Attributes\Schema;
     ],
     type: "object"
 )]
-class PostModelResourceSchema
+class PostListResourceSchema
 {
 }
