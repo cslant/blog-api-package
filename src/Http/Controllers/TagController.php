@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -43,9 +44,9 @@ class TagController extends BaseTagController
             path: "/tags",
             operationId: "tagGetAllWithFilter",
             description: "Get all tags with pagination (10 items per page by default, page 1 by default, page 1 by default)
+
     This API will get records from the database and return them as a paginated list. 
-    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-          ",
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.",
             summary: "Get all tags with pagination",
             security: [['sanctum' => []]],
             tags: ["Tag"],
@@ -78,17 +79,10 @@ class TagController extends BaseTagController
                                 default: false
                             ),
                             new Property(
-                                property: 'data',
-                                description: 'Data',
-                                properties: [
-                                    new Property(
-                                        property: 'tag',
-                                        ref: TagModelResourceSchema::class,
-                                        description: 'Tag',
-                                        type: 'object'
-                                    ),
-                                ],
-                                type: 'object'
+                                property: "data",
+                                description: "Data of model",
+                                type: "array",
+                                items: new Items(ref: TagModelResourceSchema::class)
                             ),
                         ]
                     )
@@ -110,7 +104,15 @@ class TagController extends BaseTagController
     ]
     public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        return parent::index($request);
+        $data = Tag::query()
+            ->wherePublished()
+            ->with('slugable')
+            ->paginate($request->integer('per_page', 10) ?: 10);
+
+        return $this
+            ->httpResponse()
+            ->setData(TagResource::collection($data))
+            ->toApiResponse();
     }
 
     /**
