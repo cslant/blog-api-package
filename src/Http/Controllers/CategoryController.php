@@ -107,7 +107,7 @@ class CategoryController extends BaseCategoryController
             ]
         )
     ]
-    public function index(Request $request)
+    public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         return parent::index($request);
     }
