@@ -111,8 +111,8 @@ class ViewCountAction extends BasePostController
         }
 
         $post = Post::query()
-            ->select('id', 'views')
-            ->where('id', $slug->reference_id)
+            ->select(['id', 'views'])
+            ->where('id', (int) $slug->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
             ->first();
 
