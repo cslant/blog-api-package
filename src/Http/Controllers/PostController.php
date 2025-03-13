@@ -145,7 +145,6 @@ class PostController extends BasePostController
     This API will get records from the database and return the post by slug.
             ",
             summary: "Get post by slug",
-            security: [['sanctum' => []]],
             tags: ["Post"],
             parameters: [
                 new Parameter(
