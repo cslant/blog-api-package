@@ -10,7 +10,7 @@ use OpenApi\Attributes\Schema;
     required: ["id", "views"],
     properties: [
         new Property(property: "id", type: "integer", uniqueItems: true),
-        new Property(property: "views", description: "Post views", type: "integer"),
+        new Property(property: "views", description: "Post views", type: "string"),
     ],
     type: "object"
 )]

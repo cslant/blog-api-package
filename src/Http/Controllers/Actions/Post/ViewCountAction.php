@@ -48,7 +48,7 @@ class ViewCountAction extends BasePostController
             operationId: "viewCountPostBySlug",
             description: "Get views count of the post by slug
             
-    This API will get records from the database and return views count of the post by slug.
+    This API will get record from the database and return views count of the post by slug.
             ",
             summary: "Get views count of the post by slug",
             tags: ["Post"],
