@@ -305,7 +305,12 @@ class PostController extends BasePostController
                         0 for non-featured posts.',
                     in: 'query',
                     required: false,
-                    schema: new Schema(type: 'integer', default: null)
+                    schema: new Schema(
+                        type: 'integer',
+                        default: null,
+                        enum: [0, 1],
+                        nullable: true
+                    )
                 ),
                 new Parameter(
                     name: 'search',
