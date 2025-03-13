@@ -245,91 +245,78 @@ class PostController extends BasePostController
             parameters: [
                 new Parameter(
                     name: 'categories',
-                    description: 'Filter of items categories',
+                    description: 'Filter posts by categories IDs',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'categories_exclude',
-                    description: 'Filter of items categories exclude',
+                    description: 'Filter posts by excluding specific category IDs.',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'exclude',
-                    description: 'Filter of items exclude',
+                    description: 'Filter posts by excluding specific post IDs.',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
-                    )
-                ),
-                new Parameter(
-                    name: 'include',
-                    description: 'Filter of items include',
-                    in: 'query',
-                    required: false,
-                    schema: new Schema(
-                        type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'author',
-                    description: 'Filter of items author',
+                    description: 'Filter posts by author IDs',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'author_exclude',
-                    description: 'Filter of items author exclude',
+                    description: 'Filter posts by excluding specific author IDs.',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'featured',
-                    description: 'Filter of items featured',
+                    description: 'Filter posts by featured status. Accepts values:
+                        1 for featured posts
+                        0 for non-featured posts.',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
+                        items: new Items(type: 'integer'),
+                        default: null
                     )
                 ),
                 new Parameter(
                     name: 'search',
-                    description: 'Filter of items search in name and description',
+                    description: 'Search for posts where the given keyword appears in either the name or description fields.',
                     in: 'query',
                     required: false,
-                    schema: new Schema(
-                        type: 'array',
-                        default: null,
-                        items: new Items(type: 'integer')
-                    )
+                    schema: new Schema(type: 'string', default: null)
                 ),
                 new Parameter(
                     name: 'per_page',
