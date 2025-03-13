@@ -244,6 +244,62 @@ class PostController extends BasePostController
             tags: ["Post"],
             parameters: [
                 new Parameter(
+                    name: 'categories',
+                    description: 'Filter of items categories',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'categories_exclude',
+                    description: 'Filter of items categories exclude',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'exclude',
+                    description: 'Filter of items exclude',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'include',
+                    description: 'Filter of items include',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'author',
+                    description: 'Filter of items author',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'author_exclude',
+                    description: 'Filter of items author exclude',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'array', default: null)
+                ),
+                new Parameter(
+                    name: 'featured',
+                    description: 'Filter of items featured',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: null)
+                ),
+                new Parameter(
+                    name: 'search',
+                    description: 'Filter of items search in name and description',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: null)
+                ),
+                new Parameter(
                     name: 'per_page',
                     description: 'Number of items per page',
                     in: 'query',
