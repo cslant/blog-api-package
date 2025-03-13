@@ -15,6 +15,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -77,17 +78,10 @@ class CategoryController extends BaseCategoryController
                                 default: false
                             ),
                             new Property(
-                                property: 'data',
-                                description: 'Data',
-                                properties: [
-                                    new Property(
-                                        property: 'category',
-                                        ref: CategoryListResourceSchema::class,
-                                        description: 'Category',
-                                        type: 'object'
-                                    ),
-                                ],
-                                type: 'object'
+                                property: "data",
+                                description: "Data of model",
+                                type: "array",
+                                items: new Items(ref: CategoryListResourceSchema::class)
                             ),
                         ]
                     )
@@ -109,7 +103,16 @@ class CategoryController extends BaseCategoryController
     ]
     public function index(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        return parent::index($request);
+        $data = Category::query()
+            ->wherePublished()
+            ->orderByDesc('created_at')
+            ->with(['slugable'])
+            ->paginate($request->integer('per_page', 10) ?: 10);
+
+        return $this
+            ->httpResponse()
+            ->setData(ListCategoryResource::collection($data))
+            ->toApiResponse();
     }
 
     /**
