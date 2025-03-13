@@ -57,7 +57,6 @@ class PostController extends BasePostController
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
             summary: "Get all posts with pagination",
-            security: [['sanctum' => []]],
             tags: ["Post"],
             parameters: [
                 new Parameter(
@@ -243,7 +242,6 @@ class PostController extends BasePostController
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
             summary: "Get posts by filter with pagination",
-            security: [['sanctum' => []]],
             tags: ["Post"],
             parameters: [
                 new Parameter(
