@@ -48,7 +48,6 @@ class TagController extends BaseTagController
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.",
             summary: "Get all tags with pagination",
-            security: [['sanctum' => []]],
             tags: ["Tag"],
             parameters: [
                 new Parameter(
@@ -134,7 +133,6 @@ class TagController extends BaseTagController
     This API will get records from the database and return the tag by slug.
             ",
             summary: "Get tag by slug",
-            security: [['sanctum' => []]],
             tags: ["Tag"],
             parameters: [
                 new Parameter(
