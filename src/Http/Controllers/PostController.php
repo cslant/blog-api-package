@@ -18,6 +18,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -51,7 +52,7 @@ class PostController extends BasePostController
             path: "/posts",
             operationId: "postGetAllWithFilter",
             description: "Get all posts with pagination (10 items per page by default, page 1 by default)
-            
+
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
@@ -87,17 +88,10 @@ class PostController extends BasePostController
                                 default: false
                             ),
                             new Property(
-                                property: 'data',
-                                description: 'Data',
-                                properties: [
-                                    new Property(
-                                        property: 'post',
-                                        ref: PostListResourceSchema::class,
-                                        description: 'Post',
-                                        type: 'object'
-                                    ),
-                                ],
-                                type: 'object'
+                                property: "data",
+                                description: "Data of model",
+                                type: "array",
+                                items: new Items(ref: PostListResourceSchema::class)
                             ),
                         ]
                     )
@@ -280,17 +274,10 @@ class PostController extends BasePostController
                                 default: false
                             ),
                             new Property(
-                                property: 'data',
-                                description: 'Data',
-                                properties: [
-                                    new Property(
-                                        property: 'post',
-                                        ref: PostListResourceSchema::class,
-                                        description: 'Post',
-                                        type: 'object'
-                                    ),
-                                ],
-                                type: 'object'
+                                property: "data",
+                                description: "Data of model",
+                                type: "array",
+                                items: new Items(ref: PostListResourceSchema::class)
                             ),
                         ]
                     )
