@@ -47,7 +47,6 @@ class CategoryController extends BaseCategoryController
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
             summary: "Get all categories with pagination",
-            security: [['sanctum' => []]],
             tags: ["Category"],
             parameters: [
                 new Parameter(
@@ -134,7 +133,6 @@ class CategoryController extends BaseCategoryController
     This API will get records from the database and return the category by slug.
             ",
             summary: "Get category by slug",
-            security: [['sanctum' => []]],
             tags: ["Category"],
             parameters: [
                 new Parameter(
