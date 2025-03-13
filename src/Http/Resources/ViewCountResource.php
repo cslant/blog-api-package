@@ -20,7 +20,7 @@ class ViewCountResource extends JsonResource
         /** @var Post $this */
         return [
             'id' => $this->id,
-            'views' => $this->views,
+            'views' => $this->views ?? 0,
         ];
     }
 }

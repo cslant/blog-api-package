@@ -51,7 +51,6 @@ class ViewCountAction extends BasePostController
     This API will get records from the database and return views count of the post by slug.
             ",
             summary: "Get views count of the post by slug",
-            security: [['sanctum' => []]],
             tags: ["Post"],
             parameters: [
                 new Parameter(
@@ -113,10 +112,8 @@ class ViewCountAction extends BasePostController
 
         $post = Post::query()
             ->select('id', 'views')
-            ->where([
-                'id' => $slug->reference_id,
-                'status' => StatusEnum::PUBLISHED,
-            ])
+            ->where('id', $slug->reference_id)
+            ->where('status', StatusEnum::PUBLISHED)
             ->first();
 
         if (!$post) {
