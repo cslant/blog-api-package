@@ -250,8 +250,8 @@ class PostController extends BasePostController
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(type: 'integer'),
-                        default: null
+                        items: new Items(description: 'Input the category ID', type: 'integer'),
+                        default: null,
                     )
                 ),
                 new Parameter(
@@ -261,7 +261,7 @@ class PostController extends BasePostController
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude category ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -272,7 +272,7 @@ class PostController extends BasePostController
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude post ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -283,7 +283,7 @@ class PostController extends BasePostController
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the author ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -294,7 +294,7 @@ class PostController extends BasePostController
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude author ID', type: 'integer'),
                         default: null
                     )
                 ),

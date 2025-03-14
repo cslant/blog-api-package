@@ -46,4 +46,4 @@ git config --local commit.template .github/commit_message.txt
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE) for more information.
+The MIT License (MIT). Please look at [License File](LICENSE) for more information.
