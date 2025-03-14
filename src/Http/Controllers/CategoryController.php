@@ -3,9 +3,13 @@
 namespace CSlant\Blog\Api\Http\Controllers;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\Blog\Http\Resources\CategoryResource;
+use Botble\Blog\Repositories\Interfaces\CategoryInterface;
+use Botble\Blog\Supports\FilterCategory;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
 use CSlant\Blog\Core\Models\Category;
@@ -111,6 +115,84 @@ class CategoryController extends BaseCategoryController
         return $this
             ->httpResponse()
             ->setData(ListCategoryResource::collection($data))
+            ->toApiResponse();
+    }
+
+    #[
+        Get(
+            path: "/categories/filters",
+            operationId: "categoryGetWithFilter",
+            description: "Get all categories with filters and pagination (10 items per page by default, page 1 by default)
+            
+    This API will get records from the database and return them as a paginated list. 
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
+            ",
+            summary: "Get category filters",
+            tags: ['Category'],
+            parameters: [
+                new Parameter(
+                    name: 'order_by',
+                    description: 'Field to order by',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'created_at')
+                ),
+                new Parameter(
+                    name: 'order',
+                    description: 'Order direction: 
+                        ASC for ascending
+                        DESC for descending',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
+                ),
+                new Parameter(
+                    name: 'per_page',
+                    description: 'Number of items per page',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 10)
+                ),
+                new Parameter(
+                    name: 'page',
+                    description: 'Page number',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 1)
+                ),
+            ],
+            responses: [
+              new Response(
+                  response: 200,
+                  description: "Get filters successfully",
+                  content: new JsonContent(
+                      properties: [
+                            new Property(
+                                property: 'error',
+                                description: 'Error status',
+                                type: 'boolean',
+                                default: false
+                            ),
+                            new Property(
+                                property: "data",
+                                description: "Filter data",
+                                type: "array",
+                                items: new Items(ref: CategoryModelResourceSchema::class)
+                            ),
+                        ]
+                  )
+              ),
+            ],
+        )
+    ]
+    public function getFilters(Request $request, CategoryInterface $categoryRepository): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    {
+        $filters = FilterCategory::setFilters($request->input());
+        $data = $categoryRepository->getFilters($filters);
+
+        return $this
+            ->httpResponse()
+            ->setData(CategoryResource::collection($data))
             ->toApiResponse();
     }
 
