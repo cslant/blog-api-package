@@ -140,11 +140,11 @@ class CategoryController extends BaseCategoryController
                 new Parameter(
                     name: 'order',
                     description: 'Order direction: 
-                        asc for ascending
-                        desc for descending',
+                        ASC for ascending
+                        DESC for descending',
                     in: 'query',
                     required: false,
-                    schema: new Schema(type: 'string', default: 'ASC')
+                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
                 ),
                 new Parameter(
                     name: 'per_page',
