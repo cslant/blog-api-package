@@ -121,7 +121,7 @@ class CategoryController extends BaseCategoryController
         Get(
             path: "/categories/filters",
             operationId: "categoryGetWithFilter",
-            description: "Get all categories with pagination (10 items per page by default, page 1 by default)
+            description: "Get all categories with filters and pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
