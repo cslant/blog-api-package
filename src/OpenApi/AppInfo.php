@@ -2,6 +2,8 @@
 
 namespace CSlant\Blog\Api\OpenApi;
 
+use OpenApi\Attributes\Server;
+
 /**
  * @OA\Info(
  *     description="The API Documentation for CSlant Blog - Build by cslant.com",
@@ -29,15 +31,14 @@ namespace CSlant\Blog\Api\OpenApi;
  * @OA\PathItem(
  *     path="/",
  * )
- *
  * @OA\Server(
- *     url="/cs-api",
- *     description="The API Base Path"
+ *     url=YOUR_DYNAMIC_URL_CONSTANT,
+ *     description="OpenApi dynamic host local"
  * )
  *
  * @OA\Server(
- *     url="https://blog-api.cslant.com/cs-api",
- *     description="The CSlant Blog API Base Path"
+ *     url="YOUR_DYNAMIC_PROD_URL_CONSTANT",
+ *     description="OpenApi dynamic host server"
  * )
  *
  * @OA\SecurityScheme(
