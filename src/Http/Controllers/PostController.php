@@ -249,9 +249,8 @@ class PostController extends BasePostController
                     in: 'query',
                     required: false,
                     schema: new Schema(
-                        description: 'Input the category ID',
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the category ID', type: 'integer'),
                         default: null,
                     )
                 ),
@@ -261,9 +260,8 @@ class PostController extends BasePostController
                     in: 'query',
                     required: false,
                     schema: new Schema(
-                        description: 'Input the exclude category ID',
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude category ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -273,9 +271,8 @@ class PostController extends BasePostController
                     in: 'query',
                     required: false,
                     schema: new Schema(
-                        description: 'Input the exclude post ID',
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude post ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -285,9 +282,8 @@ class PostController extends BasePostController
                     in: 'query',
                     required: false,
                     schema: new Schema(
-                        description: 'Input the author ID',
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the author ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -297,9 +293,8 @@ class PostController extends BasePostController
                     in: 'query',
                     required: false,
                     schema: new Schema(
-                        description: 'Input the exclude author ID',
                         type: 'array',
-                        items: new Items(type: 'integer'),
+                        items: new Items(description: 'Input the exclude author ID', type: 'integer'),
                         default: null
                     )
                 ),
