@@ -163,7 +163,7 @@ class CategoryController extends BaseCategoryController
                   response: 200,
                   description: "Get filters successfully",
                   content: new JsonContent(
-                        properties: [
+                      properties: [
                             new Property(
                                 property: 'error',
                                 description: 'Error status',
@@ -178,11 +178,10 @@ class CategoryController extends BaseCategoryController
                             ),
                         ]
                   )
-              )
+              ),
             ],
         )
-     ]
-
+    ]
     public function getFilters(Request $request, CategoryInterface $categoryRepository): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         $filters = FilterCategory::setFilters($request->input());
