@@ -9,6 +9,7 @@ use Botble\Blog\Supports\FilterCategory;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
 use CSlant\Blog\Core\Models\Category;
@@ -138,7 +139,9 @@ class CategoryController extends BaseCategoryController
                 ),
                 new Parameter(
                     name: 'order',
-                    description: 'Order direction',
+                    description: 'Order direction: 
+                        asc for ascending
+                        desc for descending',
                     in: 'query',
                     required: false,
                     schema: new Schema(type: 'string', default: 'ASC')
@@ -173,8 +176,8 @@ class CategoryController extends BaseCategoryController
                             new Property(
                                 property: "data",
                                 description: "Filter data",
-                                type: "object",
-                                items: new Items(ref: CategoryListResourceSchema::class)
+                                type: "array",
+                                items: new Items(ref: CategoryModelResourceSchema::class)
                             ),
                         ]
                   )
