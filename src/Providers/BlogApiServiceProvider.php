@@ -23,6 +23,7 @@ class BlogApiServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerAssetPublishing();
+        $this->resourceOverride();
     }
 
     /**
@@ -69,5 +70,16 @@ class BlogApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../lang' => resource_path('lang/packages/blog-api'),
         ], 'lang');
+    }
+
+    /**
+     * Override resource of the package.
+     */
+    public function resourceOverride(): void
+    {
+        $this->app->bind(
+            \Botble\Blog\Http\Resources\TagResource::class,
+            \CSlant\Blog\Api\Http\Resources\TagResource::class
+        );
     }
 }
