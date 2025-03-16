@@ -32,7 +32,7 @@ class AuthorAction extends BasePostController
      *
      * @queryParam  Find by authorId of user.
      *
-     * @return BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     public function __invoke(int $authorId, Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
@@ -41,7 +41,7 @@ class AuthorAction extends BasePostController
             ->whereId($authorId)
             ->first();
 
-        if (! $user) {
+        if (!$user) {
             return $this
                 ->httpResponse()
                 ->setError()
