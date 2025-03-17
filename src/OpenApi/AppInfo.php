@@ -31,13 +31,18 @@ namespace CSlant\Blog\Api\OpenApi;
  * )
  *
  * @OA\Server(
- *     url="/cs-api",
- *     description="The API Base Path"
+ *     url=L5_SWAGGER_API_DEV_URL,
+ *     description="OpenApi dynamic host local"
  * )
  *
  * @OA\Server(
- *     url="https://blog-api.cslant.com/cs-api",
- *     description="The CSlant Blog API Base Path"
+ *     url=L5_SWAGGER_API_STAGING_URL,
+ *     description="OpenApi dynamic host staging"
+ * )
+ *
+ * @OA\Server(
+ *     url=L5_SWAGGER_API_PROD_URL,
+ *     description="OpenApi dynamic host production"
  * )
  *
  * @OA\SecurityScheme(

@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\Providers;
 
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
 class BlogApiServiceProvider extends ServiceProvider
@@ -23,6 +24,8 @@ class BlogApiServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerAssetPublishing();
+
+        $this->resourceOverride();
     }
 
     /**
@@ -69,5 +72,18 @@ class BlogApiServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../../lang' => resource_path('lang/packages/blog-api'),
         ], 'lang');
+    }
+
+    /**
+     * Override resource of the package.
+     */
+    public function resourceOverride(): void
+    {
+        if (!class_exists(\Botble\Blog\Http\Resources\TagResource::class, false)) {
+            class_alias(
+                \CSlant\Blog\Api\Http\Resources\TagResource::class,
+                \Botble\Blog\Http\Resources\TagResource::class
+            );
+        }
     }
 }
