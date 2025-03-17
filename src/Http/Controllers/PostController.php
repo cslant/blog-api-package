@@ -4,8 +4,8 @@ namespace CSlant\Blog\Api\Http\Controllers;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
-use CSlant\Blog\Api\Http\Resources\ListPostResource;
-use CSlant\Blog\Api\Http\Resources\PostResource;
+use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
+use CSlant\Blog\Api\Http\Resources\Post\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;

@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Author;
 
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @mixin User
  */
-class AuthorResource extends JsonResource
+class AuthorWithPostResource extends JsonResource
 {
     /**
      * @param $request
@@ -21,10 +21,12 @@ class AuthorResource extends JsonResource
 
         return [
             'id' => $this->id,
+            'email' => $this->email,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'username' => $this->username,
             'image' => $this->avatar_url,
-            'role' => $this->roles?->first()->name ?? null,
+            'posts' => $this->posts()->orderBy($request->order_by, $request->order)->paginate($request->per_page ?? 10),
         ];
     }
 }

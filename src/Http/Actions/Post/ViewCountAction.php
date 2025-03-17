@@ -4,7 +4,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
-use CSlant\Blog\Api\Http\Resources\ViewCountResource;
+use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;

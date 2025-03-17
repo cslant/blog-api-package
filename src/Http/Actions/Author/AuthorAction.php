@@ -4,7 +4,7 @@ namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\ACL\Models\User;
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use CSlant\Blog\Api\Http\Resources\AuthorWithPostResource;
+use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
 use Illuminate\Http\JsonResponse;
