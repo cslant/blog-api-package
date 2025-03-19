@@ -1,0 +1,125 @@
+<?php
+
+namespace CSlant\Blog\Api\Http\Actions\Post;
+
+use Botble\Base\Http\Responses\BaseHttpResponse;
+use Botble\Blog\Http\Resources\PostResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
+use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Supports\Base\FilterPost;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes\Get;
+use OpenApi\Attributes\JsonContent;
+use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Property;
+use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Schema;
+
+/**
+ * Class GetByTagAction
+ *
+ *
+ * @group Blog API
+ *
+ * @authenticated
+ *
+ * @method BaseHttpResponse httpResponse()
+ * @method BaseHttpResponse setData(mixed $data)
+ * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
+ */
+class GetByTagAction extends BasePostController
+{
+    /**
+     * @param  int  $tagId
+     * @param  Request  $request
+     *
+     * @group Blog
+     *
+     * @queryParam  Find by tagId of post.
+     *
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
+     */
+    #[
+        Get(
+            path: "/posts/{tagId}/by-tag",
+            operationId: "postByTagId",
+            description: "Get list post of the tag by tag id
+            
+    This API will get record from the database and return list post of the tag by tag id.
+            ",
+            summary: "Get list post of the tag by tag id",
+            tags: ["Post"],
+            parameters: [
+                new Parameter(
+                    name: 'tagId',
+                    description: 'Tag Id',
+                    in: 'path',
+                    required: true,
+                    schema: new Schema(type: 'string', example: 'php')
+                ),
+                new Parameter(
+                    name: 'per_page',
+                    description: 'Number of items per page',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 10)
+                ),
+                new Parameter(
+                    name: 'page',
+                    description: 'Page number',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 1)
+                ),
+            ],
+            responses: [
+                new Response(
+                    response: 200,
+                    description: "Get list posts by tag successfully",
+                    content: new JsonContent(
+                        properties: [
+                            new Property(
+                                property: 'error',
+                                description: 'Error status',
+                                type: 'boolean',
+                                default: false
+                            ),
+                            new Property(
+                                property: "data",
+                                ref: PostModelResourceSchema::class,
+                                description: "Data of model",
+                                type: "object",
+                            ),
+                        ]
+                    )
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    response: 400,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    response: 404,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    response: 500,
+                ),
+            ]
+        )
+    ]
+    public function __invoke(int $tagId, Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    {
+        $filters = FilterPost::setFilters($request->input());
+
+        $data = $this->postRepository->getByTag($tagId, $filters['per_page']);
+
+        return $this
+            ->httpResponse()
+            ->setData(PostResource::collection($data))
+            ->toApiResponse();
+    }
+}

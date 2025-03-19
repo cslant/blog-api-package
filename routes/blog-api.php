@@ -1,5 +1,6 @@
 <?php
 
+use CSlant\Blog\Api\Http\Actions\Post\GetByTagAction;
 use CSlant\Blog\Api\Http\Controllers\Actions\Post\ViewCountAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
@@ -30,6 +31,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('filters', [PostController::class, 'getFilters']);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', ViewCountAction::class);
+        Route::get('{tagId}/by-tag', GetByTagAction::class);
     });
 
     Route::group(['prefix' => 'categories'], function () {
