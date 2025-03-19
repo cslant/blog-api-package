@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Providers;
 
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
 class BlogApiServiceProvider extends ServiceProvider
