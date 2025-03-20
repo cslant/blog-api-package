@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Resources\Post;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ListPostResourceCollection extends ResourceCollection
 {
@@ -19,19 +20,22 @@ class ListPostResourceCollection extends ResourceCollection
      *
      * @param  Request  $request
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function toArray(Request $request): array
     {
+        /** @var LengthAwarePaginator<mixed> $paginator */
+        $paginator = $this->resource;
+
         return [
             'data' => $this->collection,
             'meta' => [
-                'total' => $this->resource->total(),
-                'per_page' => $this->resource->perPage(),
-                'current_page' => $this->resource->currentPage(),
-                'last_page' => $this->resource->lastPage(),
-                'from' => $this->resource->firstItem(),
-                'to' => $this->resource->lastItem(),
+                'total' => $paginator->total(),
+                'per_page' => $paginator->perPage(),
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+                'from' => $paginator->firstItem(),
+                'to' => $paginator->lastItem(),
             ],
         ];
     }
