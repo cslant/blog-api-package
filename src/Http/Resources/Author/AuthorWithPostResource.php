@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Http\Resources\Author;
 
-use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResourceCollection;
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
