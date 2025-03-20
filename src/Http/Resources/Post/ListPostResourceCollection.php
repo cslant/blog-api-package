@@ -30,12 +30,13 @@ class ListPostResourceCollection extends ResourceCollection
         return [
             'data' => $this->collection,
             'meta' => [
-                'total' => $paginator->total(),
-                'per_page' => $paginator->perPage(),
                 'current_page' => $paginator->currentPage(),
-                'last_page' => $paginator->lastPage(),
                 'from' => $paginator->firstItem(),
+                'last_page' => $paginator->lastPage(),
+                'path' => $paginator->path(),
+                'per_page' => $paginator->perPage(),
                 'to' => $paginator->lastItem(),
+                'total' => $paginator->total(),
             ],
         ];
     }
