@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Author;
 
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;

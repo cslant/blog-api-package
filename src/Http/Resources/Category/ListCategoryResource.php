@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Category;
 
 use CSlant\Blog\Core\Facades\Base\BaseHelper;
 use CSlant\Blog\Core\Http\Resources\Base\BaseListCategoryResource;

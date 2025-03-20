@@ -1,7 +1,10 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Post;
 
+use CSlant\Blog\Api\Http\Resources\Author\AuthorResource;
+use CSlant\Blog\Api\Http\Resources\Category\CategoryResource;
+use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
