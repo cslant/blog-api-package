@@ -34,12 +34,13 @@ class AuthorAction extends BasePostController
 {
     /**
      * @param  int  $authorId
+     * @param  Request  $request
      *
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
      *
      * @queryParam  Find by authorId of user.
      *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
@@ -143,7 +144,7 @@ class AuthorAction extends BasePostController
 
         return $this
             ->httpResponse()
-            ->setData(new AuthorWithPostResource($user))
+            ->setData(AuthorWithPostResource::make($user))
             ->toApiResponse();
     }
 }
