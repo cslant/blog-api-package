@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
+use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Actions\Action;

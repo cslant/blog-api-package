@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\ACL\Models\User;
+use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Actions\Action;
 use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
