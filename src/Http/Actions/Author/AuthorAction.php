@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\ACL\Models\User;
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Api\Http\Actions\Action;
 use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
 use Illuminate\Http\JsonResponse;
@@ -16,7 +17,6 @@ use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
-use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 
 /**
  * Class AuthorAction
@@ -30,10 +30,8 @@ use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class AuthorAction
+class AuthorAction extends Action
 {
-    use HasHttpResponse;
-
     /**
      * @param  int  $authorId
      * @param  Request  $request

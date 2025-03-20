@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
+use CSlant\Blog\Api\Http\Actions\Action;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
@@ -18,7 +19,6 @@ use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
-use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 
 /**
  * Class ViewCountAction
@@ -33,10 +33,8 @@ use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class ViewCountAction
+class ViewCountAction  extends Action
 {
-    use HasHttpResponse;
-
     /**
      * @param  string  $slug
      *
