@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
+use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
@@ -18,7 +19,6 @@ use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
-use Botble\Base\Http\Controllers\Concerns\HasHttpResponse;
 
 /**
  * Class ViewCountAction
