@@ -3,9 +3,9 @@
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use CSlant\Blog\Api\Http\Actions\Action;
 use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
