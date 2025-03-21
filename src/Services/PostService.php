@@ -20,10 +20,11 @@ class PostService
     /**
      * Get posts by tags.
      *
-     * @param array<string, mixed> $filters
-     * @return Builder<Post>|LengthAwarePaginator
+     * @param  array<string, mixed>  $filters
+     *
+     * @return LengthAwarePaginator<Post>
      */
-    public function getPostByTags(array $filters): Builder|LengthAwarePaginator
+    public function getPostByTags(array $filters): LengthAwarePaginator
     {
         $data = Post::query();
 
