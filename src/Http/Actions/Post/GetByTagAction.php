@@ -13,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -38,7 +39,6 @@ class GetByTagAction extends Action
     }
 
     /**
-     * @param  int  $tagId
      * @param  Request  $request
      *
      * @group Blog
@@ -49,7 +49,7 @@ class GetByTagAction extends Action
      */
     #[
         Get(
-            path: "/posts/{tagId}/by-tag",
+            path: "/posts/get-by-tags",
             operationId: "postByTagId",
             description: "Get list post of the tag by tag id
             
@@ -59,11 +59,15 @@ class GetByTagAction extends Action
             tags: ["Post"],
             parameters: [
                 new Parameter(
-                    name: 'tagId',
-                    description: 'Tag Id',
-                    in: 'path',
-                    required: true,
-                    schema: new Schema(type: 'string', example: 'php')
+                    name: 'tags',
+                    description: 'Filter posts by tag specific tag IDs.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the exclude tag ID', type: 'integer'),
+                        default: null
+                    )
                 ),
                 new Parameter(
                     name: 'per_page',
@@ -116,11 +120,11 @@ class GetByTagAction extends Action
             ]
         )
     ]
-    public function __invoke(int $tagId, Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postRepository->getByTag($tagId, (int) $filters['per_page']);
+        $data = $this->postRepository->getFilters((array) $filters);
 
         return $this
             ->httpResponse()

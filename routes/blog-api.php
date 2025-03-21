@@ -34,9 +34,9 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::get('filters', [PostController::class, 'getFilters']);
+        Route::get('get-by-tags', GetByTagAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', ViewCountAction::class);
-        Route::get('{tagId}/by-tag', GetByTagAction::class);
     });
 
     Route::group(['prefix' => 'categories'], function () {
