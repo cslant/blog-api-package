@@ -7,7 +7,6 @@ use Botble\Blog\Http\Resources\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
-use CSlant\Blog\Core\Http\Repositories\PostRepository;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
