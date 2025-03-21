@@ -120,7 +120,7 @@ class GetByTagAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postRepository->getByTag($tagId, $filters['per_page']);
+        $data = $this->postRepository->getByTag($tagId, (int) $filters['per_page']);
 
         return $this
             ->httpResponse()

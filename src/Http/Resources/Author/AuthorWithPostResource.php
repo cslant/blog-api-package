@@ -18,10 +18,16 @@ class AuthorWithPostResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $orderBy = (string) $request->get('order_by', 'created_at');
+        $order = strtoupper((string) $request->get('order', 'DESC'));
+        $perPage = $request->input('per_page', 10);
+        $perPage = is_numeric($perPage) ? (int) $perPage : 10;
+
         /** @var User $this */
         $posts = $this->posts()
-            ->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'DESC'))
-            ->paginate($request->get('per_page', 10));
+            ->orderBy($orderBy, $order)
+            ->paginate($perPage);
+
 
         return [
             'id' => $this->id,
