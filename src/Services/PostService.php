@@ -21,7 +21,7 @@ class PostService
      * Get posts by tags.
      *
      * @param array<string, mixed> $filters
-     * @return Builder<Post>|BaseQueryBuilder
+     * @return BaseQueryBuilder|Builder<Post>
      */
     public function getPostByTags(array $filters): Builder|BaseQueryBuilder
     {
