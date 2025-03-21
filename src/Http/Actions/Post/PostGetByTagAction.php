@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Blog\Http\Resources\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
+use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Http\Repositories\PostRepository;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
@@ -34,11 +35,11 @@ use OpenApi\Attributes\Schema;
  */
 class PostGetByTagAction extends Action
 {
-    protected PostRepository $postRepository;
+    protected PostService $postService;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostService $postService)
     {
-        $this->postRepository = $postRepository;
+        $this->postService = $postService;
     }
 
     /**
@@ -127,7 +128,7 @@ class PostGetByTagAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postRepository->getFilters((array) $filters);
+        $data = $this->postService->getFilters((array) $filters);
 
         return $this
             ->httpResponse()
