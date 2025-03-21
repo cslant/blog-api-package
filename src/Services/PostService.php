@@ -2,12 +2,11 @@
 
 namespace CSlant\Blog\Api\Services;
 
+use Botble\Base\Models\BaseQueryBuilder;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 /**
  * Class PostService
@@ -18,7 +17,12 @@ use Illuminate\Support\Collection;
  */
 class PostService
 {
-    public function getPostByTags(array $filters): Collection|LengthAwarePaginator
+    /**
+     * @param  array  $filters
+     *
+     * @return BaseQueryBuilder|Builder
+     */
+    public function getPostByTags(array $filters): BaseQueryBuilder|Builder
     {
         $data = Post::query();
 
