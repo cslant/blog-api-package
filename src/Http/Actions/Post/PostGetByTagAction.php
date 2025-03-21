@@ -4,7 +4,6 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Blog\Http\Resources\PostResource;
-use Botble\Blog\Repositories\Interfaces\PostInterface;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Http\Repositories\PostRepository;
