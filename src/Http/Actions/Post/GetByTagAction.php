@@ -4,8 +4,9 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use Botble\Blog\Http\Resources\PostResource;
+use Botble\Blog\Repositories\Interfaces\PostInterface;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
-use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -30,8 +31,12 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class GetByTagAction extends BasePostController
+class GetByTagAction extends Action
 {
+    public function __construct(protected PostInterface $postRepository)
+    {
+    }
+
     /**
      * @param  int  $tagId
      * @param  Request  $request
