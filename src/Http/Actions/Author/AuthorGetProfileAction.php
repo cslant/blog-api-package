@@ -30,7 +30,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class AuthorAction extends Action
+class AuthorGetProfileAction extends Action
 {
     /**
      * @param  int  $authorId
