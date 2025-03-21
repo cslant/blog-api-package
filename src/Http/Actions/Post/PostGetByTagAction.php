@@ -127,7 +127,7 @@ class PostGetByTagAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postService->getPostByTag((array) $filters);
+        $data = $this->postService->getPostByTags((array) $filters);
 
         return $this
             ->httpResponse()
