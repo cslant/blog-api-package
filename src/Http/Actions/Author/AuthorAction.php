@@ -2,11 +2,11 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
-use Botble\ACL\Models\User;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
-use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Http\Actions\Action;
+use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -19,7 +19,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class ViewCountAction
+ * Class AuthorAction
  *
  *
  * @group Blog API
@@ -30,7 +30,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class AuthorAction extends BasePostController
+class AuthorAction extends Action
 {
     /**
      * @param  int  $authorId

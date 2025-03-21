@@ -7,7 +7,7 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
-use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
@@ -33,7 +33,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class ViewCountAction extends BasePostController
+class ViewCountAction extends Action
 {
     /**
      * @param  string  $slug
