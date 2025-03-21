@@ -1,6 +1,6 @@
 <?php
 
-use CSlant\Blog\Api\Http\Actions\Post\PostGetByTagAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostGetByTagsAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
@@ -34,7 +34,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::get('filters', [PostController::class, 'getFilters']);
-        Route::get('get-by-tags', PostGetByTagAction::class);
+        Route::get('get-by-tags', PostGetByTagsAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
     });

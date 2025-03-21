@@ -32,7 +32,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostGetByTagAction extends Action
+class PostGetByTagsAction extends Action
 {
     protected PostService $postService;
 
