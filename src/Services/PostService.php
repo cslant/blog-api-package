@@ -18,11 +18,12 @@ use Illuminate\Support\Arr;
 class PostService
 {
     /**
-     * @param  array  $filters
+     * Get posts by tags.
      *
-     * @return BaseQueryBuilder|Builder
+     * @param array<string, mixed> $filters
+     * @return Builder<Post>|BaseQueryBuilder
      */
-    public function getPostByTags(array $filters): BaseQueryBuilder|Builder
+    public function getPostByTags(array $filters): Builder|BaseQueryBuilder
     {
         $data = Post::query();
 
