@@ -3,8 +3,8 @@
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use Botble\Blog\Http\Resources\PostResource;
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
+use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
@@ -22,7 +22,6 @@ use OpenApi\Attributes\Schema;
 
 /**
  * Class GetByTagsAction
- *
  *
  * @group Blog API
  *
@@ -101,7 +100,7 @@ class PostGetByTagsAction extends Action
                             ),
                             new Property(
                                 property: "data",
-                                ref: PostModelResourceSchema::class,
+                                ref: PostListResourceSchema::class,
                                 description: "Data of model",
                                 type: "object",
                             ),
@@ -131,7 +130,7 @@ class PostGetByTagsAction extends Action
 
         return $this
             ->httpResponse()
-            ->setData(PostResource::collection($data))
+            ->setData(ListPostResource::collection($data))
             ->toApiResponse();
     }
 }
