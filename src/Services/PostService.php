@@ -18,7 +18,7 @@ use Illuminate\Support\Collection;
  */
 class PostService
 {
-    public function getFilters(array $filters): Collection|LengthAwarePaginator
+    public function getPostByTag(array $filters): Collection|LengthAwarePaginator
     {
         $data = Post::query();
 
