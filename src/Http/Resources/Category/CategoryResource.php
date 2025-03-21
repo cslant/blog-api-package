@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Category;
 
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;

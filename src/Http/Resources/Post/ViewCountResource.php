@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources;
+namespace CSlant\Blog\Api\Http\Resources\Post;
 
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\Resources\Json\JsonResource;

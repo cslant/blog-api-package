@@ -1,7 +1,8 @@
 <?php
 
 use CSlant\Blog\Api\Http\Actions\Post\GetByTagAction;
-use CSlant\Blog\Api\Http\Controllers\Actions\Post\ViewCountAction;
+use CSlant\Blog\Api\Http\Actions\Author\AuthorAction;
+use CSlant\Blog\Api\Http\Actions\Post\ViewCountAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
 use CSlant\Blog\Api\Http\Controllers\PostController;
@@ -25,6 +26,10 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::get('/', fn () => response()->json(['message' => 'Welcome to CSlant Blog API']));
 
     Route::get('search', [PostController::class, 'getSearch']);
+
+    Route::group(['prefix' => 'authors'], function () {
+        Route::get('/{authorId}', AuthorAction::class);
+    });
 
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
