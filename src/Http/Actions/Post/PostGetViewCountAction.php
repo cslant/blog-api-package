@@ -39,7 +39,7 @@ class PostGetViewCountAction extends Action
      * @param  string  $slug
      *
      * @group Blog
-     * @queryParam slug Find by slug of post.
+     * @queryParam Find by slug of post.
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[

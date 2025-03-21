@@ -21,7 +21,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class GetByTagAction
+ * Class GetByTagsAction
  *
  *
  * @group Blog API
@@ -46,7 +46,7 @@ class PostGetByTagsAction extends Action
      *
      * @group Blog
      *
-     * @queryParam  Find by tagId of post.
+     * @queryParam  Find by list tag id of post.
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */

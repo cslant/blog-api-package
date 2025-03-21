@@ -6,6 +6,7 @@ use Botble\Base\Models\BaseQueryBuilder;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 
 /**
@@ -21,9 +22,9 @@ class PostService
      * Get posts by tags.
      *
      * @param array<string, mixed> $filters
-     * @return BaseQueryBuilder|Builder<Post>
+     * @return Builder<Post>|LengthAwarePaginator
      */
-    public function getPostByTags(array $filters): Builder|BaseQueryBuilder
+    public function getPostByTags(array $filters): Builder|LengthAwarePaginator
     {
         $data = Post::query();
 
