@@ -33,7 +33,6 @@ use OpenApi\Attributes\Schema;
 class AuthorGetListAction extends Action
 {
     /**
-     * @param  int  $authorId
      * @param  Request  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
