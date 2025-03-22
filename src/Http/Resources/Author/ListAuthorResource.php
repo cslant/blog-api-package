@@ -22,6 +22,7 @@ class ListAuthorResource extends JsonResource
             'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'username' => $this->username,
             'image' => $this->avatar_url,
             'posts_count' => $this->posts_count,
         ];
