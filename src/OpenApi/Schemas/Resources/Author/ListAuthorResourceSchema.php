@@ -13,6 +13,7 @@ use OpenApi\Attributes\Schema;
         new Property(property: "first_name", description: "Author first_name", type: "string", maxLength: 120, nullable: true),
         new Property(property: "last_name", description: "Author last_name", type: "string", maxLength: 120, nullable: true),
         new Property(property: "image", description: "Author image", type: "string", maxLength: 255, nullable: true),
+        new Property(property: "username", description: "Author username", type: "string", maxLength: 60, nullable: true),
         new Property(property: "posts_count", description: "Author posts_count", type: "integer", nullable: true),
     ],
     type: "object"
