@@ -1,5 +1,6 @@
 <?php
 
+use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetByTagsAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
@@ -28,6 +29,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::get('search', [PostController::class, 'getSearch']);
 
     Route::group(['prefix' => 'authors'], function () {
+        Route::get('/', AuthorGetListAction::class);
         Route::get('/{authorId}', AuthorGetProfileAction::class);
     });
 
