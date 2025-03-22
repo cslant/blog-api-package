@@ -5,8 +5,9 @@ namespace CSlant\Blog\Api\Http\Actions\Author;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;
+use CSlant\Blog\Api\Services\AuthorService;
+use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
-use CSlant\Blog\Core\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,6 +33,13 @@ use OpenApi\Attributes\Schema;
  */
 class AuthorGetListAction extends Action
 {
+    protected AuthorService $authorService;
+
+    public function __construct(AuthorService $authorService)
+    {
+        $this->authorService = $authorService;
+    }
+
     /**
      * @param  Request  $request
      *
@@ -50,6 +58,22 @@ class AuthorGetListAction extends Action
             summary: "Get all authors with pagination",
             tags: ["Author"],
             parameters: [
+                new Parameter(
+                    name: 'order_by',
+                    description: 'Can order by field: id, posts_count, updated_at, ...',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'updated_at')
+                ),
+                new Parameter(
+                    name: 'order',
+                    description: 'Order direction: 
+                        ASC for ascending
+                        DESC for descending',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
+                ),
                 new Parameter(
                     name: 'per_page',
                     description: 'Number of items per page',
@@ -103,10 +127,7 @@ class AuthorGetListAction extends Action
     ]
     public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $users = User::query()
-            ->withCount('posts')
-            ->orderBy('posts_count', 'DESC')
-            ->paginate($request->integer('per_page', 10));
+        $users = $this->authorService->getAllAuthor($request);
 
         return $this
             ->httpResponse()
