@@ -1,17 +1,19 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Actions\Author;
+namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
+use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
+use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
-use CSlant\Blog\Core\Models\User;
+use CSlant\Blog\Core\Supports\Base\FilterPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -19,8 +21,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class AuthorAction
- *
+ * Class GetByTagsAction
  *
  * @group Blog API
  *
@@ -30,51 +31,45 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class AuthorAction extends Action
+class PostGetByTagsAction extends Action
 {
+    protected PostService $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     /**
-     * @param  int  $authorId
      * @param  Request  $request
      *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
      *
-     * @queryParam  Find by authorId of user.
+     * @queryParam  Find by list tag id of post.
      *
+     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/authors/{authorId}",
-            operationId: "profileAuthorByAuthorId",
-            description: "Get profile and list post of the author by author id
+            path: "/posts/get-by-tags",
+            operationId: "postGetByTag",
+            description: "Get list post of the tag by tag id
             
-    This API will get record from the database and return profile and list post of the author by author id.
+    This API will get record from the database and return list post of the tag by tag id.
             ",
-            summary: "Get profile and list post of the author by author id",
-            tags: ["Author"],
+            summary: "Get list post of the tag by tag id",
+            tags: ["Post"],
             parameters: [
                 new Parameter(
-                    name: 'authorId',
-                    description: 'Author Id',
-                    in: 'path',
-                    required: true,
-                    schema: new Schema(type: 'string', example: 'php')
-                ),
-                new Parameter(
-                    name: 'order_by',
-                    description: 'Can order by field: id, slug, created_at, ...',
+                    name: 'tags',
+                    description: 'Filter posts by tag specific tag IDs.',
                     in: 'query',
                     required: false,
-                    schema: new Schema(type: 'string', default: 'created_at')
-                ),
-                new Parameter(
-                    name: 'order',
-                    description: 'Order direction: 
-                        ASC for ascending
-                        DESC for descending',
-                    in: 'query',
-                    required: false,
-                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the exclude tag ID', type: 'integer'),
+                        default: null
+                    )
                 ),
                 new Parameter(
                     name: 'per_page',
@@ -94,7 +89,7 @@ class AuthorAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get author and list posts successfully",
+                    description: "Get list posts by tag successfully",
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -105,7 +100,7 @@ class AuthorAction extends Action
                             ),
                             new Property(
                                 property: "data",
-                                ref: AuthorModelResourceSchema::class,
+                                ref: PostListResourceSchema::class,
                                 description: "Data of model",
                                 type: "object",
                             ),
@@ -127,24 +122,15 @@ class AuthorAction extends Action
             ]
         )
     ]
-    public function __invoke(int $authorId, Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $user = User::query()
-            ->with('posts')
-            ->whereId($authorId)
-            ->first();
+        $filters = FilterPost::setFilters($request->input());
 
-        if (!$user) {
-            return $this
-                ->httpResponse()
-                ->setError()
-                ->setCode(404)
-                ->setMessage('Not found');
-        }
+        $data = $this->postService->getPostByTags((array) $filters);
 
         return $this
             ->httpResponse()
-            ->setData(AuthorWithPostResource::make($user))
+            ->setData(ListPostResource::collection($data))
             ->toApiResponse();
     }
 }

@@ -1,8 +1,9 @@
 <?php
 
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
-use CSlant\Blog\Api\Http\Actions\Author\AuthorAction;
-use CSlant\Blog\Api\Http\Actions\Post\ViewCountAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostGetByTagsAction;
+use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
 use CSlant\Blog\Api\Http\Controllers\PostController;
@@ -29,14 +30,15 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
 
     Route::group(['prefix' => 'authors'], function () {
         Route::get('/', AuthorGetListAction::class);
-        Route::get('/{authorId}', AuthorAction::class);
+        Route::get('/{authorId}', AuthorGetProfileAction::class);
     });
 
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::get('filters', [PostController::class, 'getFilters']);
+        Route::get('get-by-tags', PostGetByTagsAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
-        Route::get('{slug}/view-count', ViewCountAction::class);
+        Route::get('{slug}/view-count', PostGetViewCountAction::class);
     });
 
     Route::group(['prefix' => 'categories'], function () {

@@ -20,8 +20,8 @@ class AuthorWithPostResource extends JsonResource
     {
         /** @var User $this */
         $posts = $this->posts()
-            ->orderBy($request->get('order_by', 'created_at'), $request->get('order', 'DESC'))
-            ->paginate($request->get('per_page', 10));
+            ->orderBy((string) $request->get('order_by', 'created_at'), (string) $request->get('order', 'DESC'))
+            ->paginate($request->integer('per_page', 10));
 
         return [
             'id' => $this->id,
