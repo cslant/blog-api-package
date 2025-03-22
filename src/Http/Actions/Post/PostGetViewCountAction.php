@@ -33,13 +33,13 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class ViewCountAction extends Action
+class PostGetViewCountAction extends Action
 {
     /**
      * @param  string  $slug
      *
      * @group Blog
-     * @queryParam slug Find by slug of post.
+     * @queryParam Find by slug of post.
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[

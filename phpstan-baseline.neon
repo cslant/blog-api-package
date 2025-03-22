@@ -12,6 +12,9 @@ parameters:
         - message: '#Cannot cast mixed to string#'
           path: '*'
 
+        - message: '#Cannot cast mixed to int#'
+          path: '*'
+
         - message: '#Method CSlant\\Blog\\Api\\Services\\SlugService::getSlugModel\(\) has no return type specified#'
           path: src/Services/SlugService.php
 
