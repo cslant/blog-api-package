@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Services;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
@@ -22,7 +23,7 @@ class AuthorService
      *
      * @param  Request  $request
      *
-     * @return LengthAwarePaginator<User>
+     * @return LengthAwarePaginator<Model>
      */
     public function getAllAuthor(Request $request): LengthAwarePaginator
     {
@@ -34,9 +35,6 @@ class AuthorService
 
         $data = $data->orderBy($orderBy, $order);
 
-        /** @var LengthAwarePaginator<User> $result */
-        $result = $data->paginate($request->integer('per_page', 10));
-
-        return $result;
+        return $data->paginate($request->integer('per_page', 10));
     }
 }
