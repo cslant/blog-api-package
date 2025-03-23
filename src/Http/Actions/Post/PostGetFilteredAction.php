@@ -21,7 +21,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class GetByTagsAction
+ * Class PostGetFilteredAction
  *
  * @group Blog API
  *
