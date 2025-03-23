@@ -21,7 +21,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class PostGetFilteredAction
+ * Class PostGetCustomFiltersAction
  *
  * @group Blog API
  *
@@ -31,7 +31,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostGetFilteredAction extends Action
+class PostGetCustomFiltersAction extends Action
 {
     protected PostService $postService;
 

@@ -1,7 +1,7 @@
 <?php
 
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
-use CSlant\Blog\Api\Http\Actions\Post\PostGetFilteredAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostGetCustomFiltersAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
@@ -36,7 +36,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::group(['prefix' => 'posts'], function () {
         Route::get('/', [PostController::class, 'index']);
         Route::get('filters', [PostController::class, 'getFilters']);
-        Route::get('filtered', PostGetFilteredAction::class);
+        Route::get('custom-filters', PostGetCustomFiltersAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
     });
