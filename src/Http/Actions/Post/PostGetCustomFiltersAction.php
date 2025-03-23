@@ -45,18 +45,20 @@ class PostGetCustomFiltersAction extends Action
      *
      * @group Blog
      *
-     * @queryParam  Find by list tag id of post.
-     *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/filtered",
-            operationId: "postGetWithFiltered",
+            path: "/posts/custom-filters",
+            operationId: "postGetWithCustomFilters",
             description: "Get all posts with pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
+    
+    Additional query parameters:
+    - `custom-filters`: Apply custom filters such as tags, categories, etc and custom order by multiple.  
+    - `tags`: Filter posts that are associated with specific tag IDs. Supports passing multiple tag IDs.
             ",
             summary: "Get posts by filter with pagination",
             tags: ["Post"],
@@ -138,7 +140,7 @@ class PostGetCustomFiltersAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postService->getPostByTags((array) $filters);
+        $data = $this->postService->getCustomFilter((array) $filters);
 
         return $this
             ->httpResponse()

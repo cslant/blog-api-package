@@ -24,7 +24,7 @@ class PostService
      *
      * @return LengthAwarePaginator<Post>
      */
-    public function getPostByTags(array $filters): LengthAwarePaginator
+    public function getCustomFilter(array $filters): LengthAwarePaginator
     {
         $data = Post::query();
 
