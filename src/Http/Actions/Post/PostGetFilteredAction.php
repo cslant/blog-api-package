@@ -31,7 +31,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostGetByTagsAction extends Action
+class PostGetFilteredAction extends Action
 {
     protected PostService $postService;
 
@@ -51,15 +51,27 @@ class PostGetByTagsAction extends Action
      */
     #[
         Get(
-            path: "/posts/get-by-tags",
-            operationId: "postGetByTag",
-            description: "Get list post of the tag by tag id
+            path: "/posts/filtered",
+            operationId: "postGetWithFiltered",
+            description: "Get all posts with pagination (10 items per page by default, page 1 by default)
             
-    This API will get record from the database and return list post of the tag by tag id.
+    This API will get records from the database and return them as a paginated list. 
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
-            summary: "Get list post of the tag by tag id",
+            summary: "Get posts by filter with pagination",
             tags: ["Post"],
             parameters: [
+                new Parameter(
+                    name: 'categories',
+                    description: 'Filter posts by categories IDs',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the category ID', type: 'integer'),
+                        default: null,
+                    )
+                ),
                 new Parameter(
                     name: 'tags',
                     description: 'Filter posts by tag specific tag IDs.',
@@ -89,7 +101,7 @@ class PostGetByTagsAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get list posts by tag successfully",
+                    description: "Get list posts successfully",
                     content: new JsonContent(
                         properties: [
                             new Property(
