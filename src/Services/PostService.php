@@ -18,15 +18,23 @@ use Illuminate\Support\Arr;
 class PostService
 {
     /**
-     * Get posts by tags.
+     * Get posts by filters.
      *
      * @param  array<string, mixed>  $filters
      *
      * @return LengthAwarePaginator<Post>
      */
-    public function getPostByTags(array $filters): LengthAwarePaginator
+    public function getCustomFilters(array $filters): LengthAwarePaginator
     {
         $data = Post::query();
+
+        if ($filters['categories'] !== null) {
+            $categories = array_filter((array) $filters['categories']);
+
+            $data = $data->whereHas('categories', function (Builder $query) use ($categories): void {
+                $query->whereIn('categories.id', $categories);
+            });
+        }
 
         if ($filters['tags'] !== null) {
             $tags = array_filter((array) $filters['tags']);

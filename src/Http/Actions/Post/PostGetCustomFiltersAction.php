@@ -21,7 +21,7 @@ use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
 /**
- * Class GetByTagsAction
+ * Class PostGetCustomFiltersAction
  *
  * @group Blog API
  *
@@ -31,7 +31,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostGetByTagsAction extends Action
+class PostGetCustomFiltersAction extends Action
 {
     protected PostService $postService;
 
@@ -45,21 +45,35 @@ class PostGetByTagsAction extends Action
      *
      * @group Blog
      *
-     * @queryParam  Find by list tag id of post.
-     *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/get-by-tags",
-            operationId: "postGetByTag",
-            description: "Get list post of the tag by tag id
+            path: "/posts/custom-filters",
+            operationId: "postGetWithCustomFilters",
+            description: "Get all posts with pagination (10 items per page by default, page 1 by default)
             
-    This API will get record from the database and return list post of the tag by tag id.
+    This API will get records from the database and return them as a paginated list. 
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
+    
+    Additional query parameters:
+    - `custom-filters`: Apply custom filters such as tags, categories, etc and custom order by multiple.  
+    - `tags`: Filter posts that are associated with specific tag IDs. Supports passing multiple tag IDs.
             ",
-            summary: "Get list post of the tag by tag id",
+            summary: "Get posts by filter with pagination",
             tags: ["Post"],
             parameters: [
+                new Parameter(
+                    name: 'categories',
+                    description: 'Filter posts by categories IDs',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the category ID', type: 'integer'),
+                        default: null,
+                    )
+                ),
                 new Parameter(
                     name: 'tags',
                     description: 'Filter posts by tag specific tag IDs.',
@@ -89,7 +103,7 @@ class PostGetByTagsAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get list posts by tag successfully",
+                    description: "Get list posts successfully",
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -126,7 +140,7 @@ class PostGetByTagsAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postService->getPostByTags((array) $filters);
+        $data = $this->postService->getCustomFilters((array) $filters);
 
         return $this
             ->httpResponse()
