@@ -140,7 +140,7 @@ class PostGetCustomFiltersAction extends Action
     {
         $filters = FilterPost::setFilters($request->input());
 
-        $data = $this->postService->getCustomFilter((array) $filters);
+        $data = $this->postService->getCustomFilters((array) $filters);
 
         return $this
             ->httpResponse()
