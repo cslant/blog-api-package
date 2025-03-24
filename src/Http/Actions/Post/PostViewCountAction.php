@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
-use OpenApi\Attributes\Schema;
 use OpenApi\Attributes\Response;
+use OpenApi\Attributes\Schema;
 
 class PostViewCountAction extends Action
 {
@@ -30,7 +30,7 @@ class PostViewCountAction extends Action
                     in: 'path',
                     required:  true,
                     schema: new Schema(type: 'integer', example: 1)
-                )
+                ),
             ],
             responses: [
                 new Response(
@@ -49,7 +49,7 @@ class PostViewCountAction extends Action
                                 ref: ViewCountResourceSchema::class,
                                 description: "Updated view count data",
                                 type: "object",
-                            )
+                            ),
                         ]
                     )
                 ),

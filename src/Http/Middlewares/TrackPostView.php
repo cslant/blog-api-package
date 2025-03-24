@@ -9,13 +9,15 @@ use CSlant\Blog\Core\Models\Post;
 
 class TrackPostView
 {
-    public function handle($request,Closure $next)
+    public function handle($request, Closure $next)
     {
         $postId = $request->route('id');
         $ipAddress = $request->ip();
 
         $post = Post::find($postId);
-        if(!$post) return $next($request);
+        if (!$post) {
+            return $next($request);
+        }
 
         $postView = PostView::where('post_id', $postId)
             ->where('ip_address', $ipAddress)
@@ -23,8 +25,7 @@ class TrackPostView
 
         $shouldIncrementView = false;
 
-        if(!$postView)
-        {
+        if (!$postView) {
             // Access this post for the first time from this IP
             PostView::create([
                 'post_id' => $postId,
@@ -32,12 +33,9 @@ class TrackPostView
                 'time_check' => Carbon::now()->addHours(),
             ]);
             $shouldIncrementView = true;
-        }
-        else
-        {
+        } else {
             // Check if field time_check is passed
-            if(Carbon::now()->isAfter($postView->time_check))
-            {
+            if (Carbon::now()->isAfter($postView->time_check)) {
                 // Update the field time_check
                 $postView->update([
                     'time_check' => Carbon::now()->addHours(),
@@ -46,8 +44,7 @@ class TrackPostView
             }
         }
 
-        if($shouldIncrementView)
-        {
+        if ($shouldIncrementView) {
             $post->increment('views');
         }
 
