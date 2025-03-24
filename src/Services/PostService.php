@@ -18,7 +18,7 @@ use Illuminate\Support\Arr;
 class PostService
 {
     /**
-     * Get posts by tags.
+     * Get posts by filters.
      *
      * @param  array<string, mixed>  $filters
      *
