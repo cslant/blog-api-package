@@ -60,7 +60,7 @@ class PostGetCustomFiltersAction extends Action
     - `custom-filters`: Apply custom filters such as tags, categories, etc and custom order by multiple.  
     - `tags`: Filter posts that are associated with specific tag IDs. Supports passing multiple tag IDs.
             ",
-            summary: "Get posts by filter with pagination",
+            summary: "Get posts by custom filter with pagination",
             tags: ["Post"],
             parameters: [
                 new Parameter(
@@ -84,6 +84,22 @@ class PostGetCustomFiltersAction extends Action
                         items: new Items(description: 'Input the exclude tag ID', type: 'integer'),
                         default: null
                     )
+                ),
+                new Parameter(
+                    name: 'order_by',
+                    description: 'Can order by field: id, views, created_at, ...',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'created_at')
+                ),
+                new Parameter(
+                    name: 'order',
+                    description: 'Order direction: 
+                        ASC for ascending
+                        DESC for descending',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
                 ),
                 new Parameter(
                     name: 'per_page',
