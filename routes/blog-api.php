@@ -1,5 +1,6 @@
 <?php
 
+use CSlant\Blog\Api\Http\Actions\Auth\AuthPostRegisterAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetCustomFiltersAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
@@ -27,6 +28,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::get('/', fn () => response()->json(['message' => 'Welcome to CSlant Blog API']));
 
     Route::get('search', [PostController::class, 'getSearch']);
+    Route::post('register', AuthPostRegisterAction::class);
 
     Route::group(['prefix' => 'authors'], function () {
         Route::get('/', AuthorGetListAction::class);
