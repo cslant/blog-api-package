@@ -83,7 +83,7 @@ class PostService
             {
                 // Update field time_check
                 $postView->update([
-                    'time_check' => Caton::now()->addHours(),
+                    'time_check' => Carbon::now()->addHours(),
                 ]);
                 $shouldIncrementView = true;
             }
