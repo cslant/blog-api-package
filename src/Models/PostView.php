@@ -2,18 +2,18 @@
 
 namespace CSlant\Blog\Api\Models;
 
+use Carbon\Carbon;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Carbon\Carbon;
 
 /**
  * @property int $id
  * @property int $post_id
  * @property string $ip_address
  * @property Carbon $time_check
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
+ * @property null|Carbon $created_at
+ * @property null|Carbon $updated_at
  *
  * @method static \Illuminate\Database\Eloquent\Builder<\CSlant\Blog\Api\Models\PostView> query()
  */

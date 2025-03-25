@@ -59,7 +59,9 @@ class PostService
     public function trackView(int $postId, string $ipAddress): bool
     {
         $post = Post::find($postId);
-        if(!$post) return false;
+        if (!$post) {
+            return false;
+        }
 
         $postView = PostView::where('post_id', $postId)
             ->where('ip_address', $ipAddress)
@@ -67,8 +69,7 @@ class PostService
 
         $shouldIncrementView = false;
 
-        if(!$postView)
-        {
+        if (!$postView) {
             // Access this post for the first time from this IP
             PostView::create([
                 'post_id' => $postId,
@@ -76,11 +77,9 @@ class PostService
                 'time_check' => Carbon::now()->addHours(),
             ]);
             $shouldIncrementView = true;
-        }
-        else {
+        } else {
             // Check if field time_check is passed
-            if(Carbon::now()->isAfter($postView->time_check))
-            {
+            if (Carbon::now()->isAfter($postView->time_check)) {
                 // Update field time_check
                 $postView->update([
                     'time_check' => Carbon::now()->addHours(),
@@ -89,10 +88,10 @@ class PostService
             }
         }
 
-        if($shouldIncrementView)
-        {
+        if ($shouldIncrementView) {
             $post->increment('views');
         }
+
         return $shouldIncrementView;
     }
 }
