@@ -56,57 +56,43 @@ class PostService
         return $data->paginate((int) $filters['per_page']);
     }
 
-    /**
-     * Track post view.
-     *
-     * @param int $postId
-     * @param string $ipAddress
-     * @return bool
-     */
     public function trackView(int $postId, string $ipAddress): bool
     {
-        /** @var Post|null $post */
         $post = Post::find($postId);
-        if (!$post) return false;
+        if(!$post) return false;
 
-        /** @var \Illuminate\Database\Eloquent\Builder<PostView> $query */
-        $query = PostView::query();
-
-        /** @var PostView|null $postView */
-        $postView = $query
-            ->where('post_id', '=', $postId)
-            ->where('ip_address', '=', $ipAddress)
+        $postView = PostView::where('post_id', $postId)
+            ->where('ip_address', $ipAddress)
             ->first();
 
         $shouldIncrementView = false;
 
-        if (!$postView) {
+        if(!$postView)
+        {
             // Access this post for the first time from this IP
-            /** @var array<string, mixed> $attributes */
-            $attributes = [
+            PostView::create([
                 'post_id' => $postId,
                 'ip_address' => $ipAddress,
-                'time_check' => Carbon::now()->addHour(),
-            ];
-            PostView::create($attributes);
+                'time_check' => Carbon::now()->addHours(),
+            ]);
             $shouldIncrementView = true;
-        } else {
+        }
+        else {
             // Check if field time_check is passed
-            if (Carbon::now()->isAfter($postView->time_check)) {
+            if(Carbon::now()->isAfter($postView->time_check))
+            {
                 // Update field time_check
-                /** @var array<string, mixed> $updateData */
-                $updateData = [
-                    'time_check' => Carbon::now()->addHour(),
-                ];
-                $postView->update($updateData);
+                $postView->update([
+                    'time_check' => Caton::now()->addHours(),
+                ]);
                 $shouldIncrementView = true;
             }
         }
 
-        if ($shouldIncrementView) {
+        if($shouldIncrementView)
+        {
             $post->increment('views');
         }
-
         return $shouldIncrementView;
     }
 }
