@@ -5,10 +5,13 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
-use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
@@ -25,7 +28,7 @@ class PostViewCountAction extends Action
     }
 
     #[
-        PostAttribute(
+        Get(
             path: "/posts/{id}/increment-views",
             operationId: "incrementViewCountPostById",
             description: "Increment views count of the post by ID. Only adds 1 view per IP in 1 hour.",

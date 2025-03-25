@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Models;
 
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PostView extends Model
 {
@@ -19,7 +20,7 @@ class PostView extends Model
         'time_check' => 'datetime',
     ];
 
-    public function post()
+    public function post(): BelongsTo
     {
         return $this->belongsTo(Post::class, 'post_id');
     }
