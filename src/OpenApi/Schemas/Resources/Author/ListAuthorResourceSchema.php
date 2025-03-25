@@ -15,6 +15,7 @@ use OpenApi\Attributes\Schema;
         new Property(property: "image", description: "Author image", type: "string", maxLength: 255, nullable: true),
         new Property(property: "username", description: "Author username", type: "string", maxLength: 60, nullable: true),
         new Property(property: "posts_count", description: "Author posts_count", type: "integer", nullable: true),
+        new Property(property: "created_at", description: "Post created at", type: "datetime", nullable: true),
     ],
     type: "object"
 )]
