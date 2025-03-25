@@ -56,43 +56,57 @@ class PostService
         return $data->paginate((int) $filters['per_page']);
     }
 
+    /**
+     * Track post view.
+     *
+     * @param int $postId
+     * @param string $ipAddress
+     * @return bool
+     */
     public function trackView(int $postId, string $ipAddress): bool
     {
+        /** @var Post|null $post */
         $post = Post::find($postId);
-        if(!$post) return false;
+        if (!$post) return false;
 
-        $postView = PostView::where('post_id', $postId)
-            ->where('ip_address', $ipAddress)
+        /** @var \Illuminate\Database\Eloquent\Builder<PostView> $query */
+        $query = PostView::query();
+
+        /** @var PostView|null $postView */
+        $postView = $query
+            ->where('post_id', '=', $postId)
+            ->where('ip_address', '=', $ipAddress)
             ->first();
 
         $shouldIncrementView = false;
 
-        if(!$postView)
-        {
+        if (!$postView) {
             // Access this post for the first time from this IP
-            PostView::create([
+            /** @var array<string, mixed> $attributes */
+            $attributes = [
                 'post_id' => $postId,
                 'ip_address' => $ipAddress,
-                'time_check' => Carbon::now()->addHours(),
-            ]);
+                'time_check' => Carbon::now()->addHour(),
+            ];
+            PostView::create($attributes);
             $shouldIncrementView = true;
-        }
-        else {
+        } else {
             // Check if field time_check is passed
-            if(Carbon::now()->isAfter($postView->time_check))
-            {
+            if (Carbon::now()->isAfter($postView->time_check)) {
                 // Update field time_check
-                $postView->update([
-                    'time_check' => Caton::now()->addHours(),
-                ]);
+                /** @var array<string, mixed> $updateData */
+                $updateData = [
+                    'time_check' => Carbon::now()->addHour(),
+                ];
+                $postView->update($updateData);
                 $shouldIncrementView = true;
             }
         }
 
-        if($shouldIncrementView)
-        {
+        if ($shouldIncrementView) {
             $post->increment('views');
         }
+
         return $shouldIncrementView;
     }
 }

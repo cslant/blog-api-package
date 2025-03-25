@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
+use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\JsonResponse;
@@ -83,7 +84,11 @@ class PostViewCountAction extends Action
     {
         $post = Post::findOrFail($id);
 
-        $ipAddress = $request->ip();
+        $ipAddress = $request->header('X-Forwarded-For')
+            ?? $request->header('X-Real-IP')
+            ?? $request->ip()
+            ?? '127.0.0.1';
+
         $this->postService->trackView($post->id, $ipAddress);
 
         return $this
