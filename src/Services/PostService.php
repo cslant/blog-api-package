@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Services;
 
-use Carbon\Carbon;
 use CSlant\Blog\Api\Models\PostView;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
@@ -61,12 +60,12 @@ class PostService
      *
      * @param int $postId The post ID
      * @param string $ipAddress The IP address
-     * @param string|null $userAgent The user agent
+     * @param null|string $userAgent The user agent
      * @return void
      */
     public function trackView(int $postId, string $ipAddress, ?string $userAgent = null): void
     {
-        /** @var \CSlant\Blog\Api\Models\PostView|null $existingView */
+        /** @var null|\CSlant\Blog\Api\Models\PostView $existingView */
         $existingView = PostView::query()
             ->where('post_id', '=', $postId)
             ->where('ip_address', '=', $ipAddress)
