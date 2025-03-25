@@ -5,6 +5,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
+use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\Request;
@@ -16,6 +17,13 @@ use OpenApi\Attributes\Schema;
 
 class PostViewCountAction extends Action
 {
+    protected PostService $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
+
     #[
         PostAttribute(
             path: "/posts/{id}/increment-views",
@@ -71,6 +79,9 @@ class PostViewCountAction extends Action
     public function __invoke(Request $request, int $id): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         $post = Post::findOrFail($id);
+
+        $ipAddress = $request->ip();
+        $this->postService->trackView($post->id, $ipAddress);
 
         return $this
             ->httpResponse()
