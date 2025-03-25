@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('ip_address');
             $table->timestamp('time_check');
             $table->timestamps();
-
             $table->index(['post_id', 'ip_address']);
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });

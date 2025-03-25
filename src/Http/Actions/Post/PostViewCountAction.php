@@ -89,7 +89,9 @@ class PostViewCountAction extends Action
             ?? $request->ip()
             ?? '127.0.0.1';
 
-        $this->postService->trackView($post->id, $ipAddress);
+        $userAgent = $request->header('User-Agent');
+
+        $this->postService->trackView($post->id, $ipAddress, $userAgent);
 
         return $this
             ->httpResponse()

@@ -11,22 +11,31 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $post_id
  * @property string $ip_address
+ * @property string|null $user_agent
  * @property Carbon $time_check
- * @property null|Carbon $created_at
- * @property null|Carbon $updated_at
- *
- * @method static \Illuminate\Database\Eloquent\Builder<\CSlant\Blog\Api\Models\PostView> query()
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Post|null $post
  */
 class PostView extends Model
 {
-    protected $table = 'post_views';
-
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
         'post_id',
         'ip_address',
+        'user_agent',
         'time_check',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
     protected $casts = [
         'time_check' => 'datetime',
     ];
@@ -34,12 +43,16 @@ class PostView extends Model
     /**
      * Get the post associated with this view.
      *
-     * @return BelongsTo<\CSlant\Blog\Core\Models\Post, \CSlant\Blog\Api\Models\PostView>
-     * @phpstan-ignore generics.notSubtype
+     * @phpstan-return \Illuminate\Database\Eloquent\Relations\BelongsTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\PostView>
      */
     public function post(): BelongsTo
     {
-        // @phpstan-ignore-next-line
-        return $this->belongsTo(Post::class, 'post_id');
+        /** @phpstan-var class-string<\Illuminate\Database\Eloquent\Model> $postClass */
+        $postClass = Post::class;
+
+        /** @phpstan-var \Illuminate\Database\Eloquent\Relations\BelongsTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\PostView> $relation */
+        $relation = $this->belongsTo($postClass, 'post_id');
+
+        return $relation;
     }
 }
