@@ -91,13 +91,13 @@ class PostService
 
     /**
      * @param  BaseQueryBuilder|Builder<Model>  $model
-     * @param  string|null  $keyword
+     * @param  null|string  $keyword
      *
-     * @return Builder<Model>|BaseQueryBuilder
+     * @return BaseQueryBuilder|Builder<Model>
      */
     protected function search(Builder|BaseQueryBuilder $model, ?string $keyword): Builder|BaseQueryBuilder
     {
-        if (! $model instanceof BaseQueryBuilder || ! $keyword) {
+        if (!$model instanceof BaseQueryBuilder || !$keyword) {
             return $model;
         }
 
