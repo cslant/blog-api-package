@@ -39,7 +39,10 @@
   "autoload": {
     "psr-4": {
       "CSlant\\Blog\\Api\\": "src/"
-    }
+    },
+    "files": [
+      "common/helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

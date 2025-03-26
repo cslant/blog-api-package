@@ -55,14 +55,21 @@ class PostGetCustomFiltersAction extends Action
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-    
-    Additional query parameters:
-    - `custom-filters`: Apply custom filters such as tags, categories, etc and custom order by multiple.  
-    - `tags`: Filter posts that are associated with specific tag IDs. Supports passing multiple tag IDs.
             ",
-            summary: "Get posts by filter with pagination",
+            summary: "Get posts by custom filters with pagination",
             tags: ["Post"],
             parameters: [
+                new Parameter(
+                    name: 'tags',
+                    description: 'Filter posts by tag specific tag IDs.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the exclude tag ID', type: 'integer'),
+                        default: null
+                    )
+                ),
                 new Parameter(
                     name: 'categories',
                     description: 'Filter posts by categories IDs',
@@ -75,15 +82,85 @@ class PostGetCustomFiltersAction extends Action
                     )
                 ),
                 new Parameter(
-                    name: 'tags',
-                    description: 'Filter posts by tag specific tag IDs.',
+                    name: 'categories_exclude',
+                    description: 'Filter posts by excluding specific category IDs.',
                     in: 'query',
                     required: false,
                     schema: new Schema(
                         type: 'array',
-                        items: new Items(description: 'Input the exclude tag ID', type: 'integer'),
+                        items: new Items(description: 'Input the exclude category ID', type: 'integer'),
                         default: null
                     )
+                ),
+                new Parameter(
+                    name: 'exclude',
+                    description: 'Filter posts by excluding specific post IDs.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the exclude post ID', type: 'integer'),
+                        default: null
+                    )
+                ),
+                new Parameter(
+                    name: 'author',
+                    description: 'Filter posts by author IDs',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the author ID', type: 'integer'),
+                        default: null
+                    )
+                ),
+                new Parameter(
+                    name: 'author_exclude',
+                    description: 'Filter posts by excluding specific author IDs.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the exclude author ID', type: 'integer'),
+                        default: null
+                    )
+                ),
+                new Parameter(
+                    name: 'featured',
+                    description: 'Filter posts by featured status. Accepts values:
+                        1 for featured posts
+                        0 for non-featured posts.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'integer',
+                        default: null,
+                        enum: [0, 1],
+                        nullable: true
+                    )
+                ),
+                new Parameter(
+                    name: 'search',
+                    description: 'Search for posts where the given keyword appears in either the name or description fields.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: null)
+                ),
+                new Parameter(
+                    name: 'order_by',
+                    description: 'Can order by field: id, views, created_at, ...',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'created_at')
+                ),
+                new Parameter(
+                    name: 'order',
+                    description: 'Order direction: 
+                        ASC for ascending
+                        DESC for descending',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: 'ASC', enum: ['ASC', 'DESC'])
                 ),
                 new Parameter(
                     name: 'per_page',
