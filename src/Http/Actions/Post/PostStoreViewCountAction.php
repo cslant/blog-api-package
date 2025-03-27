@@ -19,7 +19,7 @@ use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
-class PostViewCountAction extends Action
+class PostStoreViewCountAction extends Action
 {
     protected VisitorLogsService $visitorLogsService;
 

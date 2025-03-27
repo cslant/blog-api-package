@@ -8,7 +8,7 @@ use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
 use CSlant\Blog\Api\Http\Controllers\PostController;
 use CSlant\Blog\Api\Http\Controllers\TagController;
-use CSlant\Blog\Api\Http\Actions\Post\PostViewCountAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostStoreViewCountAction;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +40,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('custom-filters', PostGetCustomFiltersAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
-        Route::post('{id}/increment-views', PostViewCountAction::class);
+        Route::post('{id}/increment-views', PostStoreViewCountAction::class);
     });
 
     Route::group(['prefix' => 'categories'], function () {
