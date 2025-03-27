@@ -48,8 +48,7 @@ class VisitorLogsService
                 ], $visitorData));
 
             $post->increment('views');
-        } elseif ($now->isAfter($existingView->expired_at))
-        {
+        } elseif ($now->isAfter($existingView->expired_at)) {
             $existingView->update($visitorData);
             $post->increment('views');
         }
