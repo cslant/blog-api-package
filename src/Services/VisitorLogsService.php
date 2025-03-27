@@ -18,39 +18,28 @@ class VisitorLogsService
      */
     public function trackPostView(int $postId, ?string $ipAddress, ?string $userAgent = null): Post
     {
-        $expirationMinutes = (int) config('blog-core.expiration_view_time', 60);
-        $ipAddress = $ipAddress ?? '';
-
-        $post = Post::findOrFail($postId);
-        $entityType = get_class($post);
-        $entityId = $post->getKey();
+        $expirationMinutes = (int) config('blog-core.expiration_view_time');
+        $ipAddress = $ipAddress ?: '';
         $now = Carbon::now();
 
-        /** @var null|VisitorLog $existingView */
-        $existingView = VisitorLog::query()
-            ->where('viewable_id', '=', $entityId)
-            ->where('viewable_type', '=', $entityType)
-            ->where('ip_address', '=', $ipAddress)
-            ->first();
+        $post = Post::query()->lockForUpdate()->findOrFail($postId);
 
-        $expiredAt = $now->copy()->addMinutes($expirationMinutes);
+        $visitorLog = VisitorLog::query()->firstOrNew([
+            'viewable_id' => $post->getKey(),
+            'viewable_type' => Post::class,
+            'ip_address' => $ipAddress,
+        ]);
 
-        $visitorData = [
-            'user_agent' => $userAgent,
-            'expired_at' => $expiredAt,
-        ];
+        $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at);
 
-        if (!$existingView instanceof VisitorLog) {
-            VisitorLog::create(array_merge([
-                    'viewable_id' => $entityId,
-                    'viewable_type' => $entityType,
-                    'ip_address' => $ipAddress,
-                ], $visitorData));
+        if ($shouldCountView) {
+            $visitorLog->fill([
+                'user_agent' => $userAgent,
+                'expired_at' => $now->copy()->addMinutes($expirationMinutes),
+            ]);
+            $visitorLog->save();
 
-            $post->increment('views');
-        } elseif ($now->isAfter($existingView->expired_at)) {
-            $existingView->update($visitorData);
-            $post->increment('views');
+            Post::where('id', $postId)->increment('views');
         }
 
         return $post->refresh();
