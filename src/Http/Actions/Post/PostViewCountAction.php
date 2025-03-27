@@ -5,7 +5,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
-use CSlant\Blog\Api\Services\PostService;
+use CSlant\Blog\Api\Services\VisitorLogsService;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\JsonResponse;
@@ -21,11 +21,11 @@ use OpenApi\Attributes\Schema;
 
 class PostViewCountAction extends Action
 {
-    protected PostService $postService;
+    protected VisitorLogsService $visitorLogsService;
 
-    public function __construct(PostService $postService)
+    public function __construct(VisitorLogsService $visitorLogsService)
     {
-        $this->postService = $postService;
+        $this->visitorLogsService = $visitorLogsService;
     }
 
     #[
@@ -82,16 +82,10 @@ class PostViewCountAction extends Action
     ]
     public function __invoke(Request $request, int $id): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $post = Post::findOrFail($id);
+        $ipAddress = $request->header('X-Forwarded-For') ?? $request->ip();
+        $userAgent = $request->userAgent();
 
-        $ipAddress = $request->header('X-Forwarded-For')
-            ?? $request->header('X-Real-IP')
-            ?? $request->ip()
-            ?? '127.0.0.1';
-
-        $userAgent = $request->header('User-Agent');
-
-        $this->postService->trackView($post->id, $ipAddress, $userAgent);
+        $post = $this->visitorLogsService->trackPostView($id, $ipAddress, $userAgent);
 
         return $this
             ->httpResponse()

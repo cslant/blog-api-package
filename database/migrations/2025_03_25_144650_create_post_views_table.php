@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_views', function (Blueprint $table) {
+        Schema::create('visitor_logs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('post_id');
+            $table->morphs('viewable');
             $table->string('ip_address');
-            $table->timestamp('time_check');
+            $table->timestamp('expired_at');
             $table->timestamps();
-            $table->index(['post_id', 'ip_address']);
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+
+            $table->index(['viewable_id', 'viewable_type', 'ip_address']);
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_views');
+        Schema::dropIfExists('visitor_logs');
     }
 };
