@@ -3,8 +3,8 @@
 namespace CSlant\Blog\Api\Http\Actions\Auth;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use Botble\Member\Models\Member;
 use CSlant\Blog\Core\Http\Actions\Action;
+use CSlant\Blog\Core\Models\Member;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
