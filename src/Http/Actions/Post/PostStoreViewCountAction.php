@@ -7,7 +7,6 @@ use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
 use CSlant\Blog\Api\Services\VisitorLogsService;
 use CSlant\Blog\Core\Http\Actions\Action;
-use CSlant\Blog\Core\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

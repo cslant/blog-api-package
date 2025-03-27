@@ -13,8 +13,8 @@ class VisitorLogsService
      * Track a view for a post by ID.
      *
      * @param int $postId The post ID
-     * @param string|null $ipAddress The viewer's IP address
-     * @param string|null $userAgent The viewer's user agent
+     * @param null|string $ipAddress The viewer's IP address
+     * @param null|string $userAgent The viewer's user agent
      * @return Post The updated post
      */
     public function trackPostView(int $postId, ?string $ipAddress, ?string $userAgent = null): Post
@@ -23,13 +23,13 @@ class VisitorLogsService
         $ipAddress = $ipAddress ?? '';
 
         /** @var Post */
-        return DB::transaction(function() use ($postId, $ipAddress, $userAgent, $expirationMinutes): Post {
+        return DB::transaction(function () use ($postId, $ipAddress, $userAgent, $expirationMinutes): Post {
             $post = Post::findOrFail($postId);
             $entityType = get_class($post);
             $entityId = $post->getKey();
             $now = Carbon::now();
 
-            /** @var VisitorLogs|null $existingView */
+            /** @var null|VisitorLogs $existingView */
             $existingView = VisitorLogs::query()
                 ->where('viewable_id', '=', $entityId)
                 ->where('viewable_type', '=', $entityType)

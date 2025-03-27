@@ -86,4 +86,48 @@ class PostService
 
         return $data->paginate((int) $filters['per_page']);
     }
+
+    /**
+     * Track a view for a post.
+     *
+     * @param int $postId The post ID
+     * @param string $ipAddress The IP address
+     * @param null|string $userAgent The user agent
+     * @return void
+     */
+    public function trackView(int $postId, string $ipAddress, ?string $userAgent = null): void
+    {
+        /** @var null|\CSlant\Blog\Api\Models\PostView $existingView */
+        $existingView = PostView::query()
+            ->where('post_id', '=', $postId)
+            ->where('ip_address', '=', $ipAddress)
+            ->first();
+
+        $timeCheck = now();
+
+        if (!$existingView) {
+            /** @var array<string, mixed> $attributes */
+            $attributes = [
+                'post_id' => $postId,
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent,
+                'time_check' => $timeCheck,
+            ];
+
+            PostView::query()->create($attributes);
+
+            return;
+        }
+
+        // Only count as a new view if the last view was more than an hour ago
+        if ($existingView->time_check->diffInHours(now()) >= 1) {
+            /** @var array<string, mixed> $attributes */
+            $attributes = [
+                'time_check' => $timeCheck,
+                'user_agent' => $userAgent,
+            ];
+
+            $existingView->update($attributes);
+        }
+    }
 }
