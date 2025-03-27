@@ -44,7 +44,7 @@ class VisitorLogsService
             VisitorLog::create(array_merge([
                     'viewable_id' => $entityId,
                     'viewable_type' => $entityType,
-                    'ip_address' => $ipAddress
+                    'ip_address' => $ipAddress,
                 ], $visitorData));
 
             $post->increment('views');
