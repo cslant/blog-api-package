@@ -41,11 +41,11 @@ class VisitorLogsService
         ];
 
         if (!$existingView instanceof VisitorLog) {
-            VisitorLog::create([
-                'viewable_id' => $entityId,
-                'viewable_type' => $entityType,
-                'ip_address' => $ipAddress
-            ] + $visitorData);
+            VisitorLog::create(array_merge([
+                    'viewable_id' => $entityId,
+                    'viewable_type' => $entityType,
+                    'ip_address' => $ipAddress
+                ], $visitorData));
 
             $post->increment('views');
         } elseif ($now->isAfter($existingView->expired_at))
