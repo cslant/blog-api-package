@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Services;
 
-use CSlant\Blog\Api\Models\PostView;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
