@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property null|Carbon $updated_at
  * @property-read \Eloquent|Model $viewable
  */
-class VisitorLogs extends Model
+class VisitorLog extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -44,11 +44,11 @@ class VisitorLogs extends Model
     /**
      * Get the parent viewable model.
      *
-     * @phpstan-return \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLogs>
+     * @phpstan-return \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLog>
      */
     public function viewable(): MorphTo
     {
-        /** @phpstan-var \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLogs> $relation */
+        /** @phpstan-var \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLog> $relation */
         $relation = $this->morphTo();
 
         return $relation;

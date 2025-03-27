@@ -3,7 +3,7 @@
 namespace CSlant\Blog\Api\Services;
 
 use Carbon\Carbon;
-use CSlant\Blog\Api\Models\VisitorLogs;
+use CSlant\Blog\Api\Models\VisitorLog;
 use CSlant\Blog\Core\Models\Post;
 
 class VisitorLogsService
@@ -26,32 +26,32 @@ class VisitorLogsService
         $entityId = $post->getKey();
         $now = Carbon::now();
 
-        /** @var null|VisitorLogs $existingView */
-        $existingView = VisitorLogs::query()
+        /** @var null|VisitorLog $existingView */
+        $existingView = VisitorLog::query()
             ->where('viewable_id', '=', $entityId)
             ->where('viewable_type', '=', $entityType)
             ->where('ip_address', '=', $ipAddress)
             ->first();
 
-        if ($existingView === null) {
-            VisitorLogs::create([
+        $expiredAt = $now->copy()->addMinutes($expirationMinutes);
+
+        $visitorData = [
+            'user_agent' => $userAgent,
+            'expired_at' => $expiredAt,
+        ];
+
+        if (!$existingView instanceof VisitorLog) {
+            VisitorLog::create([
                 'viewable_id' => $entityId,
                 'viewable_type' => $entityType,
-                'ip_address' => $ipAddress,
-                'user_agent' => $userAgent,
-                'expired_at' => $now->copy()->addMinutes($expirationMinutes),
-            ]);
+                'ip_address' => $ipAddress
+            ] + $visitorData);
 
             $post->increment('views');
-        } else {
-            if ($now->isAfter($existingView->expired_at)) {
-                $existingView->update([
-                    'user_agent' => $userAgent,
-                    'expired_at' => $now->copy()->addMinutes($expirationMinutes),
-                ]);
-
-                $post->increment('views');
-            }
+        } elseif ($now->isAfter($existingView->expired_at))
+        {
+            $existingView->update($visitorData);
+            $post->increment('views');
         }
 
         return $post->refresh();
