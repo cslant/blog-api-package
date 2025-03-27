@@ -87,8 +87,7 @@ class PostStoreViewCountAction extends Action
 
         DB::beginTransaction();
 
-        try
-        {
+        try {
             $post = $this->visitorLogsService->trackPostView($id, $ipAddress, $userAgent);
 
             DB::commit();
@@ -97,10 +96,9 @@ class PostStoreViewCountAction extends Action
                 ->httpResponse()
                 ->setData(new ViewCountResource($post))
                 ->toApiResponse();
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             DB::rollBack();
+
             return $this
                 ->httpResponse()
                 ->setStatusCode(500)
