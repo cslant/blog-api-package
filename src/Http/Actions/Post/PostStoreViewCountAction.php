@@ -11,6 +11,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
@@ -84,11 +85,27 @@ class PostStoreViewCountAction extends Action
         $ipAddress = $request->header('X-Forwarded-For') ?? $request->ip();
         $userAgent = $request->userAgent();
 
-        $post = $this->visitorLogsService->trackPostView($id, $ipAddress, $userAgent);
+        DB::beginTransaction();
 
-        return $this
-            ->httpResponse()
-            ->setData(new ViewCountResource($post))
-            ->toApiResponse();
+        try
+        {
+            $post = $this->visitorLogsService->trackPostView($id, $ipAddress, $userAgent);
+
+            DB::commit();
+
+            return $this
+                ->httpResponse()
+                ->setData(new ViewCountResource($post))
+                ->toApiResponse();
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return $this
+                ->httpResponse()
+                ->setStatusCode(500)
+                ->setData(['error' => true])
+                ->toApiResponse();
+        }
     }
 }
