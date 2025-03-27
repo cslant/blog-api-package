@@ -86,4 +86,37 @@ class PostService
 
         return $data->paginate((int) $filters['per_page']);
     }
+
+    /**
+     * @param  BaseQueryBuilder|Builder<Model>  $model
+     * @param  null|string  $keyword
+     *
+     * @return BaseQueryBuilder|Builder<Model>
+     */
+    protected function search(Builder|BaseQueryBuilder $model, ?string $keyword): Builder|BaseQueryBuilder
+    {
+        if (!$model instanceof BaseQueryBuilder || !$keyword) {
+            return $model;
+        }
+
+        if (
+            is_plugin_active('language') &&
+            is_plugin_active('language-advanced') &&
+            Language::getCurrentLocale() != Language::getDefaultLocale()
+        ) {
+            return $model
+                ->whereHas('translations', function (BaseQueryBuilder $query) use ($keyword): void {
+                    $query
+                        ->addSearch('name', $keyword, false, false)
+                        ->addSearch('description', $keyword, false);
+                });
+        }
+
+        return $model
+            ->where(function (BaseQueryBuilder $query) use ($keyword): void {
+                $query
+                    ->addSearch('name', $keyword, false, false)
+                    ->addSearch('description', $keyword, false);
+            });
+    }
 }
