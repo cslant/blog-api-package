@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $post_id
  * @property string $ip_address
- * @property string|null $user_agent
+ * @property null|string $user_agent
  * @property Carbon $time_check
- * @property Carbon|null $created_at
- * @property Carbon|null $updated_at
- * @property-read Post|null $post
+ * @property null|Carbon $created_at
+ * @property null|Carbon $updated_at
+ * @property-read null|Post $post
  */
 class PostView extends Model
 {
