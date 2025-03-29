@@ -139,6 +139,13 @@ class CategoryController extends BaseCategoryController
             tags: ['Category'],
             parameters: [
                 new Parameter(
+                    name: 'search',
+                    description: 'Search for categories where the given keyword appears in either the name field.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'string', default: null)
+                ),
+                new Parameter(
                     name: 'order_by',
                     description: 'Field to order by',
                     in: 'query',
