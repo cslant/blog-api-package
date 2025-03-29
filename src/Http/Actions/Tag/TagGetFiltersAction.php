@@ -55,7 +55,7 @@ class TagGetFiltersAction extends Action
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
-            summary: "Get posts by custom filters with pagination",
+            summary: "Get tags by filters with pagination",
             tags: ["Tags"],
             parameters: [
                 new Parameter(
@@ -67,10 +67,10 @@ class TagGetFiltersAction extends Action
                 ),
                 new Parameter(
                     name: 'order_by',
-                    description: 'Can order by field: id, name, created_at, ...',
+                    description: 'Can order by field: id, name, created_at, posts_count, ...',
                     in: 'query',
                     required: false,
-                    schema: new Schema(type: 'string', default: 'created_at')
+                    schema: new Schema(type: 'string', default: 'posts_count')
                 ),
                 new Parameter(
                     name: 'order',

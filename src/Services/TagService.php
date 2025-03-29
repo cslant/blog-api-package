@@ -29,14 +29,15 @@ class TagService
      */
     public function getFilters(array $filters): LengthAwarePaginator
     {
-        $data = Tag::query();
+        $data = Tag::query()
+            ->withCount('posts');
 
         if ($filters['search'] !== null) {
             $keyword = isset($filters['search']) ? (string) $filters['search'] : null;
             $data = $this->search($data, $keyword);
         }
 
-        $orderBy = Arr::get($filters, 'order_by', 'created_at');
+        $orderBy = Arr::get($filters, 'order_by', 'posts_count');
         $order = Arr::get($filters, 'order', 'desc');
 
         $data = $data

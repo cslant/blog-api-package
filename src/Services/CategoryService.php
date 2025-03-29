@@ -29,14 +29,15 @@ class CategoryService
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
-        $data = Category::query();
+        $data = Category::query()
+                    ->withCount('posts');
 
         if ($filters['search'] !== null) {
             $keyword = isset($filters['search']) ? (string) $filters['search'] : null;
             $data = $this->search($data, $keyword);
         }
 
-        $orderBy = Arr::get($filters, 'order_by', 'updated_at');
+        $orderBy = Arr::get($filters, 'order_by', 'posts_count');
         $order = Arr::get($filters, 'order', 'desc');
 
         $data = $data
