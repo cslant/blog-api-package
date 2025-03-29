@@ -101,23 +101,20 @@ class PostService
             return $model;
         }
 
-        if (
-            is_plugin_active('language') &&
-            is_plugin_active('language-advanced') &&
-            Language::getCurrentLocale() != Language::getDefaultLocale()
+        if (is_plugin_active('language')
+            && is_plugin_active('language-advanced')
+            && Language::getCurrentLocale() != Language::getDefaultLocale()
         ) {
             return $model
                 ->whereHas('translations', function (BaseQueryBuilder $query) use ($keyword): void {
-                    $query
-                        ->addSearch('name', $keyword, false, false)
+                    $query->addSearch('name', $keyword, false, false)
                         ->addSearch('description', $keyword, false);
                 });
         }
 
         return $model
             ->where(function (BaseQueryBuilder $query) use ($keyword): void {
-                $query
-                    ->addSearch('name', $keyword, false, false)
+                $query->addSearch('name', $keyword, false, false)
                     ->addSearch('description', $keyword, false);
             });
     }
