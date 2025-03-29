@@ -138,7 +138,7 @@ class TagGetFiltersAction extends Action
         $input = (array) $request->input();
         $filters = FilterTag::setFilters($input);
 
-        $data = $this->tagService->getFilters((array) $filters);
+        $data = $this->tagService->getFilters($filters);
 
         return $this
             ->httpResponse()

@@ -30,7 +30,7 @@ class CategoryService
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
         $data = Category::query()
-                    ->withCount('posts');
+            ->withCount('posts');
 
         if ($filters['search'] !== null) {
             $keyword = isset($filters['search']) ? (string) $filters['search'] : null;
@@ -59,11 +59,7 @@ class CategoryService
             return $model;
         }
 
-        if (
-            is_plugin_active('language') &&
-            is_plugin_active('language-advanced') &&
-            Language::getCurrentLocale() != Language::getDefaultLocale()
-        ) {
+        if (is_plugin_active('language') && is_plugin_active('language-advanced') && Language::getCurrentLocale() != Language::getDefaultLocale()) {
             return $model
                 ->whereHas('translations', function (BaseQueryBuilder $query) use ($keyword): void {
                     $query
