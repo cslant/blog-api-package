@@ -10,6 +10,7 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Category\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryModelResourceSchema;
+use CSlant\Blog\Api\Services\CategoryService;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
 use CSlant\Blog\Core\Models\Category;
@@ -41,6 +42,13 @@ use OpenApi\Attributes\Schema;
  */
 class CategoryController extends BaseCategoryController
 {
+    protected CategoryService $categoryService;
+
+    public function __construct(CategoryService $categoryService)
+    {
+        $this->categoryService = $categoryService;
+    }
+
     #[
         Get(
             path: "/categories",
@@ -188,7 +196,7 @@ class CategoryController extends BaseCategoryController
     public function getFilters(Request $request, CategoryInterface $categoryRepository): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         $filters = FilterCategory::setFilters($request->input());
-        $data = $categoryRepository->getFilters($filters);
+        $data = $this->categoryService->getCustomFilters((array) $filters);
 
         return $this
             ->httpResponse()
