@@ -31,6 +31,7 @@ class ListCategoryResource extends BaseListCategoryResource
             'description' => $this->description,
             'children' => CategoryResource::collection($this->children),
             'parent' => new CategoryResource($this->parent),
+            'posts_count' => $this->posts_count,
         ];
     }
 }

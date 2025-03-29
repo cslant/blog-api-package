@@ -14,6 +14,7 @@ use OpenApi\Attributes\Schema;
         new Property(property: "slug", description: "Category slug", type: "string", maxLength: 255, uniqueItems: true),
         new Property(property: "description", type: "string", nullable: true),
         new Property(property: "icon", description: "Category icon", type: "string", nullable: true),
+        new Property(property: "posts_count", description: "Author posts_count", type: "integer", nullable: true),
     ],
     type: "object"
 )]

@@ -24,6 +24,7 @@ class TagResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug instanceof Slug ? $this->slug->key : $this->slug,
             'description' => $this->description,
+            'posts_count' => $this->posts_count,
         ];
     }
 }
