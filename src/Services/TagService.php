@@ -62,15 +62,13 @@ class TagService
         if (is_plugin_active('language') && is_plugin_active('language-advanced') && Language::getCurrentLocale() != Language::getDefaultLocale()) {
             return $model
                 ->whereHas('translations', function (BaseQueryBuilder $query) use ($keyword): void {
-                    $query
-                        ->addSearch('name', $keyword, false, false);
+                    $query->addSearch('name', $keyword, false, false);
                 });
         }
 
         return $model
             ->where(function (BaseQueryBuilder $query) use ($keyword): void {
-                $query
-                    ->addSearch('name', $keyword, false, false);
+                $query->addSearch('name', $keyword, false, false);
             });
     }
 }
