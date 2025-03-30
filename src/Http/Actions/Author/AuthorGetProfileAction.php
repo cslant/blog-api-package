@@ -127,8 +127,10 @@ class AuthorGetProfileAction extends Action
             ]
         )
     ]
-    public function __invoke(int $authorId, Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
-    {
+    public function __invoke(
+        int $authorId,
+        Request $request
+    ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
         $user = User::query()
             ->with('posts')
             ->whereId($authorId)

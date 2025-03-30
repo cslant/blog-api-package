@@ -18,7 +18,7 @@ class VisitorLogsService
      */
     public function trackPostView(int $postId, ?string $ipAddress, ?string $userAgent = null): Post
     {
-        $expirationMinutes = (int) config('blog-core.expiration_view_time');
+        $expirationMinutes = (int) config('blog-core.view_throttle_minutes');
         $ipAddress = $ipAddress ?: '';
         $now = Carbon::now();
 

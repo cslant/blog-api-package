@@ -19,8 +19,11 @@ class MetaBoxService
         return MetaBox::getMeta($model, $metaKey);
     }
 
-    protected function getModelMetaBox(string $modelClass, int $modelId, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
-    {
+    protected function getModelMetaBox(
+        string $modelClass,
+        int $modelId,
+        string $lang = AppConstant::DEFAULT_LOCALE
+    ): ?Model {
         /** @var class-string<Model> $modelClass */
         $model = $modelClass::query()->find($modelId);
 

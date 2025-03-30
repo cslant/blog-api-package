@@ -177,11 +177,11 @@ class CategoryController extends BaseCategoryController
                 ),
             ],
             responses: [
-              new Response(
-                  response: 200,
-                  description: "Get filters successfully",
-                  content: new JsonContent(
-                      properties: [
+                new Response(
+                    response: 200,
+                    description: "Get filters successfully",
+                    content: new JsonContent(
+                        properties: [
                             new Property(
                                 property: 'error',
                                 description: 'Error status',
@@ -195,13 +195,15 @@ class CategoryController extends BaseCategoryController
                                 items: new Items(ref: CategoryModelResourceSchema::class)
                             ),
                         ]
-                  )
-              ),
+                    )
+                ),
             ],
         )
     ]
-    public function getFilters(Request $request, CategoryInterface $categoryRepository): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
-    {
+    public function getFilters(
+        Request $request,
+        CategoryInterface $categoryRepository
+    ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
         $filters = FilterCategory::setFilters($request->input());
         $data = $this->categoryService->getCustomFilters($filters);
 

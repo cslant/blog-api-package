@@ -40,7 +40,7 @@ class PostStoreViewCountAction extends Action
                     name: 'id',
                     description: 'Post Id',
                     in: 'path',
-                    required:  true,
+                    required: true,
                     schema: new Schema(type: 'integer', example: 1)
                 ),
             ],
