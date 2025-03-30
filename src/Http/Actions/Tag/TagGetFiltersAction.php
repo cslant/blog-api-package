@@ -48,7 +48,7 @@ class TagGetFiltersAction extends Action
      */
     #[
         Get(
-            path: "/tag/filters",
+            path: "/tags/filters",
             operationId: "TagGetFiltersAction",
             description: "Get all tags with pagination (10 items per page by default, page 1 by default)
             
