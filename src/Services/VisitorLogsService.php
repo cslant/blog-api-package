@@ -6,7 +6,6 @@ use Carbon\Carbon;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Models\VisitorLog;
 use CSlant\Blog\Core\Models\Post;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VisitorLogsService
