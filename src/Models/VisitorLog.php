@@ -42,15 +42,10 @@ class VisitorLog extends Model
     ];
 
     /**
-     * Get the parent viewable model.
-     *
-     * @phpstan-return \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLog>
+     * @return MorphTo<Model>
      */
     public function viewable(): MorphTo
     {
-        /** @phpstan-var \Illuminate\Database\Eloquent\Relations\MorphTo<\Illuminate\Database\Eloquent\Model, \CSlant\Blog\Api\Models\VisitorLog> $relation */
-        $relation = $this->morphTo();
-
-        return $relation;
+        return $this->morphTo('viewable', 'viewable_type', 'viewable_id');
     }
 }
