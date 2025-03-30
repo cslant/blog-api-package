@@ -192,7 +192,7 @@ class CategoryController extends BaseCategoryController
                                 property: "data",
                                 description: "Filter data",
                                 type: "array",
-                                items: new Items(ref: CategoryModelResourceSchema::class)
+                                items: new Items(ref: CategoryListResourceSchema::class)
                             ),
                         ]
                   )
@@ -207,7 +207,7 @@ class CategoryController extends BaseCategoryController
 
         return $this
             ->httpResponse()
-            ->setData(CategoryResource::collection($data))
+            ->setData(ListCategoryResource::collection($data))
             ->toApiResponse();
     }
 
