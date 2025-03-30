@@ -12,9 +12,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\DB;
-use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Post;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
@@ -29,7 +29,7 @@ class PostStoreViewCountAction extends Action
     }
 
     #[
-        Get(
+        Post(
             path: "/posts/{id}/increment-views",
             operationId: "incrementViewCountPostById",
             description: "Increment views count of the post by ID. Only adds 1 view per IP in 1 hour.",
