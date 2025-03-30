@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->morphs('viewable');
             $table->string('ip_address');
+            $table->string('user_agent')->nullable();
             $table->timestamp('expired_at');
             $table->timestamps();
 

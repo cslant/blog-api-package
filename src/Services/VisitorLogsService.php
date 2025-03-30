@@ -3,7 +3,6 @@
 namespace CSlant\Blog\Api\Services;
 
 use Carbon\Carbon;
-use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Models\VisitorLog;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -27,10 +26,6 @@ class VisitorLogsService
 
         /** @var Post $post */
         $post = Post::query()->lockForUpdate()->findOrFail($postId);
-
-        if ($post->status !== StatusEnum::PUBLISHED->value) {
-            return $post;
-        }
 
         $visitorLog = VisitorLog::query()->firstOrNew([
             'viewable_id' => $post->getKey(),

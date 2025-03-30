@@ -18,6 +18,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  */
 class VisitorLog extends Model
 {
+    protected $primaryKey = 'id';
+
+    public $incrementing = true;
+
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -30,6 +36,8 @@ class VisitorLog extends Model
         'ip_address',
         'user_agent',
         'expired_at',
+        'created_at',
+        'updated_at',
     ];
 
     /**
