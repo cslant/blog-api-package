@@ -56,7 +56,7 @@ class TagGetFiltersAction extends Action
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
             ",
             summary: "Get tags by filters with pagination",
-            tags: ["Tags"],
+            tags: ["Tag"],
             parameters: [
                 new Parameter(
                     name: 'search',
