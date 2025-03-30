@@ -24,16 +24,13 @@ class VisitorLogsService
         ?string $ipAddress,
         ?string $userAgent = null
     ): Model|Collection|Post|null {
-        $expirationMinutes = (int) config('blog-core.view_throttle_minutes');
-        $ipAddress = $ipAddress ?: '';
         $now = Carbon::now();
-
         $post = Post::query()->lockForUpdate()->findOrFail($postId);
 
         $visitorLog = VisitorLog::query()->firstOrNew([
             'viewable_id' => $post->getKey(),
             'viewable_type' => Post::class,
-            'ip_address' => $ipAddress,
+            'ip_address' => $ipAddress ?: '',
         ]);
 
         $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at);
@@ -41,7 +38,7 @@ class VisitorLogsService
         if ($shouldCountView) {
             $visitorLog->fill([
                 'user_agent' => $userAgent,
-                'expired_at' => $now->copy()->addMinutes($expirationMinutes),
+                'expired_at' => $now->copy()->addMinutes((int) config('blog-core.view_throttle_minutes')),
             ]);
             $visitorLog->save();
 
