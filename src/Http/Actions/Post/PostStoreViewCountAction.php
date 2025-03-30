@@ -96,14 +96,14 @@ class PostStoreViewCountAction extends Action
                 ->httpResponse()
                 ->setData(new ViewCountResource($post))
                 ->toApiResponse();
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             DB::rollBack();
 
             return $this
                 ->httpResponse()
+                ->setError()
                 ->setStatusCode(500)
-                ->setData(['error' => true])
-                ->toApiResponse();
+                ->setMessage($exception->getMessage());
         }
     }
 }

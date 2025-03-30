@@ -3,10 +3,8 @@
 namespace CSlant\Blog\Api\Models;
 
 use Carbon\Carbon;
-use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @property int $id
@@ -26,6 +24,7 @@ class VisitorLog extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'id',
         'viewable_type',
         'viewable_id',
         'ip_address',

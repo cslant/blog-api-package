@@ -7,6 +7,7 @@ use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Models\VisitorLog;
 use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class VisitorLogsService
 {
@@ -15,20 +16,21 @@ class VisitorLogsService
      * @param  string|null  $ipAddress
      * @param  string|null  $userAgent
      *
-     * @return Model|null
+     * @return Post
+     * @throws ModelNotFoundException
      */
     public function trackPostView(
         int $postId,
         ?string $ipAddress,
         ?string $userAgent = null
-    ): Model|null {
+    ): Post {
         $now = Carbon::now();
 
         /** @var Post $post */
         $post = Post::query()->lockForUpdate()->findOrFail($postId);
 
-        if (!$post instanceof Post && $post->status !== StatusEnum::PUBLISHED->value) {
-            return null;
+        if ($post->status !== StatusEnum::PUBLISHED->value) {
+            return $post;
         }
 
         $visitorLog = VisitorLog::query()->firstOrNew([
@@ -37,7 +39,7 @@ class VisitorLogsService
             'ip_address' => $ipAddress ?: '',
         ]);
 
-        $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at);
+        $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at ?? $now->copy()->subMinute());
 
         if ($shouldCountView) {
             $visitorLog->fill([
@@ -47,8 +49,9 @@ class VisitorLogsService
             $visitorLog->save();
 
             Post::where('id', $postId)->increment('views');
+            $post->refresh();
         }
 
-        return $post->refresh();
+        return $post;
     }
 }
