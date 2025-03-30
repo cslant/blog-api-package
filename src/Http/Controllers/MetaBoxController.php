@@ -19,8 +19,11 @@ class MetaBoxController
         $this->slugService = $slugService;
     }
 
-    public function getMetaBoxBySlugModel(string $model, string $slug, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
-    {
+    public function getMetaBoxBySlugModel(
+        string $model,
+        string $slug,
+        string $lang = AppConstant::DEFAULT_LOCALE
+    ): ?Model {
         $slugModel = $this->slugService->getSlugModel($slug, $model);
 
         if ($slugModel) {

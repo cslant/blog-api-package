@@ -3,68 +3,51 @@
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
-use CSlant\Blog\Core\Facades\Base\SlugHelper;
+use CSlant\Blog\Api\Services\VisitorLogsService;
 use CSlant\Blog\Core\Http\Actions\Action;
-use CSlant\Blog\Core\Models\Post;
-use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use OpenApi\Attributes\Get;
+use Illuminate\Support\Facades\DB;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Post;
 use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
-/**
- * Class ViewCountAction
- *
- * @package CSlant\Blog\Api\Http\Controllers\Actions\Post
- *
- * @group Blog API
- *
- * @authenticated
- *
- * @method BaseHttpResponse httpResponse()
- * @method BaseHttpResponse setData(mixed $data)
- * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
- */
-class PostGetViewCountAction extends Action
+class PostStoreViewCountAction extends Action
 {
-    /**
-     * @param  string  $slug
-     *
-     * @group Blog
-     * @queryParam Find by slug of post.
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
-     */
+    protected VisitorLogsService $visitorLogsService;
+
+    public function __construct(VisitorLogsService $visitorLogsService)
+    {
+        $this->visitorLogsService = $visitorLogsService;
+    }
+
     #[
-        Get(
-            path: "/posts/{slug}/view-count",
-            operationId: "viewCountPostBySlug",
-            description: "Get views count of the post by slug
-            
-    This API will get record from the database and return views count of the post by slug.
-            ",
-            summary: "Get views count of the post by slug",
+        Post(
+            path: "/posts/{id}/increment-views",
+            operationId: "incrementViewCountPostById",
+            description: "Increment views count of the post by ID. Only adds 1 view per IP in 1 hour.",
+            summary: "Increment views count of the post by ID",
             tags: ["Post"],
             parameters: [
                 new Parameter(
-                    name: 'slug',
-                    description: 'Post slug',
+                    name: 'id',
+                    description: 'Post Id',
                     in: 'path',
                     required: true,
-                    schema: new Schema(type: 'string', example: 'php')
+                    schema: new Schema(type: 'integer', example: 1)
                 ),
             ],
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get views count successfully",
+                    description: "Success",
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -76,7 +59,7 @@ class PostGetViewCountAction extends Action
                             new Property(
                                 property: "data",
                                 ref: ViewCountResourceSchema::class,
-                                description: "Data of model",
+                                description: "Updated view count data",
                                 type: "object",
                             ),
                         ]
@@ -97,36 +80,30 @@ class PostGetViewCountAction extends Action
             ]
         )
     ]
-    public function __invoke(string $slug): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(Request $request, int $id): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
+        $ipAddress = $request->header('X-Forwarded-For') ?? $request->ip();
+        $userAgent = $request->userAgent();
 
-        if (!$slug) {
+        DB::beginTransaction();
+
+        try {
+            $post = $this->visitorLogsService->trackPostView($id, $ipAddress, $userAgent);
+
+            DB::commit();
+
+            return $this
+                ->httpResponse()
+                ->setData(new ViewCountResource($post))
+                ->toApiResponse();
+        } catch (\Exception $exception) {
+            DB::rollBack();
+
             return $this
                 ->httpResponse()
                 ->setError()
-                ->setCode(404)
-                ->setMessage('Not found');
+                ->setStatusCode(500)
+                ->setMessage($exception->getMessage());
         }
-
-        $post = Post::query()
-            ->select(['id', 'views'])
-            ->whereId($slug->reference_id)
-            ->where('status', StatusEnum::PUBLISHED)
-            ->first();
-
-        if (!$post) {
-            return $this
-                ->httpResponse()
-                ->setError()
-                ->setCode(404)
-                ->setMessage('Not found');
-        }
-
-        return $this
-            ->httpResponse()
-            ->setData(new ViewCountResource($post))
-            ->toApiResponse();
     }
 }

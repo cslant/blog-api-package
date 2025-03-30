@@ -20,6 +20,8 @@ class BlogApiServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/../../lang', 'blog-api');
 
+        $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
+
         $this->registerCommands();
 
         $this->registerAssetPublishing();
