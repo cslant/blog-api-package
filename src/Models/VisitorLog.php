@@ -3,8 +3,10 @@
 namespace CSlant\Blog\Api\Models;
 
 use Carbon\Carbon;
+use CSlant\Blog\Core\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 /**
  * @property int $id
@@ -13,9 +15,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string $ip_address
  * @property null|string $user_agent
  * @property Carbon $expired_at
- * @property null|Carbon $created_at
- * @property null|Carbon $updated_at
- * @property-read \Eloquent|Model $viewable
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
  */
 class VisitorLog extends Model
 {
@@ -42,10 +43,10 @@ class VisitorLog extends Model
     ];
 
     /**
-     * @return MorphTo<Model>
+     * @return MorphTo<Model, $this>
      */
     public function viewable(): MorphTo
     {
-        return $this->morphTo('viewable', 'viewable_type', 'viewable_id');
+        return $this->morphTo();
     }
 }
