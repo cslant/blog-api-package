@@ -4,6 +4,7 @@ use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetCustomFiltersAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
+use CSlant\Blog\Api\Http\Actions\Tag\TagGetFiltersAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
 use CSlant\Blog\Api\Http\Controllers\PostController;
@@ -51,6 +52,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
 
     Route::group(['prefix' => 'tags'], function () {
         Route::get('/', [TagController::class, 'index']);
+        Route::get('filters', TagGetFiltersAction::class);
         Route::get('{slug}', [TagController::class, 'findBySlug']);
     });
 
