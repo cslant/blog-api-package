@@ -11,10 +11,10 @@ class VisitorLogsService
 {
     /**
      * @param  int  $postId
-     * @param  string|null  $ipAddress
-     * @param  string|null  $userAgent
+     * @param  null|string  $ipAddress
+     * @param  null|string  $userAgent
      *
-     * @return VisitorLog|Model
+     * @return Model|VisitorLog
      */
     public function trackPostView(
         int $postId,
