@@ -112,7 +112,7 @@ class PostGetViewCountAction extends Action
 
         $post = Post::query()
             ->select(['id', 'views'])
-            ->whereId((int) $slug->reference_id)
+            ->whereId($slug->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
             ->first();
 
