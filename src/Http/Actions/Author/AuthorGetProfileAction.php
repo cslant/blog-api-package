@@ -33,7 +33,7 @@ use OpenApi\Attributes\Schema;
 class AuthorGetProfileAction extends Action
 {
     /**
-     * @param  int  $authorId
+     * @param  string|int  $author
      * @param  Request  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
@@ -44,13 +44,13 @@ class AuthorGetProfileAction extends Action
      */
     #[
         Get(
-            path: "/authors/{authorId}",
-            operationId: "profileAuthorByAuthorId",
-            description: "Get profile and list post of the author by author id
+            path: "/authors/{author}",
+            operationId: "profileAuthorByAuthorIdOrUsername",
+            description: "Get profile and list post of the author by author id or username
             
-    This API will get record from the database and return profile and list post of the author by author id.
+    This API will get record from the database and return profile and list post of the author by id or username of author.
             ",
-            summary: "Get profile and list post of the author by author id",
+            summary: "Get profile and list post of the author by id or username of author",
             tags: ["Author"],
             parameters: [
                 new Parameter(
@@ -128,13 +128,19 @@ class AuthorGetProfileAction extends Action
         )
     ]
     public function __invoke(
-        int $authorId,
+        string|int $author,
         Request $request
     ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
+        /** @var User $user */
         $user = User::query()
-            ->with('posts')
-            ->whereId($authorId)
-            ->first();
+            ->with('posts');
+        if (is_numeric($author)) {
+            $user->whereId($author);
+        } else {
+            $user->where('username', $author);
+        }
+
+        $user = $user->first();
 
         if (!$user) {
             return $this
