@@ -131,16 +131,18 @@ class AuthorGetProfileAction extends Action
         string|int $author,
         Request $request
     ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
-        /** @var User $user */
-        $user = User::query()
+        /** @var User $userQuery */
+        $userQuery = User::query()
             ->with('posts');
-        if (is_numeric($author)) {
-            $user->whereId($author);
-        } else {
-            $user->where('username', $author);
-        }
+        if (is_numeric($author) && (int) $author > 0) {
+            $user = (clone $userQuery)->where('id', $author)->first();
 
-        $user = $user->first();
+            if (!$user) {
+                $user = (clone $userQuery)->where('username', $author)->first();
+            }
+        } else {
+            $user = $userQuery->where('username', $author)->first();
+        }
 
         if (!$user) {
             return $this
