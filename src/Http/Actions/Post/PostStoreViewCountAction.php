@@ -32,7 +32,7 @@ class PostStoreViewCountAction extends Action
         Post(
             path: "/posts/{id}/increment-views",
             operationId: "incrementViewCountPostById",
-            description: "Increment views count of the post by ID. Only adds 1 view per IP in 1 hour.",
+            description: "Increment views count of the post by ID. Only adds 1 view per IP within a time period specified in the environment configuration.",
             summary: "Increment views count of the post by ID",
             tags: ["Post"],
             parameters: [
