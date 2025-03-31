@@ -33,7 +33,7 @@ use OpenApi\Attributes\Schema;
 class AuthorGetProfileAction extends Action
 {
     /**
-     * @param  string|int  $author
+     * @param  int|string  $author
      * @param  Request  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
