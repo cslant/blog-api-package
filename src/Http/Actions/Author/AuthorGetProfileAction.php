@@ -136,15 +136,13 @@ class AuthorGetProfileAction extends Action
             ->with('posts');
         if (is_numeric($author) && (int) $author > 0) {
             $user = (clone $userQuery)->where('id', $author)->first();
-
-            if (!$user) {
-                $user = (clone $userQuery)->where('username', $author)->first();
-            }
-        } else {
-            $user = $userQuery->where('username', $author)->first();
         }
 
-        if (!$user) {
+        if (!isset($user) || !($user instanceof User)) {
+            $user = (clone $userQuery)->where('username', $author)->first();
+        }
+
+        if (!($user instanceof User)) {
             return $this
                 ->httpResponse()
                 ->setError()
