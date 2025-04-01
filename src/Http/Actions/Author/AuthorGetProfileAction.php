@@ -7,6 +7,7 @@ use CSlant\Blog\Api\Http\Resources\Author\AuthorWithPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\AuthorModelResourceSchema;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -132,17 +133,14 @@ class AuthorGetProfileAction extends Action
         Request $request
     ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
         /** @var User $userQuery */
-        $userQuery = User::query()
-            ->with('posts');
-        if (is_numeric($author) && (int) $author > 0) {
-            $user = (clone $userQuery)->where('id', $author)->first();
-        }
+        $userQuery = User::query()->with('posts');
 
-        if (!isset($user) || !($user instanceof User)) {
-            $user = (clone $userQuery)->where('username', $author)->first();
-        }
+        $user = match (true) {
+            is_numeric($author) => (clone $userQuery)->whereId((int) $author)->first(),
+            default => (clone $userQuery)->where('username', (string) $author)->first()
+        };
 
-        if (!($user instanceof User)) {
+        if (!$user instanceof User) {
             return $this
                 ->httpResponse()
                 ->setError()
