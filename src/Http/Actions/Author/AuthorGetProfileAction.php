@@ -33,7 +33,7 @@ use OpenApi\Attributes\Schema;
 class AuthorGetProfileAction extends Action
 {
     /**
-     * @param  int  $authorId
+     * @param  int|string  $author
      * @param  Request  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
@@ -44,18 +44,18 @@ class AuthorGetProfileAction extends Action
      */
     #[
         Get(
-            path: "/authors/{authorId}",
-            operationId: "profileAuthorByAuthorId",
-            description: "Get profile and list post of the author by author id
+            path: "/authors/{author}",
+            operationId: "profileAuthorByAuthorIdOrUsername",
+            description: "Get profile and list post of the author by author id or username
             
-    This API will get record from the database and return profile and list post of the author by author id.
+    This API will get record from the database and return profile and list post of the author by id or username of author.
             ",
-            summary: "Get profile and list post of the author by author id",
+            summary: "Get profile and list post of the author by id or username of author",
             tags: ["Author"],
             parameters: [
                 new Parameter(
-                    name: 'authorId',
-                    description: 'Author Id',
+                    name: 'author',
+                    description: 'Id or username of author',
                     in: 'path',
                     required: true,
                     schema: new Schema(type: 'string', example: 'php')
@@ -128,15 +128,18 @@ class AuthorGetProfileAction extends Action
         )
     ]
     public function __invoke(
-        int $authorId,
+        string|int $author,
         Request $request
     ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
-        $user = User::query()
-            ->with('posts')
-            ->whereId($authorId)
-            ->first();
+        /** @var User $userQuery */
+        $userQuery = User::query()->with('posts');
 
-        if (!$user) {
+        $user = match (true) {
+            is_numeric($author) => (clone $userQuery)->whereId((int) $author)->first(),
+            default => (clone $userQuery)->where('username', (string) $author)->first()
+        };
+
+        if (!$user instanceof User) {
             return $this
                 ->httpResponse()
                 ->setError()

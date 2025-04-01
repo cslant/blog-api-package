@@ -32,7 +32,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
 
     Route::group(['prefix' => 'authors'], function () {
         Route::get('/', AuthorGetListAction::class);
-        Route::get('/{authorId}', AuthorGetProfileAction::class);
+        Route::get('/{author}', AuthorGetProfileAction::class);
     });
 
     Route::group(['prefix' => 'posts'], function () {
