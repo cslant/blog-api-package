@@ -54,8 +54,8 @@ class AuthorGetProfileAction extends Action
             tags: ["Author"],
             parameters: [
                 new Parameter(
-                    name: 'authorId',
-                    description: 'Author Id',
+                    name: 'author',
+                    description: 'Id or username of author',
                     in: 'path',
                     required: true,
                     schema: new Schema(type: 'string', example: 'php')
