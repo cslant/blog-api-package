@@ -6,6 +6,7 @@ use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;
 use CSlant\Blog\Api\Services\AuthorService;
+use CSlant\Blog\Api\Supports\FilterAuthor;
 use CSlant\Blog\Core\Http\Actions\Action;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -57,6 +58,15 @@ class AuthorGetListAction extends Action
             summary: "Get all authors with pagination",
             tags: ["Author"],
             parameters: [
+                new Parameter(
+                    name: 'is_super',
+                    description: 'is_super direction: 
+                        0 for admin
+                        1 for super admin',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(type: 'integer', default: 0, enum: [0, 1])
+                ),
                 new Parameter(
                     name: 'order_by',
                     description: 'Can order by field: id, posts_count, updated_at, ...',
@@ -126,7 +136,9 @@ class AuthorGetListAction extends Action
     ]
     public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $users = $this->authorService->getAllAuthor($request);
+        $filters = FilterAuthor::setFilters($request->input());
+
+        $users = $this->authorService->getAllAuthor($filters);
 
         return $this
             ->httpResponse()
