@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Services;
 
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -20,7 +21,7 @@ class AuthorService
     /**
      * Get all author.
      *
-     * @param  array  $filters
+     * @param  array<string, mixed>  $filters
      *
      * @return LengthAwarePaginator<Model>
      */
@@ -29,10 +30,12 @@ class AuthorService
         $data = User::query()
             ->withCount('posts');
 
-        $data = $data->where('super_user', $filters['is_super']);
+        $data = $data->when(isset($filters['is_super']), function ($query) use ($filters) {
+            return $query->where('super_user', (int) $filters['is_super']);
+        });
 
-        $orderBy = Arr::get($filters, 'order_by', 'updated_at');
-        $order = Arr::get($filters, 'order', 'desc');
+        $orderBy = (string) Arr::get($filters, 'order_by', 'posts_count');
+        $order = (string) Arr::get($filters, 'order', 'desc');
 
         $data = $data->orderBy($orderBy, $order);
 

@@ -136,7 +136,9 @@ class AuthorGetListAction extends Action
     ]
     public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $filters = FilterAuthor::setFilters($request->input());
+        /** @var array<string, mixed> $input */
+        $input = (array) $request->input();
+        $filters = FilterAuthor::setFilters($input);
 
         $users = $this->authorService->getAllAuthor($filters);
 
