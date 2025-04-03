@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Requests;
 
-class AuthorFilterRequest extends JsonFormRequest
+class AuthorGetListRequest extends JsonFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

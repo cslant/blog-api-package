@@ -3,7 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use CSlant\Blog\Api\Http\Requests\AuthorFilterRequest;
+use CSlant\Blog\Api\Http\Requests\AuthorGetListRequest;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;
 use CSlant\Blog\Api\Services\AuthorService;
@@ -41,7 +41,7 @@ class AuthorGetListAction extends Action
     }
 
     /**
-     * @param  AuthorFilterRequest  $request
+     * @param  AuthorGetListRequest  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
@@ -134,11 +134,9 @@ class AuthorGetListAction extends Action
             ]
         )
     ]
-    public function __invoke(AuthorFilterRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(AuthorGetListRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        /** @var array<string, mixed> $input */
-        $input = (array) $request->validated();
-        $filters = FilterAuthor::setFilters($input);
+        $filters = FilterAuthor::setFilters((array) $request->validated());
 
         $users = $this->authorService->getAllAuthor($filters);
 
