@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Api\Http\Requests\AuthorFilterRequest;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;
 use CSlant\Blog\Api\Services\AuthorService;
@@ -41,7 +42,7 @@ class AuthorGetListAction extends Action
     }
 
     /**
-     * @param  Request  $request
+     * @param  AuthorFilterRequest  $request
      *
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
@@ -134,7 +135,7 @@ class AuthorGetListAction extends Action
             ]
         )
     ]
-    public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(AuthorFilterRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         /** @var array<string, mixed> $input */
         $input = (array) $request->input();

@@ -26,10 +26,10 @@ class AuthorService
      */
     public function getAllAuthor(array $filters): LengthAwarePaginator
     {
-        $data = User::query()
-            ->withCount('posts');
+        /** @var User $data */
+        $data = User::query()->withCount('posts');
 
-        $data = $data->when(isset($filters['is_super']), function ($query) use ($filters) {
+        $data = $data->when($filters['is_super'], function ($query) use ($filters) {
             return $query->where('super_user', (int) $filters['is_super']);
         });
 
