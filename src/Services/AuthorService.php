@@ -6,7 +6,6 @@ use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 
 /**
