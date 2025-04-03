@@ -138,7 +138,7 @@ class AuthorGetListAction extends Action
     public function __invoke(AuthorFilterRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
         /** @var array<string, mixed> $input */
-        $input = (array) $request->input();
+        $input = (array) $request->validated();
         $filters = FilterAuthor::setFilters($input);
 
         $users = $this->authorService->getAllAuthor($filters);
