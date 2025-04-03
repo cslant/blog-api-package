@@ -11,7 +11,6 @@ use CSlant\Blog\Api\Supports\FilterAuthor;
 use CSlant\Blog\Core\Http\Actions\Action;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
