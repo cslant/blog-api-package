@@ -1,10 +1,11 @@
 <?php
+
 namespace CSlant\Blog\Api\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Response;
+use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 
 class JsonFormRequest extends FormRequest
 {
@@ -17,6 +18,7 @@ class JsonFormRequest extends FormRequest
             'status' => Response::HTTP_BAD_REQUEST,
             'errors' => $validator->errors(),
         ], Response::HTTP_BAD_REQUEST);
+
         throw new HttpResponseException($response);
     }
 }
