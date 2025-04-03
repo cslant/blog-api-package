@@ -1,6 +1,8 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Requests;
+namespace CSlant\Blog\Api\Http\Requests\Author;
+
+use CSlant\Blog\Api\Http\Requests\JsonFormRequest;
 
 class AuthorGetListRequest extends JsonFormRequest
 {
@@ -9,7 +11,7 @@ class AuthorGetListRequest extends JsonFormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -19,7 +21,7 @@ class AuthorGetListRequest extends JsonFormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'is_super' => 'nullable|digits_between:0,1',
