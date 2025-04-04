@@ -16,11 +16,12 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // add rate limit for api
-        // $this->configureRateLimiting();
+         $this->configureRateLimiting();
     }
 
     protected function configureRateLimiting(): void
     {
+
         RateLimiter::for((string) config('blog-api.defaults.route_prefix'), function (Request $request) {
             /** @var null|User $user */
             $user = $request->user();

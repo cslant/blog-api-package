@@ -41,7 +41,8 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('custom-filters', PostGetCustomFiltersAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
-        Route::post('{id}/increment-views', PostStoreViewCountAction::class);
+        Route::post('{id}/increment-views', PostStoreViewCountAction::class)
+            ->middleware('configurable-rate-limiter:post-views');
     });
 
     Route::group(['prefix' => 'categories'], function () {
