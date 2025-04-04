@@ -25,10 +25,10 @@ class AuthorGetListRequest extends JsonFormRequest
     {
         return [
             'is_super' => 'nullable|digits_between:0,1',
-            'page' => 'nullable|numeric|between:1,100',
+            'page' => 'nullable|numeric',
             'order_by' => 'nullable|string',
             'order' => 'nullable|string|in:asc,desc,ASC,DESC',
-            'per_page' => 'nullable|numeric',
+            'per_page' => 'nullable|numeric|between:1,100',
         ];
     }
 }
