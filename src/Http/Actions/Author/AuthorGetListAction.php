@@ -61,7 +61,7 @@ class AuthorGetListAction extends Action
                 new Parameter(
                     name: 'is_super',
                     description: 'is_super direction: 
-                        0 for admin
+                        0 for normal user
                         1 for super admin',
                     in: 'query',
                     required: false,
