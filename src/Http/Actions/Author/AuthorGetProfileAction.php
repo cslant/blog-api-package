@@ -78,14 +78,14 @@ class AuthorGetProfileAction extends Action
                 ),
                 new Parameter(
                     name: 'per_page',
-                    description: 'Number of items per page',
+                    description: 'Number of items per page (Use for the collection of posts)',
                     in: 'query',
                     required: false,
                     schema: new Schema(type: 'integer', default: 10)
                 ),
                 new Parameter(
                     name: 'page',
-                    description: 'Page number',
+                    description: 'Page number (Use for the collection of posts)',
                     in: 'query',
                     required: false,
                     schema: new Schema(type: 'integer', default: 1)
