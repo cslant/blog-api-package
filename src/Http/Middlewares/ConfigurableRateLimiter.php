@@ -18,7 +18,7 @@ class ConfigurableRateLimiter
      */
     public function handle(Request $request, Closure $next, string $name): Response|JsonResponse
     {
-        /** @var User|null $user */
+        /** @var null|User $user */
         $user = $request->user();
         $identifier = $user ? $user->id : $request->ip();
         $key = $name . ':' . $identifier;
@@ -26,8 +26,7 @@ class ConfigurableRateLimiter
         // Get max attempts from env variable
         $maxAttempts = (int) config('blog-core.blog_api_default_rate_limit', 50);
 
-        if(RateLimiter::tooManyAttempts($key, $maxAttempts))
-        {
+        if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
             return $this->buildTooManyAttemptsResponse($maxAttempts);
         }
 
