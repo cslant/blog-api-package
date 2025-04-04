@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Api\Http\Requests\Post\PostGetFiltersRequest;
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\Services\PostService;
@@ -10,7 +11,6 @@ use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\Items;
@@ -41,7 +41,7 @@ class PostGetCustomFiltersAction extends Action
     }
 
     /**
-     * @param  Request  $request
+     * @param  PostGetFiltersRequest  $request
      *
      * @group Blog
      *
@@ -100,6 +100,17 @@ class PostGetCustomFiltersAction extends Action
                     schema: new Schema(
                         type: 'array',
                         items: new Items(description: 'Input the exclude post ID', type: 'integer'),
+                        default: null
+                    )
+                ),
+                new Parameter(
+                    name: 'include',
+                    description: 'Filter posts by include post IDs.',
+                    in: 'query',
+                    required: false,
+                    schema: new Schema(
+                        type: 'array',
+                        items: new Items(description: 'Input the include post ID', type: 'integer'),
                         default: null
                     )
                 ),
@@ -213,9 +224,9 @@ class PostGetCustomFiltersAction extends Action
             ]
         )
     ]
-    public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(PostGetFiltersRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $filters = FilterPost::setFilters($request->input());
+        $filters = FilterPost::setFilters($request->validated());
 
         $data = $this->postService->getCustomFilters((array) $filters);
 
