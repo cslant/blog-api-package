@@ -24,7 +24,7 @@ class ListPostResourceCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        /** @var LengthAwarePaginator<mixed> $paginator */
+        /** @var LengthAwarePaginator<int, ListPostResource> $paginator */
         $paginator = $this->resource;
 
         return [

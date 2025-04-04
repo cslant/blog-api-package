@@ -22,22 +22,20 @@ class AuthorService
      *
      * @param  array<string, mixed>  $filters
      *
-     * @return LengthAwarePaginator<Model>
+     * @return LengthAwarePaginator<int, Model>
      */
     public function getAllAuthor(array $filters): LengthAwarePaginator
     {
         /** @var User $data */
         $data = User::query()->withCount('posts');
 
-        $data = $data->when($filters['is_super'], function ($query) use ($filters) {
-            return $query->where('super_user', (int) $filters['is_super']);
-        });
+        $data = $data->where('super_user', $filters['is_super']);
 
-        $orderBy = (string) Arr::get($filters, 'order_by', 'posts_count');
-        $order = (string) Arr::get($filters, 'order', 'desc');
+        $data = $data->orderBy(
+            Arr::get($filters, 'order_by', 'posts_count'),
+            Arr::get($filters, 'order', 'desc')
+        );
 
-        $data = $data->orderBy($orderBy, $order);
-
-        return $data->paginate((int) $filters['per_page']);
+        return $data->paginate($filters['per_page']);
     }
 }

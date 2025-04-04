@@ -21,11 +21,9 @@ use Illuminate\Support\Arr;
 class PostService
 {
     /**
-     * Get posts by filters.
-     *
      * @param  array<string, mixed>  $filters
      *
-     * @return LengthAwarePaginator<Post>
+     * @return LengthAwarePaginator<int, Post>
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
@@ -79,12 +77,12 @@ class PostService
             $data = $this->search($data, $keyword);
         }
 
-        $orderBy = Arr::get($filters, 'order_by', 'updated_at');
-        $order = Arr::get($filters, 'order', 'desc');
-
         $data = $data
             ->wherePublished()
-            ->orderBy($orderBy, $order);
+            ->orderBy(
+                Arr::get($filters, 'order_by', 'updated_at'),
+                Arr::get($filters, 'order', 'desc')
+            );
 
         return $data->paginate((int) $filters['per_page']);
     }

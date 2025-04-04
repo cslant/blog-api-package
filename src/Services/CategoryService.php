@@ -25,7 +25,7 @@ class CategoryService
      *
      * @param  array<string, mixed>  $filters
      *
-     * @return LengthAwarePaginator<Category>
+     * @return LengthAwarePaginator<int, Category>
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
@@ -37,14 +37,14 @@ class CategoryService
             $data = $this->search($data, $keyword);
         }
 
-        $orderBy = Arr::get($filters, 'order_by', 'posts_count');
-        $order = Arr::get($filters, 'order', 'desc');
-
         $data = $data
             ->wherePublished()
-            ->orderBy($orderBy, $order);
+            ->orderBy(
+                Arr::get($filters, 'order_by', 'posts_count'),
+                Arr::get($filters, 'order', 'desc')
+            );
 
-        return $data->paginate((int) $filters['per_page']);
+        return $data->paginate($filters['per_page']);
     }
 
     /**
