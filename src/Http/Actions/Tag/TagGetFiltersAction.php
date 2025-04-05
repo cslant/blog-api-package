@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\Tag;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Api\Http\Requests\Tag\TagGetFiltersRequest;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use CSlant\Blog\Api\Services\TagService;
@@ -10,7 +11,6 @@ use CSlant\Blog\Api\Supports\FilterTag;
 use CSlant\Blog\Core\Http\Actions\Action;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
@@ -40,7 +40,7 @@ class TagGetFiltersAction extends Action
     }
 
     /**
-     * @param  Request  $request
+     * @param  TagGetFiltersRequest  $request
      *
      * @group Blog
      *
@@ -132,11 +132,9 @@ class TagGetFiltersAction extends Action
             ]
         )
     ]
-    public function __invoke(Request $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
+    public function __invoke(TagGetFiltersRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        /** @var array<string, mixed> $input */
-        $input = (array) $request->input();
-        $filters = FilterTag::setFilters($input);
+        $filters = FilterTag::setFilters($request->validated());
 
         $data = $this->tagService->getFilters($filters);
 
