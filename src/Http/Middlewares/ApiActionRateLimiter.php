@@ -48,6 +48,6 @@ class ApiActionRateLimiter
 
     private function resolveMaxAttempts(string $name): int
     {
-        return (int) config("blog-core.rate_limits.{$name}", config('blog-core.blog_api_default_rate_limit', 50));
+        return (int) config("blog-core.rate_limits.{$name}", config('blog-core.blog_api_default_rate_limit'));
     }
 }
