@@ -19,7 +19,11 @@ class ConfigurableRateLimiter
         $maxAttempts = $this->resolveMaxAttempts($name);
 
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
-            return $this->tooManyAttemptsResponse($maxAttempts);
+            return response()->json([
+                'error' => true,
+                'message' => 'Too many attempts. Please try again later.',
+                'maxAttempts' => $maxAttempts,
+            ], 429);
         }
 
         RateLimiter::hit($key);
@@ -39,15 +43,6 @@ class ConfigurableRateLimiter
     private function resolveMaxAttempts(string $name): int
     {
         return (int) config("blog-core.rate_limits.{$name}", config('blog-core.blog_api_default_rate_limit', 50));
-    }
-
-    private function tooManyAttemptsResponse(int $maxAttempts): JsonResponse
-    {
-        return response()->json([
-            'error' => true,
-            'message' => 'Too many attempts. Please try again later.',
-            'maxAttempts' => $maxAttempts,
-        ], 429);
     }
 
     private function addRateLimitHeaders(Response $response, string $key, int $maxAttempts): Response
