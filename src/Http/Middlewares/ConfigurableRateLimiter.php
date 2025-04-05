@@ -3,8 +3,8 @@
 namespace CSlant\Blog\Api\Http\Middlewares;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\RateLimiter;
 
@@ -37,6 +37,7 @@ class ConfigurableRateLimiter
     private function resolveKey(Request $request, string $prefix): string
     {
         $identifier = $request->user()->id ?? $request->ip();
+
         return "{$prefix}:{$identifier}";
     }
 
