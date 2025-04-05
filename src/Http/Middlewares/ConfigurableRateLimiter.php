@@ -31,7 +31,12 @@ class ConfigurableRateLimiter
         /** @var Response $response */
         $response = $next($request);
 
-        return $this->addRateLimitHeaders($response, $key, $maxAttempts);
+        $response->headers->add([
+            'X-RateLimit-Limit' => $maxAttempts,
+            'X-RateLimit-Remaining' => RateLimiter::remaining($key, $maxAttempts),
+        ]);
+
+        return $response;
     }
 
     private function resolveKey(Request $request, string $prefix): string
@@ -44,15 +49,5 @@ class ConfigurableRateLimiter
     private function resolveMaxAttempts(string $name): int
     {
         return (int) config("blog-core.rate_limits.{$name}", config('blog-core.blog_api_default_rate_limit', 50));
-    }
-
-    private function addRateLimitHeaders(Response $response, string $key, int $maxAttempts): Response
-    {
-        $response->headers->add([
-            'X-RateLimit-Limit' => $maxAttempts,
-            'X-RateLimit-Remaining' => RateLimiter::remaining($key, $maxAttempts),
-        ]);
-
-        return $response;
     }
 }

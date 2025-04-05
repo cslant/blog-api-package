@@ -42,7 +42,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
         Route::post('{id}/increment-views', PostStoreViewCountAction::class)
-            ->middleware('configurable-rate-limiter:post-views');
+            ->middleware('configurable-rate-limiter:store-post-views');
     });
 
     Route::group(['prefix' => 'categories'], function () {
