@@ -77,6 +77,10 @@ class PostStoreViewCountAction extends Action
                     ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
                     response: 500,
                 ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\TooManyRequestsResponseSchema::class,
+                    response: 429,
+                )
             ]
         )
     ]

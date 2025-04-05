@@ -16,7 +16,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // add rate limit for api
-         $this->configureRateLimiting();
+        // $this->configureRateLimiting();
     }
 
     protected function configureRateLimiting(): void

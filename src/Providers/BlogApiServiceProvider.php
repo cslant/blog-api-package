@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Providers;
 
-use CSlant\Blog\Api\Http\Middlewares\ConfigurableRateLimiter;
+use CSlant\Blog\Api\Http\Middlewares\ApiActionRateLimiter;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
@@ -101,6 +101,6 @@ class BlogApiServiceProvider extends ServiceProvider
         $router = $this->app->make('router');
 
         // Register route middleware
-        $router->aliasMiddleware('configurable-rate-limiter', ConfigurableRateLimiter::class);
+        $router->aliasMiddleware('api-action-rate-limiter', ApiActionRateLimiter::class);
     }
 }

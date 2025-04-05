@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\RateLimiter;
 
-class ConfigurableRateLimiter
+class ApiActionRateLimiter
 {
     /**
      * Handle an incoming request with configurable rate limiting.
      *
-     *
+     * @param Request $request
+     * @param Closure $next
+     * @param string $name Action identifier for rate limiting
+     * @return Response|JsonResponse
      */
     public function handle(Request $request, Closure $next, string $name): Response|JsonResponse
     {
