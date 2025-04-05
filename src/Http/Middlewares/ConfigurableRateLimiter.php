@@ -3,9 +3,8 @@
 namespace CSlant\Blog\Api\Http\Middlewares;
 
 use Closure;
-use CSlant\Blog\Core\Models\User;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\RateLimiter;
 
@@ -13,21 +12,14 @@ class ConfigurableRateLimiter
 {
     /**
      * Handle an incoming request with configurable rate limiting.
-     *
-     *
      */
     public function handle(Request $request, Closure $next, string $name): Response|JsonResponse
     {
-        /** @var null|User $user */
-        $user = $request->user();
-        $identifier = $user ? $user->id : $request->ip();
-        $key = $name . ':' . $identifier;
-
-        // Get max attempts from env variable
-        $maxAttempts = (int) config('blog-core.blog_api_default_rate_limit', 50);
+        $key = $this->resolveKey($request, $name);
+        $maxAttempts = $this->resolveMaxAttempts($name);
 
         if (RateLimiter::tooManyAttempts($key, $maxAttempts)) {
-            return $this->buildTooManyAttemptsResponse($maxAttempts);
+            return $this->tooManyAttemptsResponse($maxAttempts);
         }
 
         RateLimiter::hit($key);
@@ -35,26 +27,36 @@ class ConfigurableRateLimiter
         /** @var Response $response */
         $response = $next($request);
 
+        return $this->addRateLimitHeaders($response, $key, $maxAttempts);
+    }
+
+    private function resolveKey(Request $request, string $prefix): string
+    {
+        $identifier = $request->user()->id ?? $request->ip();
+        return "{$prefix}:{$identifier}";
+    }
+
+    private function resolveMaxAttempts(string $name): int
+    {
+        return (int) config("blog-core.rate_limits.{$name}", config('blog-core.blog_api_default_rate_limit', 50));
+    }
+
+    private function tooManyAttemptsResponse(int $maxAttempts): JsonResponse
+    {
+        return response()->json([
+            'error' => true,
+            'message' => 'Too many attempts. Please try again later.',
+            'maxAttempts' => $maxAttempts,
+        ], 429);
+    }
+
+    private function addRateLimitHeaders(Response $response, string $key, int $maxAttempts): Response
+    {
         $response->headers->add([
             'X-RateLimit-Limit' => $maxAttempts,
             'X-RateLimit-Remaining' => RateLimiter::remaining($key, $maxAttempts),
         ]);
 
         return $response;
-    }
-
-    /**
-     * Build a response for too many attempts.
-     *
-     * @param  int  $maxAttempts
-     * @return JsonResponse
-     */
-    private function buildTooManyAttemptsResponse(int $maxAttempts): JsonResponse
-    {
-        return response()->json([
-            'error' => true,
-            'message' => 'Too many attempts. Please try again later.',
-            'maxAttempts' => $maxAttempts,
-        ])->setStatusCode(429);
     }
 }
