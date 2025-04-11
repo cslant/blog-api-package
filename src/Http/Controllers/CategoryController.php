@@ -10,7 +10,7 @@ use CSlant\Blog\Api\Http\Resources\Category\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
 use CSlant\Blog\Api\Services\CategoryService;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
-use CSlant\Blog\Core\Http\Controllers\Base\BaseCategoryController;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
@@ -38,7 +38,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class CategoryController extends BaseCategoryController
+class CategoryController extends Action
 {
     protected CategoryService $categoryService;
 
