@@ -6,15 +6,15 @@ use CSlant\Blog\Api\Http\Resources\Author\AuthorResource;
 use CSlant\Blog\Api\Http\Resources\Category\CategoryResource;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
-use CSlant\Blog\Core\Http\Resources\Base\BaseListPostResource;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @mixin Post
  */
-class ListPostResource extends BaseListPostResource
+class ListPostResource extends JsonResource
 {
     /**
      * @param  Request  $request
