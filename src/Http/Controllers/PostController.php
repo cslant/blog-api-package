@@ -10,6 +10,7 @@ use CSlant\Blog\Api\Http\Resources\Post\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
@@ -38,7 +39,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostController
+class PostController extends Action
 {
     public function __construct(protected PostInterface $postRepository)
     {
