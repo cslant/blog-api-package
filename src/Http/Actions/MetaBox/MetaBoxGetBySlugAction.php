@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\MetaBox;
 
 use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Models\MetaBoxModelResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\Services\MetaBoxService;
 use CSlant\Blog\Api\Services\SlugService;
@@ -103,7 +104,7 @@ class MetaBoxGetBySlugAction extends Action
                             ),
                             new Property(
                                 property: "data",
-                                ref: MetaBoxResource::class,
+                                ref: MetaBoxModelResourceSchema::class,
                                 description: "Data of the meta box",
                                 type: "object",
                             ),
