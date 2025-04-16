@@ -1,10 +1,10 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Requests\Author;
+namespace CSlant\Blog\Api\Http\Requests\Tag;
 
 use CSlant\Blog\Api\Http\Requests\JsonFormRequest;
 
-class AuthorGetListRequest extends JsonFormRequest
+class TagGetFiltersRequest extends JsonFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,10 @@ class AuthorGetListRequest extends JsonFormRequest
     public function rules(): array
     {
         return [
-            'is_super' => 'nullable|digits_between:0,1',
-            'page' => 'nullable|numeric',
+            'search' => 'nullable|string|max:255',
             'order_by' => 'nullable|string',
             'order' => 'nullable|string|in:asc,desc,ASC,DESC',
+            'page' => 'nullable|numeric',
             'per_page' => 'nullable|numeric|between:1,100',
         ];
     }
