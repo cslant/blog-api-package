@@ -3,8 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\MetaBox;
 
 use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxResource;
-use CSlant\Blog\Api\OpenApi\Schemas\Models\MetaBoxModelResourceSchema;
-use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\MetaBox\MetaBoxModelResourceSchema;
 use CSlant\Blog\Api\Services\MetaBoxService;
 use CSlant\Blog\Api\Services\SlugService;
 use CSlant\Blog\Core\Constants\AppConstant;
@@ -14,7 +13,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
-use OpenApi\Attributes\Items;
 use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Property;
