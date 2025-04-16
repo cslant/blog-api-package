@@ -25,3 +25,6 @@ parameters:
 
         -
           identifier: staticMethod.notFound
+
+        -
+          identifier: method.notFound
