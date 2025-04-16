@@ -60,4 +60,8 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
     Route::group(['prefix' => 'meta-box'], function () {
         Route::get('{model}/{modelSlug}/{lang?}', [MetaBoxController::class, 'getMetaBoxBySlugModel']);
     });
+
+    Route::group(['prefix' => 'meta-boxes'], function () {
+        Route::get('{model}/{modelSlug}/{lang?}', \CSlant\Blog\Api\Http\Actions\MetaBox\MetaBoxGetBySlugAction::class);
+    });
 });
