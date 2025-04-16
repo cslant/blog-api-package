@@ -61,8 +61,8 @@ class MetaBoxGetBySlugAction extends Action
                     required: true,
                     schema: new Schema(
                         type: 'string',
-                        default: 'post',
-                        enum: ['post', 'page', 'category', 'tag']
+                        enum: ['post', 'page', 'category', 'tag'],
+                        example: 'category'
                     )
                 ),
                 new Parameter(
@@ -74,7 +74,7 @@ class MetaBoxGetBySlugAction extends Action
                     required: true,
                     schema: new Schema(
                         type: 'string',
-                        default: 'post-slug'
+                        example: 'php',
                     )
                 ),
                 new Parameter(
