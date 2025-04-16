@@ -124,8 +124,11 @@ class MetaBoxGetBySlugAction extends Action
             ]
         )
     ]
-    public function __invoke(string $model, string $slug, string $lang = AppConstant::DEFAULT_LOCALE)
-    {
+    public function __invoke(
+        string $model,
+        string $slug,
+        string $lang = AppConstant::DEFAULT_LOCALE
+    ): JsonResponse|BaseHttpResponse|JsonResource|RedirectResponse {
         $slugModel = $this->slugService->getSlugModel($slug, $model);
 
         if (!$slugModel) {
