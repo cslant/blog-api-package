@@ -24,7 +24,7 @@ class AuthorResource extends JsonResource
             'last_name' => $this->last_name,
             'full_name' => $this->first_name && $this->last_name
                 ? $this->first_name . ' ' . $this->last_name
-                : ($this->first_name ?? $this->last_name ?? 'System User'),
+                : ($this->first_name ?? $this->last_name ?? 'Base Member'),
             'image' => $this->avatar_url,
             'role' => $this->roles?->first()->name ?? null,
         ];
