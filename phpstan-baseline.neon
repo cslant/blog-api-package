@@ -24,7 +24,4 @@ parameters:
           identifier: varTag.nativeType
 
         -
-          identifier: staticMethod.notFound
-
-        -
           identifier: method.notFound
