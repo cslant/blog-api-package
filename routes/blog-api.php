@@ -41,7 +41,8 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('custom-filters', PostGetCustomFiltersAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
-        Route::post('{id}/increment-views', PostStoreViewCountAction::class);
+        Route::post('{id}/increment-views', PostStoreViewCountAction::class)
+            ->middleware('api-action-rate-limiter:post-views');
     });
 
     Route::group(['prefix' => 'categories'], function () {
@@ -58,5 +59,9 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
 
     Route::group(['prefix' => 'meta-box'], function () {
         Route::get('{model}/{modelSlug}/{lang?}', [MetaBoxController::class, 'getMetaBoxBySlugModel']);
+    });
+
+    Route::group(['prefix' => 'meta-boxes'], function () {
+        Route::get('{model}/{modelSlug}/{lang?}', \CSlant\Blog\Api\Http\Actions\MetaBox\MetaBoxGetBySlugAction::class);
     });
 });

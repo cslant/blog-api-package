@@ -3,24 +3,24 @@
 namespace CSlant\Blog\Api\Http\Resources\Category;
 
 use CSlant\Blog\Core\Facades\Base\BaseHelper;
-use CSlant\Blog\Core\Http\Resources\Base\BaseListCategoryResource;
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * @method static mixed make(...$params)
  *
  * @mixin Category
  */
-class ListCategoryResource extends BaseListCategoryResource
+class ListCategoryResource extends JsonResource
 {
     /**
      * @param  Request  $request
      *
      * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         /** @var Category $this */
         return [

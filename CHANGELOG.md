@@ -2,6 +2,46 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v2.0.0 - 2025-04-12
+
+### What's Changed
+
+* feat: create a response schema for the 400 error by @pxthinh in https://github.com/cslant/blog-api-package/pull/36
+* Feat add status response schema #16 by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/37
+* Update phpstan.yml by @tanhongit in https://github.com/cslant/blog-api-package/pull/39
+* #44 feat: add AuthorSchema model by @pxthinh in https://github.com/cslant/blog-api-package/pull/46
+* #44 feat: change property for AuthorSchema by @pxthinh in https://github.com/cslant/blog-api-package/pull/47
+* Feature/author model schema #44 by @pxthinh in https://github.com/cslant/blog-api-package/pull/49
+* feat: create tag model and resource schemas by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/48
+* Feature/post model and resource schemas #42 by @pxthinh in https://github.com/cslant/blog-api-package/pull/45
+* Feat/api docs for tag actions-#41 by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/50
+* #43 feat: add api docs for post actions by @pxthinh in https://github.com/cslant/blog-api-package/pull/51
+* #38 feat: add api and docs for views count by @pxthinh in https://github.com/cslant/blog-api-package/pull/52
+* #43 feat: add description for each array by @pxthinh in https://github.com/cslant/blog-api-package/pull/59
+* #55 feat: add api docs categories filters by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/60
+* #57 feat: Change the system tag resource logic by @pxthinh in https://github.com/cslant/blog-api-package/pull/61
+* #54 feat: add profile user and list posts by @pxthinh in https://github.com/cslant/blog-api-package/pull/62
+* fix: remove extend and add trait HasHttpResponse by @pxthinh in https://github.com/cslant/blog-api-package/pull/65
+* Feature/add get list post pagination filter by tag #43 by @pxthinh in https://github.com/cslant/blog-api-package/pull/63
+* #28 feat: get all author with posts count by @pxthinh in https://github.com/cslant/blog-api-package/pull/66
+* Feature/get list blog by category in center home page #27 by @pxthinh in https://github.com/cslant/blog-api-package/pull/67
+* feat: update response for author by @pxthinh in https://github.com/cslant/blog-api-package/pull/70
+* fix: update docs for order by by @pxthinh in https://github.com/cslant/blog-api-package/pull/68
+* feat: add filters for tags and categories by @pxthinh in https://github.com/cslant/blog-api-package/pull/71
+* Feature/update filter tags and categories by @pxthinh in https://github.com/cslant/blog-api-package/pull/72
+* Feat/api count view post detail #53 by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/69
+* fix: change path for docs by @pxthinh in https://github.com/cslant/blog-api-package/pull/73
+* #53: docs: edit description to make documentation clear. by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/75
+* Feature/update query usernmae for api author by @pxthinh in https://github.com/cslant/blog-api-package/pull/76
+* Feature/add filter for author action by @pxthinh in https://github.com/cslant/blog-api-package/pull/77
+* Feat/rate limitting for post view increment api #74 by @TonyDuong0509 in https://github.com/cslant/blog-api-package/pull/79
+
+### New Contributors
+
+* @TonyDuong0509 made their first contribution in https://github.com/cslant/blog-api-package/pull/37
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v1.0.0...v2.0.0
+
 ## v1.0.0 - 2025-02-12
 
 **Full Changelog**: https://github.com/cslant/blog-api-package/compare/v0.5.1...v1.0.0

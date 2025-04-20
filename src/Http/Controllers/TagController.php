@@ -10,7 +10,7 @@ use CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema;
 use CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
-use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Models\Tag;
 use Illuminate\Http\JsonResponse;
@@ -37,7 +37,7 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse httpResponse()
  * @method BaseHttpResponse setData(mixed $data)
  */
-class TagController extends BaseTagController
+class TagController extends Action
 {
     #[
         Get(

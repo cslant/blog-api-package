@@ -2,6 +2,8 @@
 
 namespace CSlant\Blog\Api\Providers;
 
+use CSlant\Blog\Api\Http\Middlewares\ApiActionRateLimiter;
+use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 
 class BlogApiServiceProvider extends ServiceProvider
@@ -27,6 +29,8 @@ class BlogApiServiceProvider extends ServiceProvider
         $this->registerAssetPublishing();
 
         $this->resourceOverride();
+
+        $this->registerMiddlewares();
     }
 
     /**
@@ -86,5 +90,17 @@ class BlogApiServiceProvider extends ServiceProvider
                 \Botble\Blog\Http\Resources\TagResource::class
             );
         }
+    }
+
+    /**
+     * Register middlewares for the package.
+     */
+    protected function registerMiddlewares(): void
+    {
+        /** @var Router $router */
+        $router = $this->app->make('router');
+
+        // Register route middleware
+        $router->aliasMiddleware('api-action-rate-limiter', ApiActionRateLimiter::class);
     }
 }
