@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Resources\Post;
 
 use CSlant\Blog\Api\Http\Resources\Author\AuthorResource;
 use CSlant\Blog\Api\Http\Resources\Category\CategoryResource;
+use CSlant\Blog\Api\Http\Resources\Comment\ListCommentResourceCollection;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
@@ -23,6 +24,9 @@ class PostResource extends JsonResource
     public function toArray($request): array
     {
         /** @var Post $this */
+        $comments = $this->comments()
+            ->orderBy((string) $request->get('order_by', 'created_at'), (string) $request->get('order', 'DESC'))
+            ->paginate($request->integer('per_page', 10));
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -33,6 +37,7 @@ class PostResource extends JsonResource
             'categories' => CategoryResource::collection($this->categories),
             'tags' => TagResource::collection($this->tags),
             'author' => AuthorResource::make($this->author),
+            'comments' => ListCommentResourceCollection::make($comments),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
