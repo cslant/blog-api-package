@@ -23,7 +23,7 @@ class CategoryResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug instanceof Slug ? $this->slug->key : $this->slug,
-            'url' => $this->url,
+            // 'url' => $this->url,
             'icon' => $this->icon,
             'description' => $this->description,
         ];

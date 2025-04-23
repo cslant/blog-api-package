@@ -33,6 +33,7 @@ use OpenApi\Attributes\Schema;
             ref: AuthorModelResourceSchema::class,
             type: "object",
         ),
+        new Property(property: "likes_count", description: "Likes count", type: "string", nullable: true),
         new Property(property: "created_at", description: "Post created at", type: "datetime", nullable: true),
         new Property(property: "updated_at", description: "Post updated at", type: "datetime", nullable: true),
     ],
