@@ -25,3 +25,6 @@ parameters:
 
         -
           identifier: method.notFound
+
+        - message: '#Call to function method_exists\(\) with \$this\(CSlant\\Blog\\Api\\Http\\Resources\\Post\\ListPostResource\) and \'likesCountDigital\' will always evaluate to true\.#'
+          path: src/Http/Resources/Post/ListPostResource.php
