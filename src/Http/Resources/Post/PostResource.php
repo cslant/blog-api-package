@@ -27,6 +27,7 @@ class PostResource extends JsonResource
         $comments = $this->comments()
             ->orderBy((string) $request->get('order_by', 'created_at'), (string) $request->get('order', 'DESC'))
             ->paginate($request->integer('per_page', 10));
+
         return [
             'id' => $this->id,
             'name' => $this->name,
