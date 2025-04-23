@@ -33,7 +33,7 @@ class PostResource extends JsonResource
             'categories' => CategoryResource::collection($this->categories),
             'tags' => TagResource::collection($this->tags),
             'author' => AuthorResource::make($this->author),
-            'likes_count' => method_exists($this, 'likesCountDigital') ? $this->likesCountDigital() : 0,
+            'likes_count' => $this->likesCountDigital(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
