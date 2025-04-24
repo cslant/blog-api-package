@@ -3,7 +3,7 @@
 namespace CSlant\Blog\Api\Http\Resources\Comment;
 
 use CSlant\Blog\Api\Http\Resources\Author\AuthorResource;
-use FriendsOfBotble\Comment\Models\Comment;
+use CSlant\Blog\Core\Models\Comment;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
