@@ -121,7 +121,7 @@ class PostController extends Action
         $data = $this
             ->postRepository
             ->advancedGet([
-                'with' => ['tags', 'categories', 'author', 'likes', 'slugable'],
+                'with' => ['tags', 'categories', 'author', 'slugable'],
                 'condition' => ['status' => StatusEnum::PUBLISHED->value],
                 'paginate' => [
                     'per_page' => $request->integer('per_page', 10),
