@@ -61,7 +61,7 @@ class AuthorGetListAction extends Action
                 new Parameter(
                     name: 'is_super',
                     description: 'is_super direction: 
-                        0 for admin
+                        0 for normal user
                         1 for super admin',
                     in: 'query',
                     required: false,
@@ -136,7 +136,7 @@ class AuthorGetListAction extends Action
     ]
     public function __invoke(AuthorGetListRequest $request): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        $filters = FilterAuthor::setFilters((array) $request->validated());
+        $filters = FilterAuthor::setFilters($request->validated());
 
         $users = $this->authorService->getAllAuthor($filters);
 
