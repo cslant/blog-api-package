@@ -33,7 +33,7 @@ class ListCommentResourceCollection extends ResourceCollection
                 'current_page' => $paginator->currentPage(),
                 'from' => $paginator->firstItem(),
                 'last_page' => $paginator->lastPage(),
-                'path' => $paginator->path(),
+                // 'path' => $paginator->path(),
                 'per_page' => $paginator->perPage(),
                 'to' => $paginator->lastItem(),
                 'total' => $paginator->total(),
