@@ -39,6 +39,7 @@ class PostResource extends JsonResource
             'tags' => TagResource::collection($this->tags),
             'author' => AuthorResource::make($this->author),
             'comments' => ListCommentResourceCollection::make($comments),
+            'likes_count' => $this->likesCountDigital(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

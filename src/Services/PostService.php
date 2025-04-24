@@ -27,7 +27,7 @@ class PostService
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
-        $data = Post::query()->withCount(['comments', 'likes']);
+        $data = Post::query()->withCount(['comments', 'likes'])->with(['likes']);
 
         if ($filters['tags'] !== null) {
             $tags = array_filter((array) $filters['tags']);

@@ -121,7 +121,7 @@ class PostController extends Action
         $data = $this
             ->postRepository
             ->advancedGet([
-                'with' => ['tags', 'categories', 'author', 'slugable'],
+                'with' => ['tags', 'categories', 'author', 'likes', 'slugable'],
                 'condition' => ['status' => StatusEnum::PUBLISHED->value],
                 'paginate' => [
                     'per_page' => $request->integer('per_page', 10),
@@ -211,7 +211,7 @@ class PostController extends Action
         }
 
         $post = Post::query()
-            ->with(['tags', 'categories', 'author', 'comments'])
+            ->with(['tags', 'categories', 'author', 'comments', 'likes'])
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,
