@@ -25,6 +25,3 @@ parameters:
 
         -
           identifier: method.notFound
-
-        - identifier: function.alreadyNarrowedType
-          path: src/Http/Resources/Post/ListPostResource.php
