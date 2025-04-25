@@ -1,19 +1,19 @@
 <?php
 
-namespace CSlant\Blog\Api\Http\Resources\Post;
+namespace CSlant\Blog\Api\Http\Resources\Comment;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-class ListPostResourceCollection extends ResourceCollection
+class ListCommentResourceCollection extends ResourceCollection
 {
     /**
      * The resource that this resource collects.
      *
      * @var string
      */
-    public $collects = ListPostResource::class;
+    public $collects = ListCommentResource::class;
 
     /**
      * Transform the resource collection into an array.
@@ -24,7 +24,7 @@ class ListPostResourceCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        /** @var LengthAwarePaginator<int, ListPostResource> $paginator */
+        /** @var LengthAwarePaginator<int, ListCommentResource> $paginator */
         $paginator = $this->resource;
 
         return [

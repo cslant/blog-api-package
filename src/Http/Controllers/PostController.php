@@ -211,7 +211,7 @@ class PostController extends Action
         }
 
         $post = Post::query()
-            ->with(['tags', 'categories', 'author', 'likes'])
+            ->with(['tags', 'categories', 'author', 'comments', 'likes'])
             ->where([
                 'id' => $slug->reference_id,
                 'status' => StatusEnum::PUBLISHED,

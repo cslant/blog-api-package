@@ -159,7 +159,7 @@ class PostGetCustomFiltersAction extends Action
                 ),
                 new Parameter(
                     name: 'order_by',
-                    description: 'Can order by field: id, views, created_at, ...',
+                    description: 'Can order by field: id, views, comments_count, likes_count, created_at, ...',
                     in: 'query',
                     required: false,
                     schema: new Schema(type: 'string', default: 'created_at')
