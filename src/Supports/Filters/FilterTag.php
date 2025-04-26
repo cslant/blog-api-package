@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Supports;
+namespace CSlant\Blog\Api\Supports\Filters;
 
 class FilterTag
 {

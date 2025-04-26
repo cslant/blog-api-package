@@ -25,3 +25,11 @@ parameters:
 
         -
           identifier: method.notFound
+
+        -
+          identifier: generics.notGeneric
+          path: src/Supports/Queries/QueryPost.php
+
+        -
+          identifier: argument.type
+          path: src/Services/PostService.php

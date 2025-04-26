@@ -7,7 +7,7 @@ use CSlant\Blog\Api\Http\Requests\Tag\TagGetFiltersRequest;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use CSlant\Blog\Api\Services\TagService;
-use CSlant\Blog\Api\Supports\FilterTag;
+use CSlant\Blog\Api\Supports\Filters\FilterTag;
 use CSlant\Blog\Core\Http\Actions\Action;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
