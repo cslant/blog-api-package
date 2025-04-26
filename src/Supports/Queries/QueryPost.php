@@ -11,10 +11,10 @@ use Illuminate\Database\Query\Builder;
 class QueryPost
 {
     /**
-     * @param  Builder|BaseQueryBuilder  $query
+     * @param  BaseQueryBuilder|Builder  $query
      * @param  array<string, mixed>  $filters
      *
-     * @return Builder|BaseQueryBuilder|Post
+     * @return BaseQueryBuilder|Builder|Post
      */
     public static function setBaseCustomFilterQuery(
         Builder|BaseQueryBuilder $query,
