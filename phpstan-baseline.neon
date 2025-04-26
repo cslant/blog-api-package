@@ -25,3 +25,11 @@ parameters:
 
         -
           identifier: method.notFound
+
+        -
+          identifier: missingType.generics
+          path: src/Services/PostService.php
+
+        -
+          identifier: argument.type
+          path: src/Services/PostService.php
