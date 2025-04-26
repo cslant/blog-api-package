@@ -11,7 +11,7 @@ use Illuminate\Database\Query\Builder;
 class QueryTag
 {
     /**
-     * @param  Builder|BaseQueryBuilder|Tag  $query
+     * @param  BaseQueryBuilder|Builder|Tag  $query
      * @param  array<string, mixed>  $filters
      *
      * @return BaseQueryBuilder|Builder|Tag
@@ -29,7 +29,7 @@ class QueryTag
     }
 
     /**
-     * @param  Builder|BaseQueryBuilder  $model
+     * @param  BaseQueryBuilder|Builder  $model
      * @param  null|string  $keyword
      *
      * @return BaseQueryBuilder|Builder<Model>
