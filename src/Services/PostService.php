@@ -21,14 +21,13 @@ use Illuminate\Support\Arr;
 class PostService
 {
     /**
+     * @param  Builder  $query
      * @param  array<string, mixed>  $filters
      *
      * @return Builder|BaseQueryBuilder|Post
      */
-    public function setBaseCustomFilterQuery(array $filters): Builder|BaseQueryBuilder|Post
+    public function setBaseCustomFilterQuery(Builder $query, array $filters): Builder|BaseQueryBuilder|Post
     {
-        $query = Post::query()->withCount(['comments', 'likes'])->with(['comments', 'likes']);
-
         if ($filters['tags'] !== null) {
             $tags = array_filter((array) $filters['tags']);
 
@@ -87,7 +86,9 @@ class PostService
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
-        $query = $this->setBaseCustomFilterQuery($filters);
+        $query = Post::query()->withCount(['comments', 'likes'])->with(['comments', 'likes']);
+
+        $query = $this->setBaseCustomFilterQuery($query, $filters);
 
         $data = $query
             ->wherePublished()
