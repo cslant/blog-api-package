@@ -10,6 +10,7 @@ use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @mixin Post
@@ -23,6 +24,11 @@ class ListPostResource extends JsonResource
      */
     public function toArray($request): array
     {
+        $userId = 0;
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+        }
+
         /** @var Post $this */
         return [
             'id' => $this->id,
@@ -34,6 +40,8 @@ class ListPostResource extends JsonResource
             'tags' => TagResource::collection($this->tags),
             'author' => AuthorResource::make($this->author),
             'likes_count' => $this->relationLoaded('likes') ? $this->likesCountDigital() : 0,
+            'is_interacted_by' => $this->relationLoaded('likes') ? $this->isInteractedBy($userId, null) : false,
+            'is_interacted_comment_by' => $this->relationLoaded('comments') ? $this->isInteractedCommentBy($userId) : false,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
