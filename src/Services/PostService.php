@@ -25,7 +25,7 @@ class PostService
      *
      * @return Builder|BaseQueryBuilder|Post
      */
-    public function setCustomFilterQuery(array $filters): Builder|BaseQueryBuilder|Post
+    public function setBaseCustomFilterQuery(array $filters): Builder|BaseQueryBuilder|Post
     {
         $query = Post::query()->withCount(['comments', 'likes'])->with(['comments', 'likes']);
 
@@ -87,7 +87,7 @@ class PostService
      */
     public function getCustomFilters(array $filters): LengthAwarePaginator
     {
-        $query = $this->setCustomFilterQuery($filters);
+        $query = $this->setBaseCustomFilterQuery($filters);
 
         $data = $query
             ->wherePublished()
