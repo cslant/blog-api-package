@@ -10,6 +10,7 @@ use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @mixin Post
@@ -28,6 +29,11 @@ class PostResource extends JsonResource
             ->orderBy((string) $request->get('order_by', 'created_at'), (string) $request->get('order', 'DESC'))
             ->paginate($request->integer('per_page', 10));
 
+        $userId = 0;
+        if (Auth::user()) {
+            $userId = Auth::user()->id;
+        }
+
         return [
             'id' => $this->id,
             'name' => $this->name,
@@ -40,6 +46,8 @@ class PostResource extends JsonResource
             'author' => AuthorResource::make($this->author),
             'comments' => ListCommentResourceCollection::make($comments),
             'likes_count' => $this->likesCountDigital(),
+            'is_liked' => $this->isLikedBy($userId),
+            'is_commented' => $this->isCommentBy($userId),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
