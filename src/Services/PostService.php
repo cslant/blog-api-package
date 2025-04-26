@@ -23,16 +23,16 @@ class PostService
     /**
      * @param  array<string, mixed>  $filters
      *
-     * @return LengthAwarePaginator<int, Post>
+     * @return Builder|BaseQueryBuilder|Post
      */
-    public function getCustomFilters(array $filters): LengthAwarePaginator
+    public function setCustomFilterQuery(array $filters): Builder|BaseQueryBuilder|Post
     {
-        $data = Post::query()->withCount(['comments', 'likes'])->with(['comments', 'likes']);
+        $query = Post::query()->withCount(['comments', 'likes'])->with(['comments', 'likes']);
 
         if ($filters['tags'] !== null) {
             $tags = array_filter((array) $filters['tags']);
 
-            $data = $data->whereHas('tags', function (Builder $query) use ($tags): void {
+            $query = $query->whereHas('tags', function (Builder $query) use ($tags): void {
                 $query->whereIn('tags.id', $tags);
             });
         }
@@ -40,44 +40,56 @@ class PostService
         if ($filters['categories'] !== null) {
             $categories = array_filter((array) $filters['categories']);
 
-            $data = $data->whereHas('categories', function (Builder $query) use ($categories): void {
+            $query = $query->whereHas('categories', function (Builder $query) use ($categories): void {
                 $query->whereIn('categories.id', $categories);
             });
         }
 
         if ($filters['categories_exclude'] !== null) {
-            $data = $data
+            $query = $query
                 ->whereHas('categories', function (Builder $query) use ($filters): void {
                     $query->whereNotIn('categories.id', array_filter((array) $filters['categories_exclude']));
                 });
         }
 
         if ($filters['exclude'] !== null) {
-            $data = $data->whereNotIn('id', array_filter((array) $filters['exclude']));
+            $query = $query->whereNotIn('id', array_filter((array) $filters['exclude']));
         }
 
         if ($filters['include'] !== null) {
-            $data = $data->whereNotIn('id', array_filter((array) $filters['include']));
+            $query = $query->whereNotIn('id', array_filter((array) $filters['include']));
         }
 
         if ($filters['author'] !== null) {
-            $data = $data->whereIn('author_id', array_filter((array) $filters['author']));
+            $query = $query->whereIn('author_id', array_filter((array) $filters['author']));
         }
 
         if ($filters['author_exclude'] !== null) {
-            $data = $data->whereNotIn('author_id', array_filter((array) $filters['author_exclude']));
+            $query = $query->whereNotIn('author_id', array_filter((array) $filters['author_exclude']));
         }
 
         if ($filters['featured'] !== null) {
-            $data = $data->where('is_featured', $filters['featured']);
+            $query = $query->where('is_featured', $filters['featured']);
         }
 
         if ($filters['search'] !== null) {
             $keyword = isset($filters['search']) ? (string) $filters['search'] : null;
-            $data = $this->search($data, $keyword);
+            $query = $this->search($query, $keyword);
         }
 
-        $data = $data
+        return $query;
+    }
+
+    /**
+     * @param  array<string, mixed>  $filters
+     *
+     * @return LengthAwarePaginator<int, Post>
+     */
+    public function getCustomFilters(array $filters): LengthAwarePaginator
+    {
+        $query = $this->setCustomFilterQuery($filters);
+
+        $data = $query
             ->wherePublished()
             ->orderBy(
                 Arr::get($filters, 'order_by', 'updated_at'),
