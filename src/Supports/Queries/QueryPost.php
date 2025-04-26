@@ -23,7 +23,7 @@ class QueryPost
         if ($filters['tags'] !== null) {
             $tags = array_filter((array) $filters['tags']);
 
-            $query = $query->whereHas('tags', function (Builder $query) use ($tags): void {
+            $query = $query->whereHas('tags', function (BaseQueryBuilder|Builder $query) use ($tags): void {
                 $query->whereIn('tags.id', $tags);
             });
         }
@@ -31,14 +31,14 @@ class QueryPost
         if ($filters['categories'] !== null) {
             $categories = array_filter((array) $filters['categories']);
 
-            $query = $query->whereHas('categories', function (Builder $query) use ($categories): void {
+            $query = $query->whereHas('categories', function (BaseQueryBuilder|Builder $query) use ($categories): void {
                 $query->whereIn('categories.id', $categories);
             });
         }
 
         if ($filters['categories_exclude'] !== null) {
             $query = $query
-                ->whereHas('categories', function (Builder $query) use ($filters): void {
+                ->whereHas('categories', function (BaseQueryBuilder|Builder $query) use ($filters): void {
                     $query->whereNotIn('categories.id', array_filter((array) $filters['categories_exclude']));
                 });
         }

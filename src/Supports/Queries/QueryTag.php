@@ -45,7 +45,7 @@ class QueryTag
             && Language::getCurrentLocale() != Language::getDefaultLocale()
         ) {
             return $model
-                ->whereHas('translations', function (BaseQueryBuilder $query) use ($keyword): void {
+                ->whereHas('translations', function (BaseQueryBuilder|Builder $query) use ($keyword): void {
                     $query->addSearch('name', $keyword, false, false);
                 });
         }
