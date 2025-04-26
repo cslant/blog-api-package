@@ -40,7 +40,7 @@ class ListPostResource extends JsonResource
             'tags' => TagResource::collection($this->tags),
             'author' => AuthorResource::make($this->author),
             'likes_count' => $this->relationLoaded('likes') ? $this->likesCountDigital() : 0,
-            'comments_count' => $this->relationLoaded('comments') ? $this->commentsCount() : 0,
+            'comments_count' => $this->relationLoaded('comments') ? $this->comments->count() : 0,
             'is_liked' => $this->relationLoaded('likes') && $this->isLikedBy($userId),
             'is_commented' => $this->relationLoaded('comments') && $this->isCommentBy($userId),
             'created_at' => $this->created_at,
