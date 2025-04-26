@@ -46,8 +46,8 @@ class PostResource extends JsonResource
             'author' => AuthorResource::make($this->author),
             'comments' => ListCommentResourceCollection::make($comments),
             'likes_count' => $this->likesCountDigital(),
-            'is_interacted_by' => $this->isInteractedBy($userId, null),
-            'is_interacted_comment_by' => $this->isInteractedCommentBy($userId),
+            'is_like_by' => $this->isLikedBy($userId),
+            'is_comment_by' => $this->isCommentBy($userId),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
