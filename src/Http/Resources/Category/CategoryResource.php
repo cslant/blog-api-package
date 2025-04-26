@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Resources\Category;
 
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -12,11 +13,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class CategoryResource extends JsonResource
 {
     /**
-     * @param $request
+     * @param  Request  $request
      *
      * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         /** @var Category $this */
         return [
