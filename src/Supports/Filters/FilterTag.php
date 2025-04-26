@@ -1,6 +1,6 @@
 <?php
 
-namespace CSlant\Blog\Api\Supports;
+namespace CSlant\Blog\Api\Supports\Filters;
 
 class FilterTag
 {
@@ -16,6 +16,8 @@ class FilterTag
             'per_page' => $request['per_page'] ?? 10,
             'search' => $request['search'] ?? null,
             'slug' => $request['slug'] ?? null,
+            'order' => $request['order'] ?? 'desc',
+            'order_by' => $request['order_by'] ?? 'posts_count',
         ];
     }
 }
