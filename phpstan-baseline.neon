@@ -28,7 +28,7 @@ parameters:
 
         -
           identifier: generics.notGeneric
-          path: src/Supports/Queries/QueryPost.php
+          path: src/Supports/Queries/*.php
 
         -
           identifier: argument.type

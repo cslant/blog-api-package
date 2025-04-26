@@ -16,6 +16,8 @@ class FilterTag
             'per_page' => $request['per_page'] ?? 10,
             'search' => $request['search'] ?? null,
             'slug' => $request['slug'] ?? null,
+            'order' => $request['order'] ?? 'desc',
+            'order_by' => $request['order_by'] ?? 'posts_count',
         ];
     }
 }
