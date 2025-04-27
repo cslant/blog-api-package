@@ -200,7 +200,7 @@ class CategoryController extends Action
     public function getFilters(
         Request $request
     ): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse {
-        $filters = FilterCategory::setFilters($request->input());
+        $filters = FilterCategory::setFilters((array) $request->input());
         $data = $this->categoryService->getCustomFilters($filters);
 
         return $this
