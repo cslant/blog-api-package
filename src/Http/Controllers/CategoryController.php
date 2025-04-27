@@ -3,11 +3,11 @@
 namespace CSlant\Blog\Api\Http\Controllers;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use Botble\Blog\Supports\FilterCategory;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Category\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
 use CSlant\Blog\Api\Services\CategoryService;
+use CSlant\Blog\Api\Supports\Filters\FilterCategory;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Category;
