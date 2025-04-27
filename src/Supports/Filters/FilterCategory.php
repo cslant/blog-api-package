@@ -5,7 +5,7 @@ namespace CSlant\Blog\Api\Supports\Filters;
 class FilterCategory
 {
     /**
-     * @param  array<string, mixed>  $request
+     * @param  array<string|mixed, mixed>  $request
      *
      * @return array<string, mixed>
      */
