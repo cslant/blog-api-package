@@ -28,13 +28,13 @@ class PostService
 
         $query = QueryPost::setBaseCustomFilterQuery($query, $filters);
 
-        $data = $query
+        $query = $query
             ->wherePublished()
             ->orderBy(
                 Arr::get($filters, 'order_by', 'updated_at'),
                 Arr::get($filters, 'order', 'desc')
             );
 
-        return $data->paginate((int) $filters['per_page']);
+        return $query->paginate((int) $filters['per_page']);
     }
 }

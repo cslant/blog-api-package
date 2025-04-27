@@ -29,7 +29,7 @@ class QueryTag
     }
 
     /**
-     * @param  BaseQueryBuilder|Builder  $model
+     * @param  BaseQueryBuilder|Builder<Model>  $model
      * @param  null|string  $keyword
      *
      * @return BaseQueryBuilder|Builder<Model>
