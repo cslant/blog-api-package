@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Actions\MetaBox;
 
 use CSlant\Blog\Api\Http\Requests\MetaBox\MetaBoxGetRequestModelRequest;
+use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxCustomResource;
 use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\MetaBox\MetaBoxModelResourceSchema;
 use CSlant\Blog\Api\Services\MetaBoxService;
@@ -128,9 +129,9 @@ class MetaBoxGetByRequestModelAction extends Action
     ]
     public function __invoke(MetaBoxGetRequestModelRequest $request): JsonResponse|BaseHttpResponse|JsonResource|RedirectResponse
     {
-        $model = $request->validated('model');
-        $slug = $request->validated('slug');
-        $lang = $request->validated('lang', AppConstant::DEFAULT_LOCALE);
+        $model = (string) $request->validated('model');
+        $slug = (string) $request->validated('slug');
+        $lang = (string) $request->validated('lang', AppConstant::DEFAULT_LOCALE);
 
         $slugModel = $this->slugService->getSlugModel($slug, $model);
 
@@ -156,7 +157,7 @@ class MetaBoxGetByRequestModelAction extends Action
 
         return $this
             ->httpResponse()
-            ->setData(MetaBoxResource::make($metaBox))
+            ->setData(MetaBoxCustomResource::make($metaBox))
             ->setMessage(__('MetaBox retrieved successfully!'))
             ->toApiResponse();
     }
