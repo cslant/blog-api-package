@@ -15,9 +15,9 @@ use OpenApi\Attributes\Schema;
         new Property(property: "email", type: "string", format: "email", maxLength: 120, example: "member@cslant.com"),
         new Property(property: "phone", type: "string"),
         new Property(property: "avatar_url", type: "string", format: "uri", example: "https://example.com/avatars/user.jpg"),
-        new Property(property: "dob", type: "string", format: "date", example: "2000-09-05"),
+        new Property(property: "dob", type: "string", format: "date"),
         new Property(property: "gender", type: "string", enum: ["male", "female", "other"]),
-        new Property(property: "description", type: "string", example: "Software developer passionate about coding"),
+        new Property(property: "description", type: "string"),
     ],
     type: "object"
 )]
