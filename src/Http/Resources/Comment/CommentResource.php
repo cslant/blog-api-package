@@ -10,7 +10,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @mixin Comment
  */
-class ListCommentResource extends JsonResource
+class CommentResource extends JsonResource
 {
     /**
      * @param  Request  $request

@@ -13,7 +13,7 @@ class ListCommentResourceCollection extends ResourceCollection
      *
      * @var string
      */
-    public $collects = ListCommentResource::class;
+    public $collects = CommentResource::class;
 
     /**
      * Transform the resource collection into an array.
@@ -24,7 +24,7 @@ class ListCommentResourceCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        /** @var LengthAwarePaginator<int, ListCommentResource> $paginator */
+        /** @var LengthAwarePaginator<int, CommentResource> $paginator */
         $paginator = $this->resource;
 
         return [
