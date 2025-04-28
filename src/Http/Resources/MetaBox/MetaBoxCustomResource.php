@@ -26,10 +26,10 @@ class MetaBoxCustomResource extends JsonResource
         $reference = $this->reference;
 
         if (is_array($metaValueCustom)) {
-            $metaValueCustom['seo_title'] = $metaValueCustom['seo_title'] ?? substr($reference->name, 0, 65) ?? null;
+            $metaValueCustom['seo_title'] = $metaValueCustom['seo_title']
+                ?? (property_exists($reference, 'name') ? substr($reference->name, 0, 65) : null);
             $metaValueCustom['seo_description'] = $metaValueCustom['seo_description']
-                ?? substr($reference->description, 0, 300)
-                ?? null;
+                ?? (property_exists($reference, 'description') ? substr($reference->description, 0, 300) : null);
         }
 
         return [
