@@ -4,7 +4,6 @@ namespace CSlant\Blog\Api\Http\Actions\MetaBox;
 
 use CSlant\Blog\Api\Http\Requests\MetaBox\MetaBoxGetRequestModelRequest;
 use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxCustomResource;
-use CSlant\Blog\Api\Http\Resources\MetaBox\MetaBoxResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\MetaBox\MetaBoxModelResourceSchema;
 use CSlant\Blog\Api\Services\MetaBoxService;
 use CSlant\Blog\Api\Services\SlugService;
