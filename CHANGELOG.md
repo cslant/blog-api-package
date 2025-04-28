@@ -2,6 +2,23 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v2.0.1 - 2025-04-28
+
+### What's Changed
+
+* feat: add total like by @pxthinh in https://github.com/cslant/blog-api-package/pull/81
+* Feature/add form request and optimize by @pxthinh in https://github.com/cslant/blog-api-package/pull/78
+* Feature/show comments for post by @pxthinh in https://github.com/cslant/blog-api-package/pull/80
+* feat: add interacted by by @pxthinh in https://github.com/cslant/blog-api-package/pull/82
+* Feat/custom post filter with sorce by @tanhongit in https://github.com/cslant/blog-api-package/pull/83
+* Feat/custom filter list page with post score by @tanhongit in https://github.com/cslant/blog-api-package/pull/84
+* feat: add comment count for post custom filter by @pxthinh in https://github.com/cslant/blog-api-package/pull/85
+* feat: add comment count for detail post by @pxthinh in https://github.com/cslant/blog-api-package/pull/86
+* feat: add username for author resource by @pxthinh in https://github.com/cslant/blog-api-package/pull/87
+* feat: add query category for post core by @pxthinh in https://github.com/cslant/blog-api-package/pull/88
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v2.0.0...v2.0.1
+
 ## v2.0.0 - 2025-04-12
 
 ### What's Changed
