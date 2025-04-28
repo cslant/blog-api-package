@@ -33,10 +33,10 @@ class MetaBoxService
     public function getMetaBoxByModel(string $model, int $modelId, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
     {
         $modelMap = [
-            'post' => Post::class,
-            'page' => Page::class,
-            'category' => Category::class,
-            'tag' => Tag::class,
+            'post' => Post::getBaseModel(),
+            'page' => Page::getBaseModel(),
+            'category' => Category::getBaseModel(),
+            'tag' => Tag::getBaseModel(),
         ];
 
         $modelClass = $modelMap[$model] ?? null;
