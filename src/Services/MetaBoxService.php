@@ -27,52 +27,20 @@ class MetaBoxService
         /** @var class-string<Model> $modelClass */
         $model = $modelClass::query()->find($modelId);
 
-        if (!$model) {
-            return null;
-        }
-
-        return $this->getSEOMetaBoxByModel($model, $lang);
+        return $model ? $this->getSEOMetaBoxByModel($model, $lang) : null;
     }
 
-    public function getPostMetaBox(int $modelId, string $lang): ?Model
-    {
-        return $this->getModelMetaBox(Post::getBaseModel(), $modelId, $lang);
-    }
-
-    public function getPageMetaBox(int $modelId, string $lang): ?Model
-    {
-        return $this->getModelMetaBox(Page::getBaseModel(), $modelId, $lang);
-    }
-
-    public function getCategoryMetaBox(int $modelId, string $lang): ?Model
-    {
-        return $this->getModelMetaBox(Category::getBaseModel(), $modelId, $lang);
-    }
-
-    public function getTagMetaBox(int $modelId, string $lang): ?Model
-    {
-        return $this->getModelMetaBox(Tag::getBaseModel(), $modelId, $lang);
-    }
-
-    /**
-     * @param  string  $model
-     * @param  int  $modelId
-     * @param  string  $lang
-     *
-     * @return null|Model
-     */
     public function getMetaBoxByModel(string $model, int $modelId, string $lang = AppConstant::DEFAULT_LOCALE): ?Model
     {
-        if ($model === 'post') {
-            return $this->getPostMetaBox($modelId, $lang);
-        } elseif ($model === 'page') {
-            return $this->getPageMetaBox($modelId, $lang);
-        } elseif ($model === 'category') {
-            return $this->getCategoryMetaBox($modelId, $lang);
-        } elseif ($model === 'tag') {
-            return $this->getTagMetaBox($modelId, $lang);
-        } else {
-            return null;
-        }
+        $modelMap = [
+            'post' => Post::class,
+            'page' => Page::class,
+            'category' => Category::class,
+            'tag' => Tag::class,
+        ];
+
+        $modelClass = $modelMap[$model] ?? null;
+
+        return $modelClass ? $this->getModelMetaBox($modelClass, $modelId, $lang) : null;
     }
 }
