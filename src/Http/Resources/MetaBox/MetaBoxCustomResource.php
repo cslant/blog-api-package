@@ -20,7 +20,7 @@ class MetaBoxCustomResource extends JsonResource
     {
         /** @var MetaBox $this */
 
-        $metaValueCustom = count($this->meta_value) == 1
+        $metaValueCustom = is_array($this->meta_value) && count($this->meta_value) == 1
             ? $this->meta_value[0]
             : $this->meta_value;
         $reference = $this->reference;
