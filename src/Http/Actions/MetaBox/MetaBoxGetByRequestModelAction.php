@@ -12,7 +12,6 @@ use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\JsonContent;
