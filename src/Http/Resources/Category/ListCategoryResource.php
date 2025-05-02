@@ -3,6 +3,7 @@
 namespace CSlant\Blog\Api\Http\Resources\Category;
 
 use CSlant\Blog\Core\Facades\Base\BaseHelper;
+use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
@@ -32,6 +33,7 @@ class ListCategoryResource extends JsonResource
             'children' => CategoryResource::collection($this->children),
             'parent' => new CategoryResource($this->parent),
             'posts_count' => $this->posts_count,
+            'image' => $this->image ? RvMedia::url($this->image) : null,
         ];
     }
 }

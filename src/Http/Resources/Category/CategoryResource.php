@@ -2,6 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Resources\Category;
 
+use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Category;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class CategoryResource extends JsonResource
             // 'url' => $this->url,
             'icon' => $this->icon,
             'description' => $this->description,
+            'image' => $this->image ? RvMedia::url($this->image) : null,
         ];
     }
 }
