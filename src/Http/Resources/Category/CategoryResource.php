@@ -29,6 +29,7 @@ class CategoryResource extends JsonResource
             'icon' => $this->icon,
             'description' => $this->description,
             'image' => $this->image ? RvMedia::url($this->image) : null,
+            'color' => $this->color,
         ];
     }
 }

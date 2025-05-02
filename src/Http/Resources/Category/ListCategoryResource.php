@@ -34,6 +34,7 @@ class ListCategoryResource extends JsonResource
             'parent' => new CategoryResource($this->parent),
             'posts_count' => $this->posts_count,
             'image' => $this->image ? RvMedia::url($this->image) : null,
+            'color' => $this->color,
         ];
     }
 }
