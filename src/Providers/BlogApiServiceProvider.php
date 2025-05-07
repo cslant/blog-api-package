@@ -40,8 +40,38 @@ class BlogApiServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $configPath = __DIR__.'/../../config/blog-api.php';
-        $this->mergeConfigFrom($configPath, 'blog-api');
+        $this->registerConfigs();
+    }
+
+    /**
+     * Register configs.
+     *
+     * @return void
+     */
+    protected function registerConfigs(): void
+    {
+        $configDir = __DIR__.'/../../config';
+        $files = scandir($configDir);
+
+        if ($files === false) {
+            return;
+        }
+
+        foreach ($files as $file) {
+            if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                $configName = pathinfo($file, PATHINFO_FILENAME);
+                $configPath = $configDir.'/'.$file;
+
+                if (file_exists(config_path($configName.'.php'))) {
+                    config()->set($configName, array_merge(
+                        is_array(config($configName)) ? config($configName) : [],
+                        require $configPath
+                    ));
+                } else {
+                    $this->mergeConfigFrom($configPath, $configName);
+                }
+            }
+        }
     }
 
     /**
