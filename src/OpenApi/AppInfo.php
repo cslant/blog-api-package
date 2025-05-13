@@ -4,9 +4,9 @@ namespace CSlant\Blog\Api\OpenApi;
 
 /**
  * @OA\Info(
- *     description="L5_SWAGGER_INFO_DESCRIPTION",
+ *     description=L5_SWAGGER_INFO_DESCRIPTION,
  *     version="1.0.0",
- *     title="L5_SWAGGER_INFO_TITLE",
+ *     title=L5_SWAGGER_INFO_TITLE,
  *     termsOfService="https://swagger.io/terms/",
  *     @OA\Contact(
  *         email="contact@cslant.com",
