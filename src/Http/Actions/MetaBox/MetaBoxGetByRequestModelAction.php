@@ -47,12 +47,12 @@ class MetaBoxGetByRequestModelAction extends Action
         Get(
             path: "/meta-boxes",
             operationId: "metaBoxGetByRequestModel",
-            description: "Get the meta data by slug and model.
+            description: "Get the meta data by query parameters.
             
-    This API will get the meta SEO data by slug and model.
+    This API will get the meta SEO data by query parameters.
     The model can be one of the following: post, page, category, tag, etc.
             ",
-            summary: "Get meta data by slug and model",
+            summary: "Get meta data by query parameters",
             tags: ["MetaBox"],
             parameters: [
                 new Parameter(
