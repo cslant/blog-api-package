@@ -3,13 +3,13 @@
 namespace CSlant\Blog\Api\Http\Controllers;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
-use Botble\Blog\Repositories\Interfaces\PostInterface;
 use CSlant\Blog\Api\Enums\StatusEnum;
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\Post\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
+use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Supports\Base\FilterPost;
@@ -38,13 +38,8 @@ use OpenApi\Attributes\Schema;
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostController
+class PostController extends BasePostController
 {
-    public function __construct(protected PostInterface $postRepository)
-    {
-        //
-    }
-
     /**
      * @group Blog API
      *
