@@ -32,7 +32,7 @@ class MetaBoxCustomResource extends JsonResource
             $metaValueCustom['seo_description'] = $metaValueCustom['seo_description']
                 ?? (property_exists($reference, 'description') ? substr($reference->description, 0, 300) : null);
             $metaValueCustom['seo_image'] = isset($metaValueCustom['seo_image']) && !empty($metaValueCustom['seo_image'])
-                ? ( RvMedia::getImageUrl($metaValueCustom['seo_image'], '', false, RvMedia::getDefaultImage()) ?? '') : null;
+                ? (RvMedia::getImageUrl($metaValueCustom['seo_image'], '', false, RvMedia::getDefaultImage()) ?? '') : null;
         }
 
         return [
