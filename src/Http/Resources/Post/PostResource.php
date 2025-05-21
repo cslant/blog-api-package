@@ -29,10 +29,7 @@ class PostResource extends JsonResource
             ->orderBy((string) $request->get('order_by', 'created_at'), (string) $request->get('order', 'DESC'))
             ->paginate($request->integer('per_page', 10));
 
-        $userId = 0;
-        if (Auth::user()) {
-            $userId = Auth::user()->id;
-        }
+        $userId = Auth::user() ? Auth::user()->id : 0;
 
         return [
             'id' => $this->id,

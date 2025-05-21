@@ -6,6 +6,7 @@ use CSlant\Blog\Api\Http\Resources\Author\AuthorResource;
 use CSlant\Blog\Core\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * @mixin Comment
@@ -19,6 +20,8 @@ class CommentResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $userId = Auth::user() ? Auth::user()->id : 0;
+
         /** @var Comment $this */
         return [
             'id' => $this->id,
@@ -26,6 +29,8 @@ class CommentResource extends JsonResource
             'content' => $this->content,
             'status' => $this->status,
             'author' => AuthorResource::make($this->author),
+            'likes_count' => $this->likesCountDigital(),
+            'is_liked' => $this->isLikedBy($userId),
         ];
     }
 }

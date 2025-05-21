@@ -24,10 +24,7 @@ class ListPostResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $userId = 0;
-        if (Auth::user()) {
-            $userId = Auth::user()->id;
-        }
+        $userId = Auth::user() ? Auth::user()->id : 0;
 
         /** @var Post $this */
         return [
