@@ -29,6 +29,7 @@ class CommentResource extends JsonResource
             'content' => $this->content,
             'status' => $this->status,
             'author' => AuthorResource::make($this->author),
+            'replies' => CommentResource::collection($this->replies),
             'likes_count' => $this->likesCountDigital(),
             'is_liked' => $this->isLikedBy($userId),
         ];
