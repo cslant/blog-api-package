@@ -140,6 +140,7 @@ class CorsMiddleware
     private function getCustomDomainPattern(): string
     {
         $customDomain = env('CORS_CUSTOM_DOMAIN_PATTERN');
+
         return $customDomain ?: '/^$/'; // Empty pattern if not set
     }
 
