@@ -42,7 +42,7 @@ class CorsMiddleware
      */
     private function getAllowedOrigin(Request $request): string
     {
-        $origin = $request->headers->get('Origin');
+        $origin = $request->headers->get('Origin') ?? '*';
 
         // Get environment-specific configurations
         $allowedOrigins = $this->getAllowedOrigins();
