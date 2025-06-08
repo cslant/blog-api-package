@@ -76,10 +76,10 @@ class CorsMiddleware
     {
         $baseOrigins = [
             // Environment-specific URLs from .env
-            env('BLOG_FE_URL'),
-            env('BLOG_ADMIN_URL'),
-            env('BLOG_API_URL'),
-            env('APP_URL'),
+            config('blog-core.fe_url'),
+            config('blog-core.admin_url'),
+            config('blog-core.api_url'),
+            config('app.url'),
 
             // Development origins
             'http://localhost',
@@ -139,7 +139,7 @@ class CorsMiddleware
      */
     private function getCustomDomainPattern(): string
     {
-        $customDomain = env('CORS_CUSTOM_DOMAIN_PATTERN');
+        $customDomain = config('blog-api.cors_custom_domain_pattern');
         return $customDomain ?: '/^$/'; // Empty pattern if not set
     }
 
