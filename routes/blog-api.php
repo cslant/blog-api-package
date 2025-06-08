@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 $routePrefix = config('blog-api.defaults.route_prefix');
 
-Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(function () {
+Route::prefix($routePrefix)->name("$routePrefix.")->middleware(\CSlant\Blog\Api\Http\Middlewares\SimpleCorsMiddleware::class)->group(function () {
     Route::get('/', fn () => response()->json(['message' => 'Welcome to CSlant Blog API']));
 
     Route::get('search', [PostController::class, 'getSearch']);
