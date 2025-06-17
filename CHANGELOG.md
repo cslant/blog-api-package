@@ -2,6 +2,18 @@
 
 Here is the complete list of changes for each Blog API package release.
 
+## v2.0.2 - 2025-06-17
+
+### What's Changed
+
+* #89 feat: create class model schema to reuseable for api docs in blog… by @francis-duong-0509 in https://github.com/cslant/blog-api-package/pull/90
+* build(deps): bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/cslant/blog-api-package/pull/93
+* Feature/add seo image for meta box by @pxthinh in https://github.com/cslant/blog-api-package/pull/95
+* feat: api reply comment by @pxthinh in https://github.com/cslant/blog-api-package/pull/97
+* build(deps): bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot in https://github.com/cslant/blog-api-package/pull/98
+
+**Full Changelog**: https://github.com/cslant/blog-api-package/compare/v2.0.1...v2.0.2
+
 ## v2.0.1 - 2025-04-28
 
 ### What's Changed
