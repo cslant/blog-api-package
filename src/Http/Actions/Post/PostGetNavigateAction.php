@@ -9,8 +9,8 @@ use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
 use OpenApi\Attributes\Parameter;
 use OpenApi\Attributes\Response;
@@ -95,6 +95,6 @@ This API will return both previous and next posts for navigation purposes.
      */
     protected function httpResponse(): BaseHttpResponse
     {
-        return new BaseHttpResponse();
+        return new BaseHttpResponse;
     }
 }
