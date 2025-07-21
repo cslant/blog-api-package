@@ -1,0 +1,16 @@
+stages:
+  - build
+
+variables:
+  GIT_STRATEGY: none
+
+build:
+  stage: build
+  tags:
+    - csl-176
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - cd $BLOG_RUNNER_PATH
+    - ./runner.sh sync api_package
+    - ./runner.sh build_admin install
