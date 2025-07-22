@@ -4,6 +4,7 @@ use CSlant\Blog\Api\Http\Actions\Author\AuthorGetListAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetCustomFiltersAction;
 use CSlant\Blog\Api\Http\Actions\Author\AuthorGetProfileAction;
 use CSlant\Blog\Api\Http\Actions\Post\PostGetViewCountAction;
+use CSlant\Blog\Api\Http\Actions\Post\PostGetNavigateAction;
 use CSlant\Blog\Api\Http\Actions\Tag\TagGetFiltersAction;
 use CSlant\Blog\Api\Http\Controllers\CategoryController;
 use CSlant\Blog\Api\Http\Controllers\MetaBoxController;
@@ -41,6 +42,7 @@ Route::prefix($routePrefix)->name("$routePrefix.")->middleware('api')->group(fun
         Route::get('custom-filters', PostGetCustomFiltersAction::class);
         Route::get('{slug}', [PostController::class, 'findBySlug']);
         Route::get('{slug}/view-count', PostGetViewCountAction::class);
+        Route::get('{slug}/navigate', PostGetNavigateAction::class);
         Route::post('{id}/increment-views', PostStoreViewCountAction::class)
             ->middleware('api-action-rate-limiter:post-views');
     });
