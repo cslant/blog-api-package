@@ -45,7 +45,7 @@ class PostNavigationService
      * Get both previous and next posts
      *
      * @param int|string $postId
-     * @return array
+     * @return array{previous: object|null, next: object|null}
      */
     public function getNavigatePosts(int|string $postId): array
     {
