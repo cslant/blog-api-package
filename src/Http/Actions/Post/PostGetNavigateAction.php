@@ -2,8 +2,8 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
-use Botble\Blog\Repositories\Interfaces\PostInterface;
 use CSlant\Blog\Api\Http\Resources\Post\PostNavigateResource;
+use CSlant\Blog\Api\Services\PostNavigationService;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
@@ -28,7 +28,7 @@ use OpenApi\Attributes\Schema;
 class PostGetNavigateAction
 {
     public function __construct(
-        protected PostInterface $postRepository
+        protected PostNavigationService $postNavigationService
     ) {
     }
 
@@ -82,7 +82,7 @@ This API will return both previous and next posts for navigation purposes.
                 ->setMessage('Post not found');
         }
 
-        $navigationPosts = $this->postRepository->getNavigatePosts($slug->reference_id);
+        $navigationPosts = $this->postNavigationService->getNavigatePosts($slug->reference_id);
 
         return $this
             ->httpResponse()
