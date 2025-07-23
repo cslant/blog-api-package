@@ -23,7 +23,7 @@ class PostNavigationService
      * Get previous post based on content relevance
      *
      * @param int|string $postId
-     * @return object|null
+     * @return null|object
      */
     public function getPreviousPost(int|string $postId): ?object
     {
@@ -34,7 +34,7 @@ class PostNavigationService
      * Get next post based on content relevance
      *
      * @param int|string $postId
-     * @return object|null
+     * @return null|object
      */
     public function getNextPost(int|string $postId): ?object
     {
@@ -45,7 +45,7 @@ class PostNavigationService
      * Get both previous and next posts
      *
      * @param int|string $postId
-     * @return array{previous: object|null, next: object|null}
+     * @return array{previous: null|object, next: null|object}
      */
     public function getNavigatePosts(int|string $postId): array
     {
@@ -61,12 +61,12 @@ class PostNavigationService
      *
      * @param int|string $postId
      * @param string $direction 'previous' or 'next'
-     * @return object|null
+     * @return null|object
      */
     protected function getRelatedPostByRelevance(int|string $postId, string $direction = 'previous'): ?object
     {
         $currentPost = $this->postRepository->findById($postId);
-        
+
         if (!$currentPost) {
             return null;
         }
@@ -95,19 +95,19 @@ class PostNavigationService
         // Calculate relevance score for each post
         $scoredPosts = $posts->map(function ($post) use ($categoryIds, $tagIds) {
             $post->load(['categories', 'tags']);
-            
+
             $postCategoryIds = $post->categories->pluck('id')->toArray();
             $postTagIds = $post->tags->pluck('id')->toArray();
-            
+
             // Calculate shared categories and tags
             $sharedCategories = count(array_intersect($categoryIds, $postCategoryIds));
             $sharedTags = count(array_intersect($tagIds, $postTagIds));
-            
+
             // Weight categories higher than tags
             $relevanceScore = ($sharedCategories * 3) + ($sharedTags * 1);
-            
+
             $post->relevance_score = $relevanceScore;
-            
+
             return $post;
         });
 
@@ -126,20 +126,23 @@ class PostNavigationService
         // Group posts by relevance score
         $groupedByScore = $relevantPosts->groupBy('relevance_score');
         $scores = $groupedByScore->keys()->sortDesc();
-        
+
         if ($direction === 'previous') {
             // Get highest scoring post(s), pick first one
             $highestScorePosts = $groupedByScore->get($scores->first());
+
             return $highestScorePosts->first();
         } else {
             // For 'next', try to get a different post
             if ($scores->count() > 1) {
                 // If we have multiple score levels, get from second highest
                 $secondHighestPosts = $groupedByScore->get($scores->get(1));
+
                 return $secondHighestPosts->first();
             } else {
                 // If all posts have same score, get second post if available
                 $highestScorePosts = $groupedByScore->get($scores->first());
+
                 return $highestScorePosts->count() > 1 ? $highestScorePosts->get(1) : $highestScorePosts->first();
             }
         }

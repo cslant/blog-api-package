@@ -17,7 +17,7 @@ class PostNavigateResource extends JsonResource
      */
     public function toArray($request): array
     {
-        /** @var array{previous: object|null, next: object|null} $resource */
+        /** @var array{previous: null|object, next: null|object} $resource */
         $resource = $this->resource;
 
         return [
