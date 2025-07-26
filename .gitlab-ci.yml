@@ -1,5 +1,6 @@
 stages:
   - build
+  - test
 
 variables:
   GIT_STRATEGY: none
@@ -14,3 +15,15 @@ build:
     - cd $BLOG_RUNNER_PATH
     - ./runner.sh sync api_package
     - ./runner.sh build_admin install
+
+analyse:
+  stage: test
+  tags:
+    - csl-176
+  script:
+    - cd $HOME_PATH
+    - composer install --prefer-dist --no-progress --no-suggest
+    # - find . -type f -name '*.php' -not -path './vendor/*' -not -path './storage/*' -exec php -l {} \;
+    - composer a
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push' || $CI_PIPELINE_SOURCE == 'merge_request_event'
