@@ -2,9 +2,6 @@ stages:
   - build
   - test
 
-variables:
-  GIT_STRATEGY: none
-
 build:
   stage: build
   tags:
@@ -18,12 +15,15 @@ build:
 
 analyse:
   stage: test
+  image: composer
   tags:
-    - csl-176
+    - csl-88176
+  before_script:
+    - php -v
+    - composer --version
+    - cd $CI_PROJECT_DIR
   script:
-    - cd $HOME_PATH
     - composer install --prefer-dist --no-progress
-    # - find . -type f -name '*.php' -not -path './vendor/*' -not -path './storage/*' -exec php -l {} \;
     - composer a
   rules:
     - if: $CI_PIPELINE_SOURCE == 'push' || $CI_PIPELINE_SOURCE == 'merge_request_event'
