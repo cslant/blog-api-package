@@ -21,7 +21,10 @@ analyse:
   before_script:
     - php -v
     - composer --version
-    - cd $CI_PROJECT_DIR
+    - if [ ! -d "$CI_PROJECT_DIR/.git" ]; then
+        git clone "$CI_REPOSITORY_URL" "$CI_PROJECT_DIR";
+      fi
+    - cd "$CI_PROJECT_DIR"
   script:
     - composer install --prefer-dist --no-progress
     - composer a
