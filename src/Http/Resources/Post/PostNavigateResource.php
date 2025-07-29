@@ -17,12 +17,20 @@ class PostNavigateResource extends JsonResource
      */
     public function toArray($request): array
     {
-        /** @var array{previous: null|object, next: null|object} $resource */
+        // Ensure the resource is an array with the expected structure
+        if (!is_array($this->resource)) {
+            return [
+                'previous' => null,
+                'next' => null,
+            ];
+        }
+
+        /** @var array{previous?: mixed, next?: mixed} $resource */
         $resource = $this->resource;
 
         return [
-            'previous' => $resource['previous'] ? new PostNavigationResource($resource['previous']) : null,
-            'next' => $resource['next'] ? new PostNavigationResource($resource['next']) : null,
+            'previous' => isset($resource['previous']) && $resource['previous'] ? new PostNavigationResource($resource['previous']) : null,
+            'next' => isset($resource['next']) && $resource['next'] ? new PostNavigationResource($resource['next']) : null,
         ];
     }
 }
