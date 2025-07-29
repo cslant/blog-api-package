@@ -42,108 +42,96 @@ class PostService
     }
 
     /**
-     * Find post by slug
-     *
-     * @param string $slug
-     * @return null|Post
-     */
-    public function findBySlug(string $slug): ?Post
-    {
-        /** @var Slug $slugModel */
-        $slugModel = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
-
-        if (!$slugModel) {
-            return null;
-        }
-
-        return Post::query()
-            ->where('id', $slugModel->reference_id)
-            ->where('status', StatusEnum::PUBLISHED)
-            ->with(['categories', 'tags'])
-            ->first();
-    }
-
-    /**
      * Get navigation posts based on content relevance
+     * Optimized to get individual posts without fetching collections
      *
      * @param Post $currentPost
      * @return array{previous: null|Post, next: null|Post}
      */
     public function getNavigationPosts(Post $currentPost): array
     {
-        $categoryIds = $currentPost->categories->pluck('id')->toArray();
-        $tagIds = $currentPost->tags->pluck('id')->toArray();
-
-        if (empty($categoryIds) && empty($tagIds)) {
-            return ['previous' => null, 'next' => null];
+        // Load relationships if not already loaded
+        if (!$currentPost->relationLoaded('categories')) {
+            $currentPost->load('categories');
+        }
+        if (!$currentPost->relationLoaded('tags')) {
+            $currentPost->load('tags');
         }
 
-        // Get all published posts except current one
-        $posts = Post::query()
-            ->wherePublished()
-            ->where('id', '!=', $currentPost->id)
-            ->with(['slugable', 'categories', 'tags', 'author'])
-            ->get();
+        $categoryIds = collect($currentPost->categories)->pluck('id');
+        $tagIds = collect($currentPost->tags)->pluck('id');
 
-        if ($posts->isEmpty()) {
-            return ['previous' => null, 'next' => null];
+        // Get previous post
+        $previous = $this->getSingleNavigationPost($currentPost->id, $categoryIds, $tagIds);
+        
+        // Get next post (exclude the previous post if found)
+        $excludeIds = [$currentPost->id];
+        if ($previous) {
+            $excludeIds[] = $previous->id;
         }
-
-        // Calculate relevance score for each post
-        $scoredPosts = $posts->map(function ($post) use ($categoryIds, $tagIds) {
-            $post->load(['categories', 'tags']);
-
-            $postCategoryIds = $post->categories->pluck('id')->toArray();
-            $postTagIds = $post->tags->pluck('id')->toArray();
-
-            // Calculate shared categories and tags
-            $sharedCategories = count(array_intersect($categoryIds, $postCategoryIds));
-            $sharedTags = count(array_intersect($tagIds, $postTagIds));
-
-            // Weight categories higher than tags
-            $relevanceScore = ($sharedCategories * 3) + ($sharedTags * 1);
-
-            $post->relevance_score = $relevanceScore;
-
-            return $post;
-        });
-
-        // Filter posts with relevance score > 0
-        $relevantPosts = $scoredPosts
-            ->filter(function ($post) {
-                return $post->relevance_score > 0;
-            })
-            ->sortByDesc('relevance_score')
-            ->values();
-
-        if ($relevantPosts->isEmpty()) {
-            return ['previous' => null, 'next' => null];
-        }
-
-        // Group posts by relevance score
-        $groupedByScore = $relevantPosts->groupBy('relevance_score');
-        $scores = $groupedByScore->keys()->sortDesc();
-
-        $previous = null;
-        $next = null;
-
-        // Get highest scoring post as previous
-        $highestScorePosts = $groupedByScore->get($scores->first());
-        $previous = $highestScorePosts->first();
-
-        // For next, try to get a different post
-        if ($scores->count() > 1) {
-            // If we have multiple score levels, get from second highest
-            $secondHighestPosts = $groupedByScore->get($scores->get(1));
-            $next = $secondHighestPosts->first();
-        } else {
-            // If all posts have same score, get second post if available
-            $next = $highestScorePosts->count() > 1 ? $highestScorePosts->get(1) : null;
-        }
+        $next = $this->getSingleNavigationPost($currentPost->id, $categoryIds, $tagIds, $excludeIds);
 
         return [
             'previous' => $previous,
             'next' => $next,
         ];
+    }
+
+    /**
+     * Get a single navigation post
+     *
+     * @param int $currentPostId
+     * @param \Illuminate\Support\Collection $categoryIds
+     * @param \Illuminate\Support\Collection $tagIds
+     * @param array $excludeIds
+     * @return Post|null
+     */
+    private function getSingleNavigationPost(int $currentPostId, $categoryIds, $tagIds, array $excludeIds = []): ?Post
+    {
+        if (empty($excludeIds)) {
+            $excludeIds = [$currentPostId];
+        }
+
+        // Try category match first
+        if ($categoryIds->isNotEmpty()) {
+            $post = Post::query()
+                ->wherePublished()
+                ->whereNotIn('id', $excludeIds)
+                ->whereHas('categories', function ($query) use ($categoryIds) {
+                    $query->whereIn('categories.id', $categoryIds);
+                })
+                ->with(['slugable', 'categories', 'tags', 'author'])
+                ->inRandomOrder()
+                ->first();
+                
+            if ($post) {
+                return $post;
+            }
+        }
+
+        // Try tag match if no category match
+        if ($tagIds->isNotEmpty()) {
+            $post = Post::query()
+                ->wherePublished()
+                ->whereNotIn('id', $excludeIds)
+                ->whereHas('tags', function ($query) use ($tagIds) {
+                    $query->whereIn('tags.id', $tagIds);
+                })
+                ->with(['slugable', 'categories', 'tags', 'author'])
+                ->inRandomOrder()
+                ->first();
+                
+            if ($post) {
+                return $post;
+            }
+        }
+
+        // Fallback to any random post
+        return Post::query()
+            ->wherePublished()
+            ->whereNotIn('id', $excludeIds)
+            ->with(['slugable', 'categories', 'tags', 'author'])
+            ->inRandomOrder()
+            ->first();
     }
 }
