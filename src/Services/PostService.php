@@ -45,7 +45,7 @@ class PostService
      * Find post by slug
      *
      * @param string $slug
-     * @return Post|null
+     * @return null|Post
      */
     public function findBySlug(string $slug): ?Post
     {

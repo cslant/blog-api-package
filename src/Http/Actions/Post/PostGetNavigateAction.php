@@ -37,6 +37,7 @@ class PostGetNavigateAction extends Action
     {
         $this->postService = $postService;
     }
+
     /**
      * @param  string  $slug
      *
@@ -110,8 +111,6 @@ This API will return both previous and next posts for navigation purposes.
             ->setData(new PostNavigateResource($navigationPosts))
             ->toApiResponse();
     }
-
-
 
     /**
      * @return BaseHttpResponse
