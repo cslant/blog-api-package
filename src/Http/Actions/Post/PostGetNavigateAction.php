@@ -49,9 +49,7 @@ class PostGetNavigateAction extends Action
         Get(
             path: "/posts/{slug}/navigate",
             operationId: "postGetNavigate",
-            description: "Get the previous and next posts by slug
-This API will return both previous and next posts for navigation purposes.
-            ",
+            description: "Get the previous and next posts by slug. This API will return both previous and next posts for navigation purposes.",
             summary: "Get previous and next posts for navigation",
             tags: ["Post"],
             parameters: [
@@ -60,17 +58,41 @@ This API will return both previous and next posts for navigation purposes.
                     description: 'Post slug',
                     in: 'path',
                     required: true,
-                    schema: new Schema(type: 'string')
+                    schema: new Schema(type: 'string', example: 'php')
                 ),
             ],
             responses: [
                 new Response(
                     response: 200,
-                    description: 'Navigation posts retrieved successfully',
+                    description: "Get previous and next posts by slug successfully",
+                    content: new JsonContent(
+                        properties: [
+                            new Property(
+                                property: 'error',
+                                description: 'Error status',
+                                type: 'boolean',
+                                default: false
+                            ),
+                            new Property(
+                                property: "data",
+                                ref: PostNavigateResourceSchema::class,
+                                description: "Data of model",
+                                type: "object",
+                            ),
+                        ]
+                    )
                 ),
                 new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    response: 400,
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
                     response: 404,
-                    description: 'Post not found',
+                ),
+                new Response(
+                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    response: 500,
                 ),
             ]
         )
