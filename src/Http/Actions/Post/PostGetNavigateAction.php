@@ -2,10 +2,12 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
+use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\PostNavigateResource;
-use CSlant\Blog\Api\Services\PostNavigationService;
+use CSlant\Blog\Api\Services\PostService;
+use CSlant\Blog\Core\Enums\StatusEnum;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Actions\Action;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Http\JsonResponse;
@@ -19,24 +21,27 @@ use OpenApi\Attributes\Schema;
 /**
  * Class PostGetNavigateAction
  *
- * @package CSlant\Blog\Api\Http\Actions\Post
+ * @group Blog API
+ *
+ * @authenticated
  *
  * @method BaseHttpResponse httpResponse()
  * @method BaseHttpResponse setData(mixed $data)
  * @method BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse toApiResponse()
  */
-class PostGetNavigateAction
+class PostGetNavigateAction extends Action
 {
-    public function __construct(
-        protected PostNavigationService $postNavigationService
-    ) {
-    }
+    protected PostService $postService;
 
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
+    }
     /**
-     * @group Blog API
-     *
      * @param  string  $slug
      *
+     * @group Blog
+     * @queryParam Find by slug of post.
      * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
@@ -71,24 +76,42 @@ This API will return both previous and next posts for navigation purposes.
     ]
     public function __invoke(string $slug): BaseHttpResponse|JsonResponse|JsonResource|RedirectResponse
     {
-        /** @var Slug $slug */
-        $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
+        /** @var Slug $slugModel */
+        $slugModel = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (!$slug) {
+        if (!$slugModel) {
             return $this
                 ->httpResponse()
                 ->setError()
                 ->setCode(404)
-                ->setMessage('Post not found');
+                ->setMessage('Not found');
         }
 
-        $navigationPosts = $this->postNavigationService->getNavigatePosts($slug->reference_id);
+        $currentPost = Post::query()
+            ->where('id', $slugModel->reference_id)
+            ->where('status', StatusEnum::PUBLISHED)
+            ->with(['categories', 'tags'])
+            ->first();
+
+        if (!$currentPost) {
+            return $this
+                ->httpResponse()
+                ->setError()
+                ->setCode(404)
+                ->setMessage('Not found');
+        }
+
+        // Get navigation posts based on content relevance
+        // Using service method for complex business logic
+        $navigationPosts = $this->postService->getNavigationPosts($currentPost);
 
         return $this
             ->httpResponse()
             ->setData(new PostNavigateResource($navigationPosts))
             ->toApiResponse();
     }
+
+
 
     /**
      * @return BaseHttpResponse
