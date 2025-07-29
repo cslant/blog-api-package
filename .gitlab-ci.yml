@@ -1,8 +1,6 @@
 stages:
   - build
-
-variables:
-  GIT_STRATEGY: none
+  - test
 
 build:
   stage: build
@@ -14,3 +12,18 @@ build:
     - cd $BLOG_RUNNER_PATH
     - ./runner.sh sync api_package
     - ./runner.sh build_admin install
+
+analyse:
+  stage: test
+  image: composer
+  tags:
+    - csl-88176
+  before_script:
+    - php -v
+    - composer --version
+    - cd $CI_PROJECT_DIR
+  script:
+    - composer install --prefer-dist --no-progress
+    - composer a
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push' || $CI_PIPELINE_SOURCE == 'merge_request_event'
