@@ -102,7 +102,6 @@ This API will return both previous and next posts for navigation purposes.
                 ->setMessage('Not found');
         }
 
-        // Get navigation posts based on content relevance
         // Using service method for complex business logic
         $navigationPosts = $this->postService->getNavigationPosts($currentPost);
 
@@ -110,13 +109,5 @@ This API will return both previous and next posts for navigation purposes.
             ->httpResponse()
             ->setData(new PostNavigateResource($navigationPosts))
             ->toApiResponse();
-    }
-
-    /**
-     * @return BaseHttpResponse
-     */
-    protected function httpResponse(): BaseHttpResponse
-    {
-        return new BaseHttpResponse;
     }
 }
