@@ -39,96 +39,35 @@ class PostService
     }
 
     /**
-     * Get navigation posts based on content relevance
-     * Optimized to get individual posts without fetching collections
+     * Get navigation posts based on ID sequence
+     * Previous = ID smaller than current, Next = ID larger than current
      *
      * @param Post $currentPost
      * @return array{previous: null|Post, next: null|Post}
      */
     public function getNavigationPosts(Post $currentPost): array
     {
-        // Load relationships if not already loaded
-        if (!$currentPost->relationLoaded('categories')) {
-            $currentPost->load('categories');
-        }
-        if (!$currentPost->relationLoaded('tags')) {
-            $currentPost->load('tags');
-        }
+        $currentId = $currentPost->id;
 
-        $categoryIds = collect($currentPost->categories)->pluck('id');
-        $tagIds = collect($currentPost->tags)->pluck('id');
+        // Get previous post (ID smaller than current, order by ID desc to get the closest one)
+        $previous = Post::query()
+            ->wherePublished()
+            ->where('id', '<', $currentId)
+            ->with(['slugable', 'author'])
+            ->orderBy('id', 'desc')
+            ->first();
 
-        // Get previous post
-        $previous = $this->getSingleNavigationPost($currentPost->id, $categoryIds, $tagIds);
-
-        // Get next post (exclude the previous post if found)
-        $excludeIds = [$currentPost->id];
-        if ($previous) {
-            $excludeIds[] = $previous->id;
-        }
-        $next = $this->getSingleNavigationPost($currentPost->id, $categoryIds, $tagIds, $excludeIds);
+        // Get next post (ID larger than current, order by ID asc to get the closest one)
+        $next = Post::query()
+            ->wherePublished()
+            ->where('id', '>', $currentId)
+            ->with(['slugable', 'author'])
+            ->orderBy('id', 'asc')
+            ->first();
 
         return [
             'previous' => $previous,
             'next' => $next,
         ];
-    }
-
-    /**
-     * Get a single navigation post
-     *
-     * @param int $currentPostId
-     * @param \Illuminate\Support\Collection $categoryIds
-     * @param \Illuminate\Support\Collection $tagIds
-     * @param array $excludeIds
-     * @return null|Post
-     */
-    private function getSingleNavigationPost(int $currentPostId, $categoryIds, $tagIds, array $excludeIds = []): ?Post
-    {
-        if (empty($excludeIds)) {
-            $excludeIds = [$currentPostId];
-        }
-
-        // Try category match first
-        if ($categoryIds->isNotEmpty()) {
-            $post = Post::query()
-                ->wherePublished()
-                ->whereNotIn('id', $excludeIds)
-                ->whereHas('categories', function ($query) use ($categoryIds) {
-                    $query->whereIn('categories.id', $categoryIds);
-                })
-                ->with(['slugable', 'categories', 'tags', 'author'])
-                ->inRandomOrder()
-                ->first();
-
-            if ($post) {
-                return $post;
-            }
-        }
-
-        // Try tag match if no category match
-        if ($tagIds->isNotEmpty()) {
-            $post = Post::query()
-                ->wherePublished()
-                ->whereNotIn('id', $excludeIds)
-                ->whereHas('tags', function ($query) use ($tagIds) {
-                    $query->whereIn('tags.id', $tagIds);
-                })
-                ->with(['slugable', 'categories', 'tags', 'author'])
-                ->inRandomOrder()
-                ->first();
-
-            if ($post) {
-                return $post;
-            }
-        }
-
-        // Fallback to any random post
-        return Post::query()
-            ->wherePublished()
-            ->whereNotIn('id', $excludeIds)
-            ->with(['slugable', 'categories', 'tags', 'author'])
-            ->inRandomOrder()
-            ->first();
     }
 }
