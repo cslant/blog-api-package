@@ -26,7 +26,7 @@ class PostNavigateResource extends JsonResource
         }
 
         // Cast to proper array type for PHPStan
-        /** @var array<string, \CSlant\Blog\Core\Models\Post|null> $navigationData */
+        /** @var array<string, null|\CSlant\Blog\Core\Models\Post> $navigationData */
         $navigationData = $this->resource;
 
         $previous = array_key_exists('previous', $navigationData) ? $navigationData['previous'] : null;
