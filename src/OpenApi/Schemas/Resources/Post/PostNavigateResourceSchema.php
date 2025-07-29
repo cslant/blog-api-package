@@ -14,15 +14,15 @@ use OpenApi\Attributes\Schema;
             description: "Previous post for navigation",
             oneOf: [
                 new Schema(ref: PostNavigationResourceSchema::class),
-                new Schema(type: "null")
+                new Schema(type: "null"),
             ]
         ),
         new Property(
-            property: "next", 
+            property: "next",
             description: "Next post for navigation",
             oneOf: [
                 new Schema(ref: PostNavigationResourceSchema::class),
-                new Schema(type: "null")
+                new Schema(type: "null"),
             ]
         ),
     ],

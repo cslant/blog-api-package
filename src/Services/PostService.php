@@ -3,11 +3,8 @@
 namespace CSlant\Blog\Api\Services;
 
 use CSlant\Blog\Api\Supports\Queries\QueryPost;
-use CSlant\Blog\Core\Enums\StatusEnum;
-use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
-use CSlant\Blog\Core\Models\Slug;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 
@@ -63,7 +60,7 @@ class PostService
 
         // Get previous post
         $previous = $this->getSingleNavigationPost($currentPost->id, $categoryIds, $tagIds);
-        
+
         // Get next post (exclude the previous post if found)
         $excludeIds = [$currentPost->id];
         if ($previous) {
@@ -84,7 +81,7 @@ class PostService
      * @param \Illuminate\Support\Collection $categoryIds
      * @param \Illuminate\Support\Collection $tagIds
      * @param array $excludeIds
-     * @return Post|null
+     * @return null|Post
      */
     private function getSingleNavigationPost(int $currentPostId, $categoryIds, $tagIds, array $excludeIds = []): ?Post
     {
@@ -103,7 +100,7 @@ class PostService
                 ->with(['slugable', 'categories', 'tags', 'author'])
                 ->inRandomOrder()
                 ->first();
-                
+
             if ($post) {
                 return $post;
             }
@@ -120,7 +117,7 @@ class PostService
                 ->with(['slugable', 'categories', 'tags', 'author'])
                 ->inRandomOrder()
                 ->first();
-                
+
             if ($post) {
                 return $post;
             }
