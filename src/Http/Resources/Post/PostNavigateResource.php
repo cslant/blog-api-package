@@ -25,12 +25,16 @@ class PostNavigateResource extends JsonResource
             ];
         }
 
-        /** @var array{previous?: mixed, next?: mixed} $resource */
-        $resource = $this->resource;
+        // Cast to proper array type for PHPStan
+        /** @var array<string, \CSlant\Blog\Core\Models\Post|null> $navigationData */
+        $navigationData = $this->resource;
+
+        $previous = array_key_exists('previous', $navigationData) ? $navigationData['previous'] : null;
+        $next = array_key_exists('next', $navigationData) ? $navigationData['next'] : null;
 
         return [
-            'previous' => isset($resource['previous']) && $resource['previous'] ? new PostNavigationResource($resource['previous']) : null,
-            'next' => isset($resource['next']) && $resource['next'] ? new PostNavigationResource($resource['next']) : null,
+            'previous' => $previous ? new PostNavigationResource($previous) : null,
+            'next' => $next ? new PostNavigationResource($next) : null,
         ];
     }
 }
