@@ -4,6 +4,7 @@ namespace CSlant\Blog\Api\Http\Actions\Post;
 
 use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\PostNavigateResource;
+use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostNavigateResourceSchema;
 use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Enums\StatusEnum;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
@@ -14,7 +15,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use OpenApi\Attributes\Get;
+use OpenApi\Attributes\JsonContent;
 use OpenApi\Attributes\Parameter;
+use OpenApi\Attributes\Property;
 use OpenApi\Attributes\Response;
 use OpenApi\Attributes\Schema;
 
