@@ -2,15 +2,17 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\PostNavigateResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostNavigateResourceSchema;
 use CSlant\Blog\Api\Services\PostService;
 use CSlant\Blog\Core\Enums\StatusEnum;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Actions\Action;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -113,7 +115,7 @@ class PostGetNavigateAction extends Action
                 ->setMessage('Not found');
         }
 
-        /** @var null|Post $currentPost */
+        /** @var Post|Builder|Model $currentPost */
         $currentPost = Post::query()
             ->where('id', $slugModel->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
@@ -127,9 +129,6 @@ class PostGetNavigateAction extends Action
                 ->setCode(404)
                 ->setMessage('Not found');
         }
-
-        // At this point, $currentPost is guaranteed to be a Post instance
-        /** @var Post $currentPost */
 
         // Using service method for complex business logic
         $navigationPosts = $this->postService->getNavigationPosts($currentPost);
