@@ -2,13 +2,13 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Requests\Author\AuthorGetListRequest;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;
 use CSlant\Blog\Api\Services\AuthorService;
 use CSlant\Blog\Api\Supports\Filters\FilterAuthor;
 use CSlant\Blog\Core\Http\Actions\Action;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;

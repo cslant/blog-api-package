@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\Post\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
@@ -10,6 +9,7 @@ use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Enums\StatusEnum;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BasePostController;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Supports\Base\FilterPost;

@@ -2,7 +2,6 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema;
 use CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema;
@@ -11,6 +10,7 @@ use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;
 use CSlant\Blog\Core\Enums\StatusEnum;
 use CSlant\Blog\Core\Facades\Base\SlugHelper;
 use CSlant\Blog\Core\Http\Controllers\Base\BaseTagController;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Core\Models\Slug;
 use CSlant\Blog\Core\Models\Tag;
 use Illuminate\Http\JsonResponse;
