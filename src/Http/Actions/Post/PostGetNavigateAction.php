@@ -115,14 +115,13 @@ class PostGetNavigateAction extends Action
                 ->setMessage('Not found');
         }
 
-        /** @var Post|Builder|Model $currentPost */
         $currentPost = Post::query()
             ->where('id', $slugModel->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
             ->with(['categories', 'tags'])
             ->first();
 
-        if (!$currentPost) {
+        if (!$currentPost || !$currentPost instanceof Post) {
             return $this
                 ->httpResponse()
                 ->setError()
