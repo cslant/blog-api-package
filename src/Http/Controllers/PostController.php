@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\Post\PostResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;

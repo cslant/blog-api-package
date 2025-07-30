@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Category\ListCategoryResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Category\CategoryListResourceSchema;
 use CSlant\Blog\Api\Services\CategoryService;

@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Author;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Requests\Author\AuthorGetListRequest;
 use CSlant\Blog\Api\Http\Resources\Author\ListAuthorResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Author\ListAuthorResourceSchema;

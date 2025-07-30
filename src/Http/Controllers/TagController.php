@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Controllers;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema;
 use CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema;

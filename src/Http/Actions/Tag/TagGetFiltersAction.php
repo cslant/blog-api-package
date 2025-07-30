@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Tag;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Requests\Tag\TagGetFiltersRequest;
 use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Tag\TagModelResourceSchema;

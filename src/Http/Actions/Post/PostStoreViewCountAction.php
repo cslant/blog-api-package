@@ -2,7 +2,7 @@
 
 namespace CSlant\Blog\Api\Http\Actions\Post;
 
-use Botble\Base\Http\Responses\BaseHttpResponse;
+use CSlant\Blog\Core\Http\Responses\Base\BaseHttpResponse;
 use CSlant\Blog\Api\Http\Resources\Post\ViewCountResource;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\ViewCountResourceSchema;
 use CSlant\Blog\Api\Services\VisitorLogsService;
