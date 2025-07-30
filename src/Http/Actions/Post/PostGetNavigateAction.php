@@ -113,6 +113,7 @@ class PostGetNavigateAction extends Action
                 ->setMessage('Not found');
         }
 
+        /** @var Post|null $currentPost */
         $currentPost = Post::query()
             ->where('id', $slugModel->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
@@ -127,6 +128,7 @@ class PostGetNavigateAction extends Action
                 ->setMessage('Not found');
         }
 
+        // At this point, $currentPost is guaranteed to be a Post instance
         // Using service method for complex business logic
         $navigationPosts = $this->postService->getNavigationPosts($currentPost);
 
