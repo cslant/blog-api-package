@@ -25,6 +25,8 @@ analyse:
         git clone "$CI_REPOSITORY_URL" "$CI_PROJECT_DIR";
       fi
     - cd "$CI_PROJECT_DIR"
+    - composer clear-cache
+    - rm -rf build
   script:
     - composer install --prefer-dist --no-progress
     - composer a
