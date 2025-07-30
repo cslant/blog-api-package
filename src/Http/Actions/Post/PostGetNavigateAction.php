@@ -113,7 +113,7 @@ class PostGetNavigateAction extends Action
                 ->setMessage('Not found');
         }
 
-        /** @var Post|null $currentPost */
+        /** @var null|Post $currentPost */
         $currentPost = Post::query()
             ->where('id', $slugModel->reference_id)
             ->where('status', StatusEnum::PUBLISHED)
