@@ -46,12 +46,8 @@ class PostService
      *
      * @return array{previous: null|Post, next: null|Post}
      */
-    public function getNavigationPosts(?Post $currentPost): array
+    public function getNavigationPosts(Post $currentPost): array
     {
-        if (!$currentPost instanceof Post) {
-            throw new \InvalidArgumentException("Expected a Post instance.");
-        }
-
         $currentId = $currentPost->id;
 
         // Get previous post (ID smaller than current, order by ID desc to get the closest one)

@@ -129,6 +129,8 @@ class PostGetNavigateAction extends Action
         }
 
         // At this point, $currentPost is guaranteed to be a Post instance
+        /** @var Post $currentPost */
+        
         // Using service method for complex business logic
         $navigationPosts = $this->postService->getNavigationPosts($currentPost);
 
