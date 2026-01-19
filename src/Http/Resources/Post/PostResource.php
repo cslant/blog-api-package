@@ -9,6 +9,7 @@ use CSlant\Blog\Api\Http\Resources\Tag\TagResource;
 use CSlant\Blog\Core\Facades\Base\Media\RvMedia;
 use CSlant\Blog\Core\Models\Post;
 use CSlant\Blog\Core\Models\Slug;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,11 +19,11 @@ use Illuminate\Support\Facades\Auth;
 class PostResource extends JsonResource
 {
     /**
-     * @param $request
+     * @param  Request  $request
      *
      * @return array<string, mixed>
      */
-    public function toArray($request): array
+    public function toArray(Request $request): array
     {
         /** @var Post $this */
         $comments = $this->comments()
