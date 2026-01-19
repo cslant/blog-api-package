@@ -17,7 +17,7 @@ analyse:
   stage: test
   image: composer
   tags:
-    - csl-88176
+    - csl2
   before_script:
     - php -v
     - composer --version
