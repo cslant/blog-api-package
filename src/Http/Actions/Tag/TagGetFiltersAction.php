@@ -40,23 +40,19 @@ class TagGetFiltersAction extends Action
     }
 
     /**
-     * @param  TagGetFiltersRequest  $request
-     *
      * @group Blog
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/tags/filters",
-            operationId: "TagGetFiltersAction",
-            description: "Get all tags with pagination (10 items per page by default, page 1 by default)
+            path: '/tags/filters',
+            operationId: 'TagGetFiltersAction',
+            description: 'Get all tags with pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get tags by filters with pagination",
-            tags: ["Tag"],
+            ',
+            summary: 'Get tags by filters with pagination',
+            tags: ['Tag'],
             parameters: [
                 new Parameter(
                     name: 'search',
@@ -99,7 +95,7 @@ class TagGetFiltersAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get list tags successfully",
+                    description: 'Get list tags successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -109,10 +105,10 @@ class TagGetFiltersAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: TagModelResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
