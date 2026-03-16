@@ -11,10 +11,7 @@ use Illuminate\Database\Query\Builder;
 class QueryCategory
 {
     /**
-     * @param  BaseQueryBuilder|Builder|Category  $query
      * @param  array<string, mixed>  $filters
-     *
-     * @return BaseQueryBuilder|Builder|Category
      */
     public static function setBaseCustomFilterQuery(
         Builder|BaseQueryBuilder|Category $query,
@@ -30,13 +27,11 @@ class QueryCategory
 
     /**
      * @param  BaseQueryBuilder|Builder<Model>  $model
-     * @param  null|string  $keyword
-     *
      * @return BaseQueryBuilder|Builder<Model>
      */
     protected static function search(Builder|BaseQueryBuilder $model, ?string $keyword): Builder|BaseQueryBuilder
     {
-        if (!$model instanceof BaseQueryBuilder || !$keyword) {
+        if (! $model instanceof BaseQueryBuilder || ! $keyword) {
             return $model;
         }
 

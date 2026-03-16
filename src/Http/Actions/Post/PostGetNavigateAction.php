@@ -42,19 +42,17 @@ class PostGetNavigateAction extends Action
     }
 
     /**
-     * @param  string  $slug
-     *
      * @group Blog
+     *
      * @queryParam Find by slug of post.
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/{slug}/navigate",
-            operationId: "postGetNavigate",
-            description: "Get the previous and next posts by slug. This API will return both previous and next posts for navigation purposes.",
-            summary: "Get previous and next posts for navigation",
-            tags: ["Post"],
+            path: '/posts/{slug}/navigate',
+            operationId: 'postGetNavigate',
+            description: 'Get the previous and next posts by slug. This API will return both previous and next posts for navigation purposes.',
+            summary: 'Get previous and next posts for navigation',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'slug',
@@ -67,7 +65,7 @@ class PostGetNavigateAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get previous and next posts by slug successfully",
+                    description: 'Get previous and next posts by slug successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -77,10 +75,10 @@ class PostGetNavigateAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: PostNavigateResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -105,7 +103,7 @@ class PostGetNavigateAction extends Action
         /** @var Slug $slugModel */
         $slugModel = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (!$slugModel) {
+        if (! $slugModel) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -119,7 +117,7 @@ class PostGetNavigateAction extends Action
             ->with(['categories', 'tags'])
             ->first();
 
-        if (!$currentPost || !$currentPost instanceof Post) {
+        if (! $currentPost || ! $currentPost instanceof Post) {
             return $this
                 ->httpResponse()
                 ->setError()

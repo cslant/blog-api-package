@@ -41,23 +41,19 @@ class PostGetCustomFiltersAction extends Action
     }
 
     /**
-     * @param  PostGetFiltersRequest  $request
-     *
      * @group Blog
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/custom-filters",
-            operationId: "postGetWithCustomFilters",
-            description: "Get all posts with pagination (10 items per page by default, page 1 by default)
+            path: '/posts/custom-filters',
+            operationId: 'postGetWithCustomFilters',
+            description: 'Get all posts with pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get posts by custom filters with pagination",
-            tags: ["Post"],
+            ',
+            summary: 'Get posts by custom filters with pagination',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'tags',
@@ -191,7 +187,7 @@ class PostGetCustomFiltersAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get list posts successfully",
+                    description: 'Get list posts successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -201,10 +197,10 @@ class PostGetCustomFiltersAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: PostListResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )

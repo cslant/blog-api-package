@@ -27,7 +27,6 @@ use OpenApi\Attributes\Schema;
 /**
  * Class CategoryController
  *
- * @package CSlant\Blog\Api\Http\Controllers
  *
  * @group Blog API
  *
@@ -48,15 +47,15 @@ class CategoryController extends Action
 
     #[
         Get(
-            path: "/categories",
-            operationId: "categoryGetAllWithFilter",
-            description: "Get all categories with pagination (10 items per page by default, page 1 by default)
+            path: '/categories',
+            operationId: 'categoryGetAllWithFilter',
+            description: 'Get all categories with pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get all categories with pagination",
-            tags: ["Category"],
+            ',
+            summary: 'Get all categories with pagination',
+            tags: ['Category'],
             parameters: [
                 new Parameter(
                     name: 'per_page',
@@ -76,7 +75,7 @@ class CategoryController extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get categories successfully",
+                    description: 'Get categories successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -86,9 +85,9 @@ class CategoryController extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
-                                description: "Data of model",
-                                type: "array",
+                                property: 'data',
+                                description: 'Data of model',
+                                type: 'array',
                                 items: new Items(ref: CategoryListResourceSchema::class)
                             ),
                         ]
@@ -125,14 +124,14 @@ class CategoryController extends Action
 
     #[
         Get(
-            path: "/categories/filters",
-            operationId: "categoryGetWithFilter",
-            description: "Get all categories with filters and pagination (10 items per page by default, page 1 by default)
+            path: '/categories/filters',
+            operationId: 'categoryGetWithFilter',
+            description: 'Get all categories with filters and pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get categories by filters with pagination",
+            ',
+            summary: 'Get categories by filters with pagination',
             tags: ['Category'],
             parameters: [
                 new Parameter(
@@ -176,7 +175,7 @@ class CategoryController extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get filters successfully",
+                    description: 'Get filters successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -186,9 +185,9 @@ class CategoryController extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
-                                description: "Filter data",
-                                type: "array",
+                                property: 'data',
+                                description: 'Filter data',
+                                type: 'array',
                                 items: new Items(ref: CategoryListResourceSchema::class)
                             ),
                         ]
@@ -213,22 +212,19 @@ class CategoryController extends Action
      *  Get category by slug
      *
      * @group Blog
+     *
      * @queryParam slug Find by slug of category.
-     *
-     * @param  string  $slug
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/categories/{slug}",
-            operationId: "categoryFilterBySlug",
-            description: "Get the category by slug
+            path: '/categories/{slug}',
+            operationId: 'categoryFilterBySlug',
+            description: 'Get the category by slug
             
     This API will get records from the database and return the category by slug.
-            ",
-            summary: "Get category by slug",
-            tags: ["Category"],
+            ',
+            summary: 'Get category by slug',
+            tags: ['Category'],
             parameters: [
                 new Parameter(
                     name: 'slug',
@@ -241,7 +237,7 @@ class CategoryController extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get category successfully",
+                    description: 'Get category successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -251,10 +247,10 @@ class CategoryController extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: CategoryListResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -279,7 +275,7 @@ class CategoryController extends Action
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::getBaseModel()));
 
-        if (!$slug) {
+        if (! $slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -295,7 +291,7 @@ class CategoryController extends Action
             ])
             ->first();
 
-        if (!$category) {
+        if (! $category) {
             return $this
                 ->httpResponse()
                 ->setError()

@@ -30,11 +30,11 @@ class PostStoreViewCountAction extends Action
 
     #[
         Post(
-            path: "/posts/{id}/increment-views",
-            operationId: "incrementViewCountPostById",
-            description: "Increment views count of the post by ID. Only adds 1 view per IP within a time period specified in the environment configuration.",
-            summary: "Increment views count of the post by ID",
-            tags: ["Post"],
+            path: '/posts/{id}/increment-views',
+            operationId: 'incrementViewCountPostById',
+            description: 'Increment views count of the post by ID. Only adds 1 view per IP within a time period specified in the environment configuration.',
+            summary: 'Increment views count of the post by ID',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'id',
@@ -47,7 +47,7 @@ class PostStoreViewCountAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Success",
+                    description: 'Success',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -57,10 +57,10 @@ class PostStoreViewCountAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: ViewCountResourceSchema::class,
-                                description: "Updated view count data",
-                                type: "object",
+                                description: 'Updated view count data',
+                                type: 'object',
                             ),
                         ]
                     )

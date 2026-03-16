@@ -33,25 +33,20 @@ use OpenApi\Attributes\Schema;
 class AuthorGetProfileAction extends Action
 {
     /**
-     * @param  int|string  $author
-     * @param  Request  $request
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
      *
      * @queryParam  Find by authorId of user.
-     *
      */
     #[
         Get(
-            path: "/authors/{author}",
-            operationId: "profileAuthorByAuthorIdOrUsername",
-            description: "Get profile and list post of the author by author id or username
+            path: '/authors/{author}',
+            operationId: 'profileAuthorByAuthorIdOrUsername',
+            description: 'Get profile and list post of the author by author id or username
             
     This API will get record from the database and return profile and list post of the author by id or username of author.
-            ",
-            summary: "Get profile and list post of the author by id or username of author",
-            tags: ["Author"],
+            ',
+            summary: 'Get profile and list post of the author by id or username of author',
+            tags: ['Author'],
             parameters: [
                 new Parameter(
                     name: 'author',
@@ -94,7 +89,7 @@ class AuthorGetProfileAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get author and list posts successfully",
+                    description: 'Get author and list posts successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -104,10 +99,10 @@ class AuthorGetProfileAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: AuthorModelResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -139,7 +134,7 @@ class AuthorGetProfileAction extends Action
             default => (clone $userQuery)->where('username', (string) $author)->first()
         };
 
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             return $this
                 ->httpResponse()
                 ->setError()

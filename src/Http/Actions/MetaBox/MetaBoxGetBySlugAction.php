@@ -44,15 +44,15 @@ class MetaBoxGetBySlugAction extends Action
 
     #[
         Get(
-            path: "/meta-boxes/{model}/{modelSlug}/{lang?}",
-            operationId: "metaBoxGetBySlugModel",
-            description: "Get the meta data by slug and model.
+            path: '/meta-boxes/{model}/{modelSlug}/{lang?}',
+            operationId: 'metaBoxGetBySlugModel',
+            description: 'Get the meta data by slug and model.
             
     This API will get the meta SEO data by slug and model.
     The model can be one of the following: post, page, category, tag, etc.
-            ",
-            summary: "Get meta data by slug and model",
-            tags: ["MetaBox"],
+            ',
+            summary: 'Get meta data by slug and model',
+            tags: ['MetaBox'],
             parameters: [
                 new Parameter(
                     name: 'model',
@@ -91,7 +91,7 @@ class MetaBoxGetBySlugAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get meta data by slug and model",
+                    description: 'Get meta data by slug and model',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -101,10 +101,10 @@ class MetaBoxGetBySlugAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: MetaBoxModelResourceSchema::class,
-                                description: "Data of the meta box",
-                                type: "object",
+                                description: 'Data of the meta box',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -131,7 +131,7 @@ class MetaBoxGetBySlugAction extends Action
     ): JsonResponse|BaseHttpResponse|JsonResource|RedirectResponse {
         $slugModel = $this->slugService->getSlugModel($slug, $model);
 
-        if (!$slugModel) {
+        if (! $slugModel) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -142,7 +142,7 @@ class MetaBoxGetBySlugAction extends Action
 
         $metaBox = $this->metaBoxService->getMetaBoxByModel($model, $slugModel->reference_id, $lang);
 
-        if (!$metaBox) {
+        if (! $metaBox) {
             return $this
                 ->httpResponse()
                 ->setError()

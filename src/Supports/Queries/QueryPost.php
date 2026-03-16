@@ -13,7 +13,6 @@ class QueryPost
     /**
      * @param  BaseQueryBuilder|Builder<Model>  $query
      * @param  array<string, mixed>  $filters
-     *
      * @return BaseQueryBuilder|Builder<Model>|Post
      */
     public static function setBaseCustomFilterQuery(
@@ -73,13 +72,11 @@ class QueryPost
 
     /**
      * @param  BaseQueryBuilder|Builder<Model>  $model
-     * @param  null|string  $keyword
-     *
      * @return BaseQueryBuilder|Builder<Model>
      */
     public static function search(Builder|BaseQueryBuilder $model, ?string $keyword): Builder|BaseQueryBuilder
     {
-        if (!$model instanceof BaseQueryBuilder || !$keyword) {
+        if (! $model instanceof BaseQueryBuilder || ! $keyword) {
             return $model;
         }
 

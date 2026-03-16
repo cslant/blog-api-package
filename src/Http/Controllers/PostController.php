@@ -28,7 +28,6 @@ use OpenApi\Attributes\Schema;
 /**
  * Class PostController
  *
- * @package CSlant\Blog\Api\Http\Controllers
  *
  * @group Blog API
  *
@@ -42,22 +41,18 @@ class PostController extends BasePostController
 {
     /**
      * @group Blog API
-     *
-     * @param  Request  $request
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts",
-            operationId: "postGetAllWithFilter",
-            description: "Get all posts with pagination (10 items per page by default, page 1 by default)
+            path: '/posts',
+            operationId: 'postGetAllWithFilter',
+            description: 'Get all posts with pagination (10 items per page by default, page 1 by default)
 
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get all posts with pagination",
-            tags: ["Post"],
+            ',
+            summary: 'Get all posts with pagination',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'per_page',
@@ -77,7 +72,7 @@ class PostController extends BasePostController
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get posts successfully",
+                    description: 'Get posts successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -87,9 +82,9 @@ class PostController extends BasePostController
                                 default: false
                             ),
                             new Property(
-                                property: "data",
-                                description: "Data of model",
-                                type: "array",
+                                property: 'data',
+                                description: 'Data of model',
+                                type: 'array',
                                 items: new Items(ref: PostListResourceSchema::class)
                             ),
                         ]
@@ -130,22 +125,20 @@ class PostController extends BasePostController
     }
 
     /**
-     * @param  string  $slug
-     *
      * @group Blog
+     *
      * @queryParam slug Find by slug of post.
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/{slug}",
-            operationId: "postFilterBySlug",
-            description: "Get the post by slug
+            path: '/posts/{slug}',
+            operationId: 'postFilterBySlug',
+            description: 'Get the post by slug
             
     This API will get records from the database and return the post by slug.
-            ",
-            summary: "Get post by slug",
-            tags: ["Post"],
+            ',
+            summary: 'Get post by slug',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'slug',
@@ -158,7 +151,7 @@ class PostController extends BasePostController
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get post successfully",
+                    description: 'Get post successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -168,10 +161,10 @@ class PostController extends BasePostController
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: PostModelResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -196,7 +189,7 @@ class PostController extends BasePostController
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (!$slug) {
+        if (! $slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -212,7 +205,7 @@ class PostController extends BasePostController
             ])
             ->first();
 
-        if (!$post) {
+        if (! $post) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -226,22 +219,17 @@ class PostController extends BasePostController
             ->toApiResponse();
     }
 
-    /**
-     * @param  Request  $request
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
-     */
     #[
         Get(
-            path: "/posts/filters",
-            operationId: "postGetWithFilter",
-            description: "Get all posts with pagination (10 items per page by default, page 1 by default)
+            path: '/posts/filters',
+            operationId: 'postGetWithFilter',
+            description: 'Get all posts with pagination (10 items per page by default, page 1 by default)
             
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get posts by filter with pagination",
-            tags: ["Post"],
+            ',
+            summary: 'Get posts by filter with pagination',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'categories',
@@ -337,7 +325,7 @@ class PostController extends BasePostController
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get posts successfully",
+                    description: 'Get posts successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -347,9 +335,9 @@ class PostController extends BasePostController
                                 default: false
                             ),
                             new Property(
-                                property: "data",
-                                description: "Data of model",
-                                type: "array",
+                                property: 'data',
+                                description: 'Data of model',
+                                type: 'array',
                                 items: new Items(ref: PostListResourceSchema::class)
                             ),
                         ]

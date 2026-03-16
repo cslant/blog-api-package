@@ -15,7 +15,7 @@ use CSlant\Blog\Core\Models\Slug;
  */
 class SlugService
 {
-    public function getSlugModel(string $slug, string $model)
+    public function getSlugModel(string $slug, string $model): ?Slug
     {
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(get_class_name_by_slug($model)));

@@ -10,11 +10,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class VisitorLogsService
 {
     /**
-     * @param  int  $postId
-     * @param  null|string  $ipAddress
-     * @param  null|string  $userAgent
-     *
-     * @return Post
      * @throws ModelNotFoundException
      */
     public function trackPostView(
@@ -33,7 +28,7 @@ class VisitorLogsService
             'ip_address' => $ipAddress ?: '',
         ]);
 
-        $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at ?? $now->copy()->subMinute());
+        $shouldCountView = ! $visitorLog->exists || $now->isAfter($visitorLog->expired_at ?? $now->copy()->subMinute());
 
         if ($shouldCountView) {
             $visitorLog->fill([

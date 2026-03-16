@@ -41,22 +41,19 @@ class AuthorGetListAction extends Action
     }
 
     /**
-     * @param  AuthorGetListRequest  $request
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      * @group Blog
      */
     #[
         Get(
-            path: "/authors",
-            operationId: "postGetAllAuthor",
-            description: "Get all authors with pagination (10 items per page by default, page 1 by default)
+            path: '/authors',
+            operationId: 'postGetAllAuthor',
+            description: 'Get all authors with pagination (10 items per page by default, page 1 by default)
 
     This API will get records from the database and return them as a paginated list. 
     The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.
-            ",
-            summary: "Get all authors with pagination",
-            tags: ["Author"],
+            ',
+            summary: 'Get all authors with pagination',
+            tags: ['Author'],
             parameters: [
                 new Parameter(
                     name: 'is_super',
@@ -101,7 +98,7 @@ class AuthorGetListAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get list authors successfully",
+                    description: 'Get list authors successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -111,10 +108,10 @@ class AuthorGetListAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: ListAuthorResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )

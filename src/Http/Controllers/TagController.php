@@ -28,7 +28,6 @@ use OpenApi\Attributes\Schema;
 /**
  * Class TagController
  *
- * @package CSlant\Blog\Api\Http\Controllers
  *
  * @group Blog
  *
@@ -41,14 +40,14 @@ class TagController extends BaseTagController
 {
     #[
         Get(
-            path: "/tags",
-            operationId: "tagGetAllWithFilter",
-            description: "Get all tags with pagination (10 items per page by default, page 1 by default, page 1 by default)
+            path: '/tags',
+            operationId: 'tagGetAllWithFilter',
+            description: 'Get all tags with pagination (10 items per page by default, page 1 by default, page 1 by default)
 
     This API will get records from the database and return them as a paginated list. 
-    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.",
-            summary: "Get all tags with pagination",
-            tags: ["Tag"],
+    The default number of items per page is 10 and the default page number is 1. You can change these values by passing the `per_page` and `page` query parameters.',
+            summary: 'Get all tags with pagination',
+            tags: ['Tag'],
             parameters: [
                 new Parameter(
                     name: 'per_page',
@@ -68,7 +67,7 @@ class TagController extends BaseTagController
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get tags successfully",
+                    description: 'Get tags successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -78,9 +77,9 @@ class TagController extends BaseTagController
                                 default: false
                             ),
                             new Property(
-                                property: "data",
-                                description: "Data of model",
-                                type: "array",
+                                property: 'data',
+                                description: 'Data of model',
+                                type: 'array',
                                 items: new Items(ref: TagModelResourceSchema::class)
                             ),
                         ]
@@ -118,22 +117,19 @@ class TagController extends BaseTagController
      * Get tag by slug
      *
      * @group Blog
+     *
      * @queryParam slug Find by slug of tag.
-     *
-     * @param  string  $slug
-     *
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/tags/{slug}",
-            operationId: "tagFilterBySlug",
-            description: "Get the tag by slug
+            path: '/tags/{slug}',
+            operationId: 'tagFilterBySlug',
+            description: 'Get the tag by slug
             
     This API will get records from the database and return the tag by slug.
-            ",
-            summary: "Get tag by slug",
-            tags: ["Tag"],
+            ',
+            summary: 'Get tag by slug',
+            tags: ['Tag'],
             parameters: [
                 new Parameter(
                     name: 'slug',
@@ -146,7 +142,7 @@ class TagController extends BaseTagController
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get tag successfully",
+                    description: 'Get tag successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -156,10 +152,10 @@ class TagController extends BaseTagController
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: TagModelResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -184,7 +180,7 @@ class TagController extends BaseTagController
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::getBaseModel()));
 
-        if (!$slug) {
+        if (! $slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -200,7 +196,7 @@ class TagController extends BaseTagController
             ])
             ->first();
 
-        if (!$tag) {
+        if (! $tag) {
             return $this
                 ->httpResponse()
                 ->setError()

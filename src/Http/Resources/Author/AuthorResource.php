@@ -11,8 +11,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class AuthorResource extends JsonResource
 {
     /**
-     * @param $request
-     *
      * @return array<string, mixed>
      */
     public function toArray($request): array
@@ -24,7 +22,7 @@ class AuthorResource extends JsonResource
             'last_name' => $this->last_name,
             'username' => $this->username,
             'full_name' => $this->first_name && $this->last_name
-                ? $this->first_name . ' ' . $this->last_name
+                ? $this->first_name.' '.$this->last_name
                 : ($this->first_name ?? $this->last_name ?? 'Base Member'),
             'image' => $this->avatar_url,
             'role' => $this->roles?->first()->name ?? null,

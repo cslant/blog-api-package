@@ -23,7 +23,6 @@ use OpenApi\Attributes\Schema;
 /**
  * Class ViewCountAction
  *
- * @package CSlant\Blog\Api\Http\Controllers\Actions\Post
  *
  * @group Blog API
  *
@@ -36,22 +35,20 @@ use OpenApi\Attributes\Schema;
 class PostGetViewCountAction extends Action
 {
     /**
-     * @param  string  $slug
-     *
      * @group Blog
+     *
      * @queryParam Find by slug of post.
-     * @return BaseHttpResponse|JsonResource|JsonResponse|RedirectResponse
      */
     #[
         Get(
-            path: "/posts/{slug}/view-count",
-            operationId: "viewCountPostBySlug",
-            description: "Get views count of the post by slug
+            path: '/posts/{slug}/view-count',
+            operationId: 'viewCountPostBySlug',
+            description: 'Get views count of the post by slug
             
     This API will get record from the database and return views count of the post by slug.
-            ",
-            summary: "Get views count of the post by slug",
-            tags: ["Post"],
+            ',
+            summary: 'Get views count of the post by slug',
+            tags: ['Post'],
             parameters: [
                 new Parameter(
                     name: 'slug',
@@ -64,7 +61,7 @@ class PostGetViewCountAction extends Action
             responses: [
                 new Response(
                     response: 200,
-                    description: "Get views count successfully",
+                    description: 'Get views count successfully',
                     content: new JsonContent(
                         properties: [
                             new Property(
@@ -74,10 +71,10 @@ class PostGetViewCountAction extends Action
                                 default: false
                             ),
                             new Property(
-                                property: "data",
+                                property: 'data',
                                 ref: ViewCountResourceSchema::class,
-                                description: "Data of model",
-                                type: "object",
+                                description: 'Data of model',
+                                type: 'object',
                             ),
                         ]
                     )
@@ -102,7 +99,7 @@ class PostGetViewCountAction extends Action
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (!$slug) {
+        if (! $slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -116,7 +113,7 @@ class PostGetViewCountAction extends Action
             ->where('status', StatusEnum::PUBLISHED)
             ->first();
 
-        if (!$post) {
+        if (! $post) {
             return $this
                 ->httpResponse()
                 ->setError()
