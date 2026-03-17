@@ -131,7 +131,7 @@ class MetaBoxGetBySlugAction extends Action
     ): JsonResponse|BaseHttpResponse|JsonResource|RedirectResponse {
         $slugModel = $this->slugService->getSlugModel($slug, $model);
 
-        if (! $slugModel) {
+        if (!$slugModel) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -142,7 +142,7 @@ class MetaBoxGetBySlugAction extends Action
 
         $metaBox = $this->metaBoxService->getMetaBoxByModel($model, $slugModel->reference_id, $lang);
 
-        if (! $metaBox) {
+        if (!$metaBox) {
             return $this
                 ->httpResponse()
                 ->setError()

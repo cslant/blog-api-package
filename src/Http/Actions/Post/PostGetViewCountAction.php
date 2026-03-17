@@ -99,7 +99,7 @@ class PostGetViewCountAction extends Action
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (! $slug) {
+        if (!$slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -113,7 +113,7 @@ class PostGetViewCountAction extends Action
             ->where('status', StatusEnum::PUBLISHED)
             ->first();
 
-        if (! $post) {
+        if (!$post) {
             return $this
                 ->httpResponse()
                 ->setError()

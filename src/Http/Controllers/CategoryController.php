@@ -275,7 +275,7 @@ class CategoryController extends Action
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Category::getBaseModel()));
 
-        if (! $slug) {
+        if (!$slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -291,7 +291,7 @@ class CategoryController extends Action
             ])
             ->first();
 
-        if (! $category) {
+        if (!$category) {
             return $this
                 ->httpResponse()
                 ->setError()

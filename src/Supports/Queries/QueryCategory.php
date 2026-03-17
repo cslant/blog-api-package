@@ -31,7 +31,7 @@ class QueryCategory
      */
     protected static function search(Builder|BaseQueryBuilder $model, ?string $keyword): Builder|BaseQueryBuilder
     {
-        if (! $model instanceof BaseQueryBuilder || ! $keyword) {
+        if (!$model instanceof BaseQueryBuilder || !$keyword) {
             return $model;
         }
 

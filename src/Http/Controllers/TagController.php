@@ -180,7 +180,7 @@ class TagController extends BaseTagController
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Tag::getBaseModel()));
 
-        if (! $slug) {
+        if (!$slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -196,7 +196,7 @@ class TagController extends BaseTagController
             ])
             ->first();
 
-        if (! $tag) {
+        if (!$tag) {
             return $this
                 ->httpResponse()
                 ->setError()

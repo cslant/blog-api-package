@@ -134,7 +134,7 @@ class AuthorGetProfileAction extends Action
             default => (clone $userQuery)->where('username', (string) $author)->first()
         };
 
-        if (! $user instanceof User) {
+        if (!$user instanceof User) {
             return $this
                 ->httpResponse()
                 ->setError()

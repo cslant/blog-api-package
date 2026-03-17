@@ -189,7 +189,7 @@ class PostController extends BasePostController
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (! $slug) {
+        if (!$slug) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -205,7 +205,7 @@ class PostController extends BasePostController
             ])
             ->first();
 
-        if (! $post) {
+        if (!$post) {
             return $this
                 ->httpResponse()
                 ->setError()

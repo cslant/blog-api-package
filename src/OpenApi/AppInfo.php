@@ -57,4 +57,6 @@ namespace CSlant\Blog\Api\OpenApi;
  *     securityScheme="sanctum"
  * )
  */
-class AppInfo {}
+class AppInfo
+{
+}

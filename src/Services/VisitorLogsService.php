@@ -28,7 +28,7 @@ class VisitorLogsService
             'ip_address' => $ipAddress ?: '',
         ]);
 
-        $shouldCountView = ! $visitorLog->exists || $now->isAfter($visitorLog->expired_at ?? $now->copy()->subMinute());
+        $shouldCountView = !$visitorLog->exists || $now->isAfter($visitorLog->expired_at ?? $now->copy()->subMinute());
 
         if ($shouldCountView) {
             $visitorLog->fill([

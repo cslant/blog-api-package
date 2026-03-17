@@ -103,7 +103,7 @@ class PostGetNavigateAction extends Action
         /** @var Slug $slugModel */
         $slugModel = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (! $slugModel) {
+        if (!$slugModel) {
             return $this
                 ->httpResponse()
                 ->setError()
@@ -117,7 +117,7 @@ class PostGetNavigateAction extends Action
             ->with(['categories', 'tags'])
             ->first();
 
-        if (! $currentPost || ! $currentPost instanceof Post) {
+        if (!$currentPost || !$currentPost instanceof Post) {
             return $this
                 ->httpResponse()
                 ->setError()
