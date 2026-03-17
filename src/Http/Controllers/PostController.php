@@ -4,6 +4,9 @@ namespace CSlant\Blog\Api\Http\Controllers;
 
 use CSlant\Blog\Api\Http\Resources\Post\ListPostResource;
 use CSlant\Blog\Api\Http\Resources\Post\PostResource;
+use CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema;
+use CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema;
+use CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostListResourceSchema;
 use CSlant\Blog\Api\OpenApi\Schemas\Resources\Post\PostModelResourceSchema;
 use CSlant\Blog\Core\Enums\StatusEnum;
@@ -91,15 +94,15 @@ class PostController extends BasePostController
                     )
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    ref: BadRequestResponseSchema::class,
                     response: 400,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    ref: ErrorNotFoundResponseSchema::class,
                     response: 404,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    ref: InternalServerResponseSchema::class,
                     response: 500,
                 ),
             ]
@@ -170,15 +173,15 @@ class PostController extends BasePostController
                     )
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    ref: BadRequestResponseSchema::class,
                     response: 400,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    ref: ErrorNotFoundResponseSchema::class,
                     response: 404,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    ref: InternalServerResponseSchema::class,
                     response: 500,
                 ),
             ]
@@ -189,12 +192,13 @@ class PostController extends BasePostController
         /** @var Slug $slug */
         $slug = SlugHelper::getSlug($slug, SlugHelper::getPrefix(Post::getBaseModel()));
 
-        if (!$slug) {
+        if (! $slug) {
             return $this
                 ->httpResponse()
                 ->setError()
                 ->setCode(404)
-                ->setMessage('Not found');
+                ->setMessage('Not found')
+                ->toApiResponse();
         }
 
         $post = Post::query()
@@ -205,12 +209,13 @@ class PostController extends BasePostController
             ])
             ->first();
 
-        if (!$post) {
+        if (! $post) {
             return $this
                 ->httpResponse()
                 ->setError()
                 ->setCode(404)
-                ->setMessage('Not found');
+                ->setMessage('Not found')
+                ->toApiResponse();
         }
 
         return $this
@@ -344,15 +349,15 @@ class PostController extends BasePostController
                     )
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\BadRequestResponseSchema::class,
+                    ref: BadRequestResponseSchema::class,
                     response: 400,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\ErrorNotFoundResponseSchema::class,
+                    ref: ErrorNotFoundResponseSchema::class,
                     response: 404,
                 ),
                 new Response(
-                    ref: \CSlant\Blog\Api\OpenApi\Responses\Errors\InternalServerResponseSchema::class,
+                    ref: InternalServerResponseSchema::class,
                     response: 500,
                 ),
             ]
